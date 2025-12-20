@@ -4,601 +4,605 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>乔治老师的托福语法第一课：句子成分全解 (完整版)</title>
+    <title>乔治老师的托福语法探险 · 第一课</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0"
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0"
         rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans SC', 'sans-serif'],
+                        display: ['Fredoka', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        cream: '#FDFBF7',
+                        paper: '#FFFFFF',
+                        primary: '#4F46E5',
+                        accent: '#F59E0B',
+                        ink: '#1F2937',
+                    }
+                }
+            }
+        }
+    </script>
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
-
         body {
-            font-family: 'Noto Sans SC', sans-serif;
-            background-color: #ffffff;
-            color: #374151;
+            background-color: #FDFBF7;
+            color: #1F2937;
+            overflow-x: hidden;
         }
 
-        /* Notion Colors & Utilities */
-        .n-bg-gray {
-            background-color: #F1F1EF;
+        /* Smooth Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
         }
 
-        .n-bg-yellow {
-            background-color: #FBF3DB;
+        ::-webkit-scrollbar-track {
+            background: transparent;
         }
 
-        .n-bg-green {
-            background-color: #EDF3EC;
-        }
-
-        .n-bg-blue {
-            background-color: #E7F3F8;
-        }
-
-        .n-bg-red {
-            background-color: #FDEBEC;
-        }
-
-        .n-bg-orange {
-            background-color: #FBECDD;
-        }
-
-        .n-callout {
-            padding: 16px;
-            border-radius: 6px;
-            display: flex;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .n-code {
-            font-family: 'JetBrains Mono', monospace;
-            background: #F1F1EF;
-            color: #EB5757;
-            padding: 2px 5px;
+        ::-webkit-scrollbar-thumb {
+            background: #E5E7EB;
             border-radius: 4px;
-            font-size: 0.9em;
         }
 
-        /* Custom UI */
-        .sidebar-link {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 8px 12px;
-            border-radius: 6px;
-            color: #6B7280;
-            font-size: 14px;
-            transition: all 0.2s;
+        ::-webkit-scrollbar-thumb:hover {
+            background: #D1D5DB;
         }
 
-        .sidebar-link:hover {
-            background: #F3F4F6;
-            color: #111827;
+        /* Card Hover Effects */
+        .hover-card {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        .sidebar-link.active {
-            background: #E7F3F8;
-            color: #111827;
-            font-weight: 600;
+        .hover-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.1);
         }
 
-        .section-title {
-            font-size: 1.8rem;
-            font-weight: 700;
-            margin-top: 3rem;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.5rem;
-            border-bottom: 1px solid #E5E7EB;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .card {
-            border: 1px solid #E5E7EB;
-            border-radius: 8px;
-            background: white;
-            overflow: hidden;
-        }
-
-        /* Expandable Details Style */
-        details.n-toggle>summary {
-            list-style: none;
-            padding: 1rem;
+        /* Interactive Sentence Lab Styles */
+        .word-token {
+            position: relative;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background-color: white;
-            transition: background-color 0.2s;
-            font-weight: 600;
+            transition: all 0.2s;
+            border-bottom: 2px solid transparent;
         }
 
-        details.n-toggle>summary:hover {
-            background-color: #F9FAFB;
+        .word-token:hover {
+            background-color: rgba(79, 70, 229, 0.1);
+            border-bottom-color: #4F46E5;
+            transform: scale(1.05);
         }
 
-        details.n-toggle[open]>summary {
-            border-bottom: 1px solid #E5E7EB;
-            background-color: #F9FAFB;
-        }
-
-        details.n-toggle>.content {
-            padding: 1.5rem;
-            background-color: white;
-            animation: slideDown 0.2s ease-out;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                transform: translateY(-10px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-size: 12px;
+        .word-token.active {
+            background-color: #EEF2FF;
+            border-bottom-color: #4F46E5;
             font-weight: bold;
-            margin-bottom: 4px;
+        }
+
+        .grammar-tooltip {
+            opacity: 0;
+            transform: translateY(10px);
+            transition: all 0.3s;
+        }
+
+        .grammar-tooltip.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Visual Blocks */
+        .lego-block {
+            box-shadow: 0 4px 0 rgba(0, 0, 0, 0.1);
+            transition: transform 0.1s;
+        }
+
+        .lego-block:active {
+            transform: translateY(4px);
+            box-shadow: none;
+        }
+
+        /* Gradient Text */
+        .text-gradient {
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            background-image: linear-gradient(to right, #4F46E5, #9333EA);
+        }
+
+        details summary::-webkit-details-marker {
+            display: none;
         }
     </style>
 </head>
 
-<body class="flex flex-col min-h-screen">
+<body class="selection:bg-yellow-200 selection:text-yellow-900">
 
-    <!-- Top Navigation -->
-    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-gray-200">
-        <div class="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
-            <div class="flex items-center gap-2">
-                <span class="material-symbols-outlined text-blue-600">school</span>
-                <span class="font-bold text-gray-800">新东方在线 · 托福基础语法</span>
-                <span class="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded ml-2">Lesson 1</span>
+    <!-- Floating Nav Pill -->
+    <nav
+        class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 bg-white/90 backdrop-blur-md border border-gray-200 shadow-2xl rounded-full px-6 py-3 flex items-center gap-6 transition-all duration-300 hover:scale-105">
+        <a href="#intro" class="hover:text-primary transition material-symbols-rounded" title="回到开头">home</a>
+        <a href="#lab" class="hover:text-primary transition material-symbols-rounded" title="句法实验室">biotech</a>
+        <a href="#components" class="hover:text-primary transition material-symbols-rounded" title="积木拆解">extension</a>
+        <a href="#modifiers" class="hover:text-primary transition material-symbols-rounded"
+            title="装饰修饰">auto_fix_high</a>
+        <div class="w-px h-4 bg-gray-300"></div>
+        <button onclick="downloadPage()" class="hover:text-primary transition material-symbols-rounded"
+            title="下载讲义">download</button>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="relative bg-white pt-20 pb-32 overflow-hidden">
+        <div class="absolute inset-0 opacity-30 bg-[url('https://www.transparenttextures.com/patterns/graphy.png')]">
+        </div>
+
+        <!-- Decorative Blobs -->
+        <div
+            class="absolute top-0 right-0 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob">
+        </div>
+        <div
+            class="absolute top-0 left-0 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-70 animate-blob animation-delay-2000">
+        </div>
+
+        <div class="max-w-4xl mx-auto px-4 text-center relative z-10" id="intro">
+            <div
+                class="inline-flex items-center gap-2 bg-indigo-50 text-indigo-700 px-4 py-2 rounded-full text-sm font-bold mb-6 hover:bg-indigo-100 transition cursor-default">
+                <span class="animate-pulse">🔴</span> Live from Virtual Studio
             </div>
-            <button onclick="downloadPage()"
-                class="text-sm font-medium text-blue-600 hover:text-blue-700 flex items-center gap-1">
-                <span class="material-symbols-outlined text-lg">download</span> 下载讲义
-            </button>
+
+            <h1 class="text-6xl font-display font-bold text-ink mb-6 tracking-tight" data-aos="fade-up">
+                托福语法<span class="text-gradient">探险记</span>
+            </h1>
+
+            <p class="text-xl text-gray-500 leading-relaxed max-w-2xl mx-auto mb-10" data-aos="fade-up"
+                data-aos-delay="100">
+                "Welcome! 我是乔治老师。此刻我并未在真正的教室，
+                想象我身后是一面<b>魔法蓝墙</b>，面前只有镜头和你。
+                今天，我们将拆解英语句子的 <span class="text-indigo-600 font-bold border-b-2 border-indigo-200">DNA</span>。"
+            </p>
+
+            <div class="flex justify-center gap-4" data-aos="fade-up" data-aos-delay="200">
+                <a href="#lab"
+                    class="bg-primary text-white px-8 py-4 rounded-2xl font-bold shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-105 transition flex items-center gap-2">
+                    <span class="material-symbols-rounded">science</span>
+                    进入句法实验室
+                </a>
+            </div>
         </div>
     </header>
 
-    <div class="flex-1 flex max-w-7xl mx-auto w-full">
+    <main class="max-w-4xl mx-auto px-4 -mt-20 relative z-20 pb-32">
 
-        <!-- Sidebar -->
-        <aside class="w-64 hidden md:block pt-8 pr-8 sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto">
-            <div class="flex items-center gap-3 mb-8 px-2">
-                <img src="virtual_studio_teacher_1766243391676.png"
-                    class="w-10 h-10 rounded-full object-cover border border-gray-200">
-                <div>
-                    <p class="text-sm font-bold text-gray-900">George Teacher</p>
-                    <p class="text-xs text-gray-500">冰洁老师</p>
+        <!-- Interactive Sentence Lab -->
+        <section id="lab" class="mb-24" data-aos="zoom-in-up">
+            <div class="bg-white rounded-3xl p-8 shadow-xl border border-gray-100 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500">
                 </div>
-            </div>
 
-            <div class="space-y-1">
-                <p class="px-2 text-xs font-bold text-gray-400 uppercase mb-2">目录 Contents</p>
-                <a href="#intro" class="sidebar-link"><span class="material-symbols-outlined text-lg">mic</span>
-                    课前导语</a>
-                <a href="#definition" class="sidebar-link"><span class="material-symbols-outlined text-lg">help</span>
-                    什么是句子</a>
-                <a href="#subject" class="sidebar-link"><span class="material-symbols-outlined text-lg">person</span> 主语
-                    Subject</a>
-                <a href="#predicate" class="sidebar-link"><span class="material-symbols-outlined text-lg">bolt</span> 谓语
-                    Predicate</a>
-                <a href="#object" class="sidebar-link"><span class="material-symbols-outlined text-lg">adjust</span> 宾语
-                    Object</a>
-                <a href="#predicative" class="sidebar-link"><span class="material-symbols-outlined text-lg">link</span>
-                    表语 Predicative</a>
-                <a href="#modifiers" class="sidebar-link"><span
-                        class="material-symbols-outlined text-lg">auto_fix_high</span> 定语 & 状语</a>
-                <a href="#complement" class="sidebar-link"><span
-                        class="material-symbols-outlined text-lg">add_circle</span> 补语 Complement</a>
-            </div>
-        </aside>
+                <div class="flex items-center justify-between mb-8">
+                    <div>
+                        <h2 class="text-2xl font-bold font-display flex items-center gap-2">
+                            <span class="material-symbols-rounded text-purple-500 text-3xl">psychology</span>
+                            终极句法挑战
+                        </h2>
+                        <p class="text-gray-400 text-sm mt-1">鼠标悬停查看细胞级结构分析</p>
+                    </div>
+                    <div class="bg-gray-100 px-3 py-1 rounded-lg text-xs font-mono text-gray-500">Difficulty: ★★★★★
+                    </div>
+                </div>
 
-        <!-- Main Content -->
-        <main class="flex-1 max-w-3xl pt-8 pb-20 px-4 md:px-0">
-
-            <!-- Intro Section -->
-            <section id="intro" class="mb-12">
+                <!-- The Interactive Sentence -->
                 <div
-                    class="rounded-xl overflow-hidden bg-gradient-to-br from-blue-900 to-slate-900 text-white relative shadow-xl">
-                    <div class="absolute top-0 right-0 p-4 opacity-20">
-                        <span class="material-symbols-outlined text-9xl">videocam</span>
+                    class="text-center py-12 bg-gray-50 rounded-2xl mb-8 border border-dashed border-gray-200 select-none cursor-help group">
+                    <div class="text-3xl md:text-4xl font-mono leading-relaxed" id="interactive-sentence">
+                        <span class="word-token" data-role="主语 Subject" data-desc="动作发出者">George</span>
+                        <span class="word-token" data-role="谓语 Predicate" data-desc="核心动作 (Discovery)">found</span>
+                        <span class="word-token" data-role="宾语 Object" data-desc="被发现的对象">jumping in puddles</span>
+                        <span class="word-token" data-role="宾语补足语 Object Comp" data-desc="补充说明宾语是有趣的">interesting</span>
                     </div>
-                    <div class="p-8 md:p-12 relative z-10">
-                        <h1 class="text-3xl font-bold mb-4">句子成分 Sentence Structure</h1>
-                        <p class="text-blue-100 leading-relaxed">
-                            我是冰洁老师 (George)。我现在坐在一个<b>虚拟的演播室</b>里，背面是蓝色的墙，前面只有一台摄像机。全靠我一个人的表演！<br>
-                            不管是 TPO 里的长难句，还是未来的写作阅读，所有复杂的结构都源于此。<br>
-                            <i class="opacity-80">“千里之行，始于足下。”</i> 让我们开始吧！
+                </div>
+
+                <!-- Analysis Dashboard -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="role-cards">
+                    <!-- Javascript will toggle classes here -->
+                    <div class="p-4 rounded-xl bg-indigo-50 border border-indigo-100 text-center opacity-50 transition-all duration-300"
+                        id="role-card-1">
+                        <div class="text-xs text-indigo-400 uppercase font-bold tracking-wider mb-1">WHO?</div>
+                        <div class="font-bold text-indigo-700">主语 Subject</div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-red-50 border border-red-100 text-center opacity-50 transition-all duration-300"
+                        id="role-card-2">
+                        <div class="text-xs text-red-400 uppercase font-bold tracking-wider mb-1">ACTION</div>
+                        <div class="font-bold text-red-700">谓语 Predicate</div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-emerald-50 border border-emerald-100 text-center opacity-50 transition-all duration-300"
+                        id="role-card-3">
+                        <div class="text-xs text-emerald-400 uppercase font-bold tracking-wider mb-1">WHAT?</div>
+                        <div class="font-bold text-emerald-700">宾语 Object</div>
+                    </div>
+                    <div class="p-4 rounded-xl bg-amber-50 border border-amber-100 text-center opacity-50 transition-all duration-300"
+                        id="role-card-4">
+                        <div class="text-xs text-amber-400 uppercase font-bold tracking-wider mb-1">HOW?</div>
+                        <div class="font-bold text-amber-700">宾补 Complement</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Definition & Fragments -->
+        <section class="mb-20" data-aos="fade-up">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div>
+                    <h3 class="text-3xl font-display font-bold mb-6 flex items-center gap-3">
+                        <span class="material-symbols-rounded text-4xl text-yellow-500">lightbulb</span>
+                        什么是完整的句子？
+                    </h3>
+                    <div class="prose text-gray-600">
+                        <p class="mb-4">这不仅是语法的定义，更是逻辑的完整。如同一座桥，必须要有<b>支柱 (Subject)</b> 和 <b>桥面 (Predicate)</b> 才能通车。
                         </p>
+                        <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100">
+                            <h4 class="font-bold text-gray-800 mb-2">反面教材：语言的碎片 (Fragments)</h4>
+                            <ul class="space-y-3">
+                                <li class="flex items-center gap-3 text-sm text-gray-500">
+                                    <span class="material-symbols-rounded text-red-400">cancel</span>
+                                    <div>"...wants to go to Harvard." <span
+                                            class="text-xs bg-red-100 text-red-500 px-2 py-0.5 rounded ml-2">Who?
+                                            主语缺失</span></div>
+                                </li>
+                                <li class="flex items-center gap-3 text-sm text-gray-500">
+                                    <span class="material-symbols-rounded text-red-400">cancel</span>
+                                    <div>"George loves..." <span
+                                            class="text-xs bg-red-100 text-red-500 px-2 py-0.5 rounded ml-2">What?
+                                            宾语缺失</span></div>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
-            </section>
-
-            <!-- Definition -->
-            <section id="definition">
-                <h2 class="section-title text-blue-600">
-                    <span class="material-symbols-outlined text-3xl">help</span> 1. 什么是句子？
-                </h2>
-                <div class="n-callout n-bg-yellow items-center">
-                    <span class="material-symbols-outlined text-yellow-600">lightbulb</span>
-                    <p class="text-sm text-gray-700">句子是至少有一个主语和一个动词，并且能够表述 <b class="bg-yellow-200 px-1">完整意义</b>
-                        的词的组合。</p>
+                <div
+                    class="bg-gray-800 rounded-3xl p-8 text-white relative overflow-hidden shadow-2xl transform rotate-2 hover:rotate-0 transition duration-500">
+                    <div class="absolute -right-10 -top-10 text-[10rem] opacity-5 select-none">?</div>
+                    <h4 class="text-lg font-bold mb-4 opacity-80">CODE: SENTENCE_GOAL</h4>
+                    <div class="space-y-4 font-mono">
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-8 h-8 rounded bg-green-500 flex items-center justify-center text-black font-bold">
+                                1</div>
+                            <span>Complete (完整)</span>
+                        </div>
+                        <div class="h-8 w-0.5 bg-gray-600 ml-4"></div>
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-8 h-8 rounded bg-blue-500 flex items-center justify-center text-black font-bold">
+                                2</div>
+                            <span>Correct (正确)</span>
+                        </div>
+                        <div class="h-8 w-0.5 bg-gray-600 ml-4"></div>
+                        <div class="flex items-center gap-3">
+                            <div
+                                class="w-8 h-8 rounded bg-yellow-400 flex items-center justify-center text-black font-bold">
+                                3</div>
+                            <span>Elegant (漂亮)</span>
+                        </div>
+                    </div>
                 </div>
+            </div>
+        </section>
 
-                <p class="text-sm font-bold text-gray-500 mb-2 mt-6">反例：碎片 (Fragments)</p>
-                <div class="card bg-red-50 border-red-100 p-4 text-sm space-y-2">
-                    <p>❌ ...wants to go to Harvard. <span class="text-gray-400">(缺主语：谁想去？)</span></p>
-                    <p>❌ George, to major in Chemistry. <span class="text-gray-400">(缺谓语：想去还是要去？)</span></p>
-                    <p>❌ George loves... <span class="text-gray-400">(意义不完整：爱谁？)</span></p>
-                </div>
-            </section>
+        <!-- Sentence Anatomy (LEGO Blocks) -->
+        <section id="components" class="mb-24 space-y-8">
+            <h3
+                class="text-center font-display text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-700 to-gray-900 mb-12">
+                句法乐高：核心组件
+            </h3>
 
             <!-- Subject -->
-            <section id="subject">
-                <h2 class="section-title text-indigo-600">
-                    <span class="material-symbols-outlined text-3xl">person</span> 2. 主语 (Subject)
-                </h2>
-                <p class="mb-4 text-gray-600">句子叙述的主体，通常位于句首。<b>核心特征：必须是名词性质。</b></p>
-
-                <div class="space-y-3">
-                    <details class="n-toggle card open">
-                        <summary>
-                            <span class="flex items-center gap-2 text-indigo-700"><span
-                                    class="material-symbols-outlined">badge</span> 1. 名词/代词</span>
-                            <span class="material-symbols-outlined text-gray-400 text-sm">expand_more</span>
-                        </summary>
-                        <div class="content">
-                            <p class="mb-2 text-sm">最常见的形式。人名、地名、代词。</p>
-                            <ul class="list-disc list-inside space-y-2 text-sm font-mono">
-                                <li><span class="n-code">Papa and George</span> love feeding bread to ducks.</li>
-                                <li><span class="n-code">She</span> left without a word.</li>
-                            </ul>
+            <div class="bg-white p-8 rounded-3xl shadow-lg border-l-8 border-indigo-500 hover-card group"
+                data-aos="fade-left">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="md:w-1/3">
+                        <h4 class="text-2xl font-bold text-indigo-700 mb-2 flex items-center gap-2">
+                            <span class="material-symbols-rounded">person_pin</span> 主语 Subject
+                        </h4>
+                        <p class="text-gray-500 text-sm leading-relaxed">动作的发起者，必须是<b
+                                class="text-indigo-600">名词性质</b>。即使是动词想做主语，也得穿上名词的“马甲”。</p>
+                    </div>
+                    <div class="md:w-2/3 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <div class="bg-indigo-50 p-3 rounded-xl border border-indigo-100 flex items-center gap-3">
+                            <span class="text-xl">👩‍👦</span>
+                            <div class="text-sm">
+                                <div class="font-bold text-gray-800">Noun</div>
+                                <div class="text-gray-500 text-xs">Papa and George...</div>
+                            </div>
                         </div>
-                    </details>
-
-                    <details class="n-toggle card">
-                        <summary>
-                            <span class="flex items-center gap-2 text-indigo-700"><span
-                                    class="material-symbols-outlined">move_up</span> 2. 不定式 & 动名词</span>
-                            <span class="material-symbols-outlined text-gray-400 text-sm">expand_more</span>
-                        </summary>
-                        <div class="content">
-                            <p class="mb-2 text-sm">动词不能直接做主语，必须"变身"为名词性质。</p>
-                            <ul class="space-y-3 text-sm font-mono">
-                                <li>
-                                    <span class="n-code">To see</span> is to believe.<br>
-                                    <span class="text-xs text-gray-500">不定式 (To do)：眼见为实。</span>
-                                </li>
-                                <li>
-                                    <span class="n-code">Seeing</span> is believing.<br>
-                                    <span class="n-code">Smoking</span> is bad for health.<br>
-                                    <span class="text-xs text-gray-500">动名词 (Doing)：抽烟有害健康。</span>
-                                </li>
-                            </ul>
+                        <div class="bg-indigo-50 p-3 rounded-xl border border-indigo-100 flex items-center gap-3">
+                            <span class="text-xl">👉</span>
+                            <div class="text-sm">
+                                <div class="font-bold text-gray-800">Pronoun</div>
+                                <div class="text-gray-500 text-xs">She left...</div>
+                            </div>
                         </div>
-                    </details>
-
-                    <details class="n-toggle card">
-                        <summary>
-                            <span class="flex items-center gap-2 text-indigo-700"><span
-                                    class="material-symbols-outlined">featured_play_list</span> 3. 主语从句</span>
-                            <span class="material-symbols-outlined text-gray-400 text-sm">expand_more</span>
-                        </summary>
-                        <div class="content">
-                            <p class="mb-2 text-sm">整个句子充当主语。</p>
-                            <p class="font-mono text-sm"><span class="n-code">What he said</span> is not the truth.</p>
-                            <p class="text-xs text-gray-500 mt-1">"他所说的" 这件事不是事实。</p>
+                        <div
+                            class="bg-indigo-50 p-3 rounded-xl border border-indigo-100 flex items-center gap-3 col-span-1 sm:col-span-2">
+                            <span class="text-xl">🎭</span>
+                            <div class="text-sm">
+                                <div class="font-bold text-gray-800">To do / Doing (变身术)</div>
+                                <div class="text-gray-500 text-xs"><span class="font-mono text-indigo-600">To see</span>
+                                    is to believe / <span class="font-mono text-indigo-600">Smoking</span> is bad</div>
+                            </div>
                         </div>
-                    </details>
+                    </div>
                 </div>
-            </section>
+            </div>
 
             <!-- Predicate -->
-            <section id="predicate">
-                <h2 class="section-title text-red-600">
-                    <span class="material-symbols-outlined text-3xl">bolt</span> 3. 谓语 (Predicate)
-                </h2>
-                <div class="card p-4">
-                    <p class="mb-4 text-sm text-gray-600">对主语动作或状态的陈述。形式多样：</p>
-                    <div class="space-y-3 text-sm font-mono">
-                        <div class="flex items-center gap-2">
-                            <span class="w-20 text-gray-400 font-sans font-bold text-xs text-right">简单动词</span>
-                            <span>She <span class="n-code">left</span> without a word.</span>
+            <div class="bg-white p-8 rounded-3xl shadow-lg border-l-8 border-red-500 hover-card" data-aos="fade-right">
+                <div class="flex flex-col md:flex-row gap-8">
+                    <div class="md:w-1/3">
+                        <h4 class="text-2xl font-bold text-red-700 mb-2 flex items-center gap-2">
+                            <span class="material-symbols-rounded">bolt</span> 谓语 Predicate
+                        </h4>
+                        <p class="text-gray-500 text-sm leading-relaxed">句子的<b
+                                class="text-red-600">引擎</b>。可以是简单的动作，也可以是复杂的短语搭配。</p>
+                    </div>
+                    <div class="md:w-2/3 space-y-3">
+                        <div class="flex items-center gap-4 p-3 bg-red-50 rounded-xl">
+                            <div
+                                class="bg-white px-2 py-1 rounded text-xs font-bold text-red-500 shadow-sm border border-red-100 w-24 text-center">
+                                动词短语</div>
+                            <p class="text-sm">George <b class="text-red-600 underline decoration-wavy">jumped into</b>
+                                the muddy puddles.</p>
                         </div>
-                        <div class="flex items-center gap-2">
-                            <span class="w-20 text-gray-400 font-sans font-bold text-xs text-right">动词短语</span>
-                            <span>George <span class="n-code">jumped into</span> the muddy puddles.</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <span class="w-20 text-gray-400 font-sans font-bold text-xs text-right">情态动词</span>
-                            <span>George <span class="n-code">can play</span> the ukulele.</span>
-                        </div>
-                        <div class="flex items-center gap-2">
-                            <span class="w-20 text-gray-400 font-sans font-bold text-xs text-right">助动词</span>
-                            <span>George <span class="n-code">doesn't agree</span> with Papa.</span>
+                        <div class="flex items-center gap-4 p-3 bg-red-50 rounded-xl">
+                            <div
+                                class="bg-white px-2 py-1 rounded text-xs font-bold text-red-500 shadow-sm border border-red-100 w-24 text-center">
+                                情态动词</div>
+                            <p class="text-sm">He <b class="text-red-600">can play</b> the ukulele.</p>
                         </div>
                     </div>
                 </div>
-            </section>
+            </div>
 
-            <!-- Object -->
-            <section id="object">
-                <h2 class="section-title text-green-600">
-                    <span class="material-symbols-outlined text-3xl">adjust</span> 4. 宾语 (Object)
-                </h2>
-                <details class="n-toggle card bg-white mb-4">
-                    <summary>
-                        <span class="flex items-center gap-2 text-green-700 font-bold">普通宾语</span>
-                        <span class="material-symbols-outlined text-gray-400 text-sm">expand_more</span>
-                    </summary>
-                    <div class="content text-sm space-y-2">
-                        <p>I hope <span class="n-code">to see you again</span>. (不定式做宾语)</p>
-                        <p>They are talking about <span class="n-code">the school beauty</span>. (介词宾语，谈论校花)</p>
+            <!-- Object (Double Object) -->
+            <div class="bg-gradient-to-br from-teal-500 to-emerald-600 text-white p-8 rounded-3xl shadow-xl transform hover:scale-[1.02] transition duration-300"
+                data-aos="flip-up">
+                <h4 class="text-2xl font-bold mb-6 flex items-center gap-3">
+                    <span class="material-symbols-rounded text-3xl">diversity_3</span>
+                    双宾语 Trick (Double Object)
+                </h4>
+
+                <div class="flex flex-col md:flex-row gap-8 items-center justify-center">
+                    <div class="bg-white/10 backdrop-blur-md p-6 rounded-2xl border border-white/20 text-center w-full">
+                        <div class="text-xs uppercase tracking-widest opacity-80 mb-2">Trick</div>
+                        <div class="text-3xl font-bold mb-2">人 + 物</div>
+                        <div class="text-sm opacity-90">人是间接 (Indirect)，物是直接 (Direct)</div>
                     </div>
-                </details>
 
-                <details class="n-toggle card border-green-200 bg-green-50 open">
-                    <summary class="bg-green-50 hover:bg-green-100">
-                        <span class="flex items-center gap-2 text-green-800 font-bold"><span
-                                class="material-symbols-outlined">diversity_3</span> 双宾语 (重点)</span>
-                        <span class="material-symbols-outlined text-gray-400 text-sm">expand_more</span>
-                    </summary>
-                    <div class="content bg-green-50/50">
-                        <p class="text-sm text-gray-600 mb-3">给某人某物，买某人某物。通常 <b>人(间接) + 物(直接)</b>。</p>
-                        <ul class="space-y-3 text-sm font-mono">
-                            <li>
-                                Give <span class="text-blue-600 font-bold">the dog</span> <span
-                                    class="text-green-600 font-bold">some food</span>.
-                            </li>
-                            <li>
-                                He bought <span class="text-blue-600 font-bold">his girlfriend</span> <span
-                                    class="text-green-600 font-bold">some flowers</span>.
-                            </li>
-                        </ul>
-                    </div>
-                </details>
-            </section>
+                    <div class="text-4xl opacity-50">👉</div>
 
-            <!-- Predicative -->
-            <section id="predicative">
-                <h2 class="section-title text-orange-600">
-                    <span class="material-symbols-outlined text-3xl">link</span> 5. 表语 (Predicative)
-                </h2>
-                <p class="mb-4 text-gray-600">配合 <b>系动词 (Link Verb)</b> 使用，说明主语的性质或状态。</p>
-
-                <details class="n-toggle card border-orange-200 shadow-sm open">
-                    <summary class="text-orange-800">
-                        <div class="flex items-center gap-2">
-                            <span class="material-symbols-outlined">visibility</span>
-                            <b>感官动词 (Sense Verbs) - 最重要！</b>
+                    <div class="space-y-4 w-full">
+                        <div
+                            class="bg-white text-emerald-900 p-4 rounded-xl shadow-lg flex justify-between items-center">
+                            <span>Give <b class="text-purple-600">the dog (人/动物)</b></span>
+                            <span class="font-bold"><b class="text-orange-500">some food (物)</b> 🦴</span>
                         </div>
-                        <span class="material-symbols-outlined text-gray-400 text-sm">expand_more</span>
-                    </summary>
-                    <div class="content">
-                        <div class="n-callout n-bg-red text-xs text-red-600 mb-4">
-                            <span class="material-symbols-outlined text-sm">warning</span>
-                            注意：感官动词没有被动语态！不要说 "is felt"。
-                        </div>
-                        <div class="grid grid-cols-2 gap-4 text-sm">
-                            <div>
-                                <span class="badge bg-orange-100 text-orange-800">Look</span>
-                                <p class="font-mono text-gray-600">You look <b class="text-orange-600">beautiful</b>.
-                                </p>
-                            </div>
-                            <div>
-                                <span class="badge bg-orange-100 text-orange-800">Feel</span>
-                                <p class="font-mono text-gray-600">It feels <b class="text-orange-600">good</b>.</p>
-                            </div>
-                            <div>
-                                <span class="badge bg-orange-100 text-orange-800">Taste</span>
-                                <p class="font-mono text-gray-600">It tastes <b class="text-orange-600">delicious</b>.
-                                </p>
-                            </div>
-                            <div>
-                                <span class="badge bg-orange-100 text-orange-800">Smell</span>
-                                <p class="font-mono text-gray-600">It smells <b class="text-orange-600">bad</b>.</p>
-                            </div>
+                        <div
+                            class="bg-white text-emerald-900 p-4 rounded-xl shadow-lg flex justify-between items-center">
+                            <span>Tell <b class="text-purple-600">me (人)</b></span>
+                            <span class="font-bold"><b class="text-orange-500">secret (物)</b> 🤫</span>
                         </div>
                     </div>
-                </details>
-            </section>
+                </div>
+            </div>
+        </section>
 
-            <!-- Modifiers (The Specific Request) -->
-            <section id="modifiers">
-                <h2 class="section-title text-purple-600">
-                    <span class="material-symbols-outlined text-3xl">auto_fix_high</span> 6. 定语 & 状语
-                </h2>
-                <p class="mb-6 text-gray-500">点击下方卡片，查看详细讲解和例句。</p>
+        <!-- Sense Verbs Gallery -->
+        <section class="mb-24" data-aos="fade-up">
+            <div class="flex items-center gap-4 mb-8">
+                <div class="h-px bg-gray-200 flex-1"></div>
+                <h3 class="text-2xl font-display font-bold text-gray-400">感官世界 (Sense Verbs)</h3>
+                <div class="h-px bg-gray-200 flex-1"></div>
+            </div>
 
-                <!-- Attribute Expandable -->
-                <details class="n-toggle card border-purple-200 mb-4 group">
-                    <summary class="hover:bg-purple-50 transition">
-                        <div class="flex items-center gap-3">
-                            <span
-                                class="bg-purple-100 text-purple-700 p-2 rounded-lg material-symbols-outlined">palette</span>
-                            <div>
-                                <h3 class="font-bold text-gray-800">定语 (Attribute)</h3>
-                                <p class="text-xs text-gray-400 font-normal mt-0.5">修饰名词/代词。翻译为“...的”。</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div
+                    class="card bg-white p-6 rounded-2xl text-center shadow-sm border border-orange-100 hover:bg-orange-50 transition cursor-pointer group">
+                    <span class="text-4xl mb-3 block group-hover:scale-125 transition">👀</span>
+                    <h5 class="font-bold text-gray-800">Look</h5>
+                    <p class="text-xs text-gray-500 mt-1">You look beautiful</p>
+                </div>
+                <div
+                    class="card bg-white p-6 rounded-2xl text-center shadow-sm border border-orange-100 hover:bg-orange-50 transition cursor-pointer group">
+                    <span class="text-4xl mb-3 block group-hover:scale-125 transition">👃</span>
+                    <h5 class="font-bold text-gray-800">Smell</h5>
+                    <p class="text-xs text-gray-500 mt-1">It smells bad</p>
+                </div>
+                <div
+                    class="card bg-white p-6 rounded-2xl text-center shadow-sm border border-orange-100 hover:bg-orange-50 transition cursor-pointer group">
+                    <span class="text-4xl mb-3 block group-hover:scale-125 transition">👅</span>
+                    <h5 class="font-bold text-gray-800">Taste</h5>
+                    <p class="text-xs text-gray-500 mt-1">It tastes good</p>
+                </div>
+                <div
+                    class="card bg-white p-6 rounded-2xl text-center shadow-sm border border-orange-100 hover:bg-orange-50 transition cursor-pointer group">
+                    <span class="text-4xl mb-3 block group-hover:scale-125 transition">🤚</span>
+                    <h5 class="font-bold text-gray-800">Feel</h5>
+                    <p class="text-xs text-gray-500 mt-1">It feels soft</p>
+                </div>
+            </div>
+            <div class="text-center mt-4">
+                <span class="inline-block bg-red-100 text-red-600 px-3 py-1 rounded text-xs font-bold animate-bounce">⚠️
+                    永远没有被动语态！</span>
+            </div>
+        </section>
+
+        <!-- Modifiers & Adverbial (Expandable Visuals) -->
+        <section id="modifiers" class="space-y-6" data-aos="fade-up">
+            <h3 class="font-display text-3xl font-bold mb-8 text-gray-800 flex items-center gap-3">
+                <span class="bg-gray-800 text-white rounded-lg p-1 text-2xl material-symbols-rounded">tune</span>
+                修饰成分：让句子活起来
+            </h3>
+
+            <!-- Adverbial Map -->
+            <div class="bg-white rounded-3xl p-8 border border-gray-200 shadow-xl relative overflow-hidden">
+                <h4 class="text-xl font-bold mb-6 text-teal-700">状语雷达 (Adverbial Radar)</h4>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <!-- Time/Place -->
+                    <div class="col-span-1 space-y-4">
+                        <div class="bg-teal-50 p-4 rounded-2xl border border-teal-100">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="material-symbols-rounded text-teal-500">schedule</span>
+                                <span class="font-bold text-sm text-gray-700">时间 Time</span>
                             </div>
+                            <p class="font-mono text-sm">at 6:00</p>
                         </div>
-                        <span
-                            class="material-symbols-outlined text-gray-400 group-open:rotate-180 transition-transform">expand_more</span>
-                    </summary>
-                    <div class="content bg-purple-50/30">
-                        <p class="text-sm text-gray-600 mb-4">定语不仅可以是形容词，还可以是词组或句子，用来限定“是哪一个”。</p>
+                        <div class="bg-teal-50 p-4 rounded-2xl border border-teal-100">
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="material-symbols-rounded text-teal-500">pin_drop</span>
+                                <span class="font-bold text-sm text-gray-700">地点 Place</span>
+                            </div>
+                            <p class="font-mono text-sm">on the 1st floor</p>
+                        </div>
+                    </div>
 
-                        <div class="space-y-3">
-                            <div class="bg-white p-3 rounded border border-purple-100 flex gap-3 text-sm items-center">
-                                <span class="w-20 text-xs font-bold text-gray-400 text-right flex-shrink-0">形容词</span>
-                                <div>The <b class="text-purple-600">lazy</b> boy.</div>
+                    <!-- Logic -->
+                    <div
+                        class="col-span-2 bg-gradient-to-r from-teal-600 to-cyan-600 rounded-2xl p-6 text-white flex flex-col justify-center relative shadow-lg">
+                        <div class="absolute right-0 top-0 opacity-10 text-9xl material-symbols-rounded">psychology
+                        </div>
+                        <div class="space-y-6 relative z-10">
+                            <div>
+                                <span class="text-xs uppercase tracking-wider opacity-80">Reason</span>
+                                <p class="text-lg font-mono">...because the alarm didn't work.</p>
                             </div>
-                            <div class="bg-white p-3 rounded border border-purple-100 flex gap-3 text-sm items-center">
-                                <span class="w-20 text-xs font-bold text-gray-400 text-right flex-shrink-0">副词</span>
-                                <div>The man <b class="text-purple-600">over there</b> is my dad.</div>
+                            <div class="h-px bg-white/20"></div>
+                            <div>
+                                <span class="text-xs uppercase tracking-wider opacity-80">Condition</span>
+                                <p class="text-lg font-mono">...if it doesn't rain 🌧️.</p>
                             </div>
-                            <div class="bg-white p-3 rounded border border-purple-100 flex gap-3 text-sm items-center">
-                                <span class="w-20 text-xs font-bold text-gray-400 text-right flex-shrink-0">介词短语</span>
-                                <div>The woman <b class="text-purple-600">with a baby</b> is my aunt.<br><span
-                                        class="text-xs text-gray-400">哪个女人？抱孩子的那个。</span></div>
-                            </div>
-                            <div class="bg-white p-3 rounded border border-purple-100 flex gap-3 text-sm items-center">
-                                <span class="w-20 text-xs font-bold text-gray-400 text-right flex-shrink-0">过去分词</span>
-                                <div>The tree <b class="text-purple-600">planted last year</b> is growing well.<br><span
-                                        class="text-xs text-gray-400">哪棵树？去年种的那棵。</span></div>
-                            </div>
-                            <div class="bg-white p-3 rounded border border-purple-100 flex gap-3 text-sm items-center">
-                                <span class="w-20 text-xs font-bold text-gray-400 text-right flex-shrink-0">不定式</span>
-                                <div>I have an idea <b class="text-purple-600">to solve the problem</b>.</div>
+                            <div class="h-px bg-white/20"></div>
+                            <div>
+                                <span class="text-xs uppercase tracking-wider opacity-80">Purpose (Doing it for
+                                    what?)</span>
+                                <p class="text-lg font-mono">In order to lose weight...</p>
                             </div>
                         </div>
                     </div>
-                </details>
-
-                <!-- Adverbial Expandable (Requested Specific) -->
-                <details class="n-toggle card border-teal-200 group" open>
-                    <summary class="hover:bg-teal-50 transition">
-                        <div class="flex items-center gap-3">
-                            <span
-                                class="bg-teal-100 text-teal-700 p-2 rounded-lg material-symbols-outlined">timer</span>
-                            <div>
-                                <h3 class="font-bold text-gray-800">状语 (Adverbial)</h3>
-                                <p class="text-xs text-gray-400 font-normal mt-0.5">修饰动词/全句。说明时间、地点、原因、条件、目的、让步等。</p>
-                            </div>
-                        </div>
-                        <span
-                            class="material-symbols-outlined text-gray-400 group-open:rotate-180 transition-transform">expand_more</span>
-                    </summary>
-
-                    <div class="content bg-teal-50/30">
-                        <p class="text-sm text-gray-600 mb-4">状语非常考验逻辑，它说明了动作发生的背景。</p>
-
-                        <div class="grid md:grid-cols-2 gap-3">
-                            <!-- Location -->
-                            <div class="bg-white p-3 rounded border border-teal-100 shadow-sm">
-                                <span class="badge bg-teal-100 text-teal-800">地点 Place</span>
-                                <p class="font-mono text-sm mt-1">George lives <b class="text-teal-600">on the 1st
-                                        floor</b>.</p>
-                                <p class="text-xs text-gray-400 mt-1">说明住的状态。</p>
-                            </div>
-
-                            <!-- Time -->
-                            <div class="bg-white p-3 rounded border border-teal-100 shadow-sm">
-                                <span class="badge bg-teal-100 text-teal-800">时间 Time</span>
-                                <p class="font-mono text-sm mt-1">George goes to school <b class="text-teal-600">at
-                                        6:00</b>.</p>
-                            </div>
-
-                            <!-- Reason -->
-                            <div class="bg-white p-3 rounded border border-teal-100 shadow-sm">
-                                <span class="badge bg-teal-100 text-teal-800">原因 Reason</span>
-                                <p class="font-mono text-sm mt-1">George was late <b class="text-teal-600">because the
-                                        alarm didn't work</b>.</p>
-                            </div>
-
-                            <!-- Condition -->
-                            <div class="bg-white p-3 rounded border border-teal-100 shadow-sm">
-                                <span class="badge bg-teal-100 text-teal-800">条件 Condition</span>
-                                <p class="font-mono text-sm mt-1">George will feed ducks <b class="text-teal-600">if it
-                                        doesn't rain</b>.</p>
-                                <p class="text-xs text-gray-400 mt-1">加上"不下雨"的条件。</p>
-                            </div>
-
-                            <!-- Purpose -->
-                            <div class="bg-white p-3 rounded border border-teal-100 shadow-sm md:col-span-2">
-                                <span class="badge bg-teal-100 text-teal-800">目的 Purpose</span>
-                                <p class="font-mono text-sm mt-1"><b class="text-teal-600">In order to lose weight</b>,
-                                    George didn't have dinner.</p>
-                                <p class="text-xs text-gray-400 mt-1">为了达到减肥的目的。</p>
-                            </div>
-
-                            <!-- Concession -->
-                            <div class="bg-white p-3 rounded border border-teal-100 shadow-sm md:col-span-2">
-                                <span class="badge bg-teal-100 text-teal-800">让步 Concession</span>
-                                <p class="font-mono text-sm mt-1">George is doing homework <b
-                                        class="text-teal-600">though he is sleepy</b>.</p>
-                                <p class="text-xs text-gray-400 mt-1">"虽然...但是..." (尽管很困，还在做).</p>
-                            </div>
-                        </div>
-                    </div>
-                </details>
-            </section>
+                </div>
+            </div>
 
             <!-- Complement -->
-            <section id="complement" class="mb-20">
-                <h2 class="section-title text-yellow-600">
-                    <span class="material-symbols-outlined text-3xl">add_circle</span> 7. 补语 (Complement)
-                </h2>
-                <div class="n-callout n-bg-gray">
-                    <span class="material-symbols-outlined text-gray-600">lightbulb</span>
-                    <p class="text-sm"><b>秘诀：</b>补谁就是什么补。补主语叫主补，补宾语叫宾补。</p>
-                </div>
-
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="card p-4">
-                        <div class="text-xs font-bold text-gray-400 uppercase mb-2">主语补足语 (Subject Comp)</div>
-                        <p class="font-mono text-sm">George was found <b class="bg-yellow-200">singing</b>.</p>
-                        <p class="text-xs text-gray-500 mt-2">George 被发现(在唱歌)。Singing 补充说明 George。</p>
-                    </div>
-                    <div class="card p-4 border-l-4 border-l-yellow-400">
-                        <div class="text-xs font-bold text-yellow-600 uppercase mb-2">宾语补足语 (Object Comp)</div>
-                        <p class="font-mono text-sm">We found George <b class="bg-yellow-200">singing</b>.</p>
-                        <p class="text-xs text-gray-500 mt-2">我们发现 George (在唱歌)。Singing 补充说明宾语 George。</p>
+            <div class="bg-yellow-50 rounded-3xl p-8 border border-yellow-200" data-aos="fade-up">
+                <h4 class="text-xl font-bold mb-4 text-yellow-800 flex items-center gap-2">
+                    <span class="material-symbols-rounded">add_circle</span> 补语 (Complement)
+                </h4>
+                <div class="text-center">
+                    <p class="text-gray-600 mb-6">"补谁就是什么补。"</p>
+                    <div class="inline-flex bg-white rounded-xl shadow-sm p-2 border border-yellow-100">
+                        <div class="px-6 py-3 border-r border-gray-100">
+                            <div class="text-xs text-gray-400 mb-1">主补</div>
+                            <div class="font-bold text-gray-800">George was found <span
+                                    class="bg-yellow-200 px-1">singing</span></div>
+                        </div>
+                        <div class="px-6 py-3">
+                            <div class="text-xs text-gray-400 mb-1">宾补</div>
+                            <div class="font-bold text-gray-800">We found George <span
+                                    class="bg-yellow-200 px-1">singing</span></div>
+                        </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="mt-4 card p-4 bg-yellow-50/50">
-                    <p class="text-xs font-bold text-gray-500 mb-2">更多宾补例子：</p>
-                    <ul class="space-y-2 text-sm font-mono">
-                        <li>George found the bonbon box <b class="text-yellow-600">empty</b>. (形容词补语: 发现糖盒是空的)</li>
-                        <li>George saw his face <b class="text-yellow-600">reflected in the water</b>. (过去分词补语:
-                            看见脸倒映在水里)</li>
-                    </ul>
-                </div>
-            </section>
+    </main>
 
-            <!-- Summary -->
-            <section class="mb-12 text-center py-12 border-t text-gray-500">
-                <p class="mb-4">Everything starts here. 就像音符构成了乐章。</p>
-                <button
-                    class="bg-gray-900 text-white px-6 py-2 rounded-full text-sm font-bold shadow-lg hover:scale-105 transition">期待下一课：五大句型</button>
-            </section>
-
-        </main>
-    </div>
+    <footer class="bg-gray-900 text-gray-400 py-12 text-center relative z-20">
+        <div class="max-w-4xl mx-auto px-4">
+            <p class="mb-4 text-2xl">🎵</p>
+            <p class="mb-8 font-light">
+                句子成分就像音符，单独存在没有意义。<br>
+                下一节，我们将学会如何将它们谱写成<b class="text-white">五大乐章 (句型)</b>。
+            </p>
+            <button
+                class="border border-gray-600 text-white px-8 py-3 rounded-full hover:bg-white hover:text-black transition duration-300">
+                预习下一课
+            </button>
+            <p class="text-xs mt-12 opacity-50">© 2025 新东方在线 · Designed for George's Students</p>
+        </div>
+    </footer>
 
     <script>
+        // Initialize AOS Animation Library
+        AOS.init({
+            duration: 800,
+            offset: 50,
+            once: true
+        });
+
+        // Interactive Sentence Logic
+        const sentenceContainer = document.getElementById('interactive-sentence');
+        const roleCards = [
+            document.getElementById('role-card-1'),
+            document.getElementById('role-card-2'),
+            document.getElementById('role-card-3'),
+            document.getElementById('role-card-4')
+        ];
+
+        // Default State: Highlight all slightly
+        const tokens = document.querySelectorAll('.word-token');
+
+        tokens.forEach((token, index) => {
+            token.addEventListener('mouseenter', () => {
+                // Reset all
+                tokens.forEach(t => t.classList.remove('active'));
+                roleCards.forEach(c => {
+                    c.classList.remove('opacity-100', 'scale-105', 'shadow-md');
+                    c.classList.add('opacity-50');
+                });
+
+                // Activate current
+                token.classList.add('active');
+
+                // Activate corresponding card
+                if (roleCards[index]) {
+                    roleCards[index].classList.remove('opacity-50');
+                    roleCards[index].classList.add('opacity-100', 'scale-105', 'shadow-md');
+                }
+            });
+        });
+
+        // Reset on mouse leave container
+        sentenceContainer.addEventListener('mouseleave', () => {
+            tokens.forEach(t => t.classList.remove('active'));
+            roleCards.forEach(c => {
+                c.classList.remove('opacity-100', 'scale-105', 'shadow-md');
+                c.classList.add('opacity-50');
+            });
+        });
+
         function downloadPage() {
             const pageContent = document.documentElement.outerHTML;
             const blob = new Blob([pageContent], { type: 'text/html' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'Lesson1_Full_Transcript_George.html';
+            a.download = 'Lesson1_Visual_Notes.html';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
         }
-
-        // Auto-expand details if anchor link targets inside
-        window.addEventListener('hashchange', () => {
-            const target = document.querySelector(location.hash);
-            if (target) {
-                const details = target.closest('details');
-                if (details) details.open = true;
-            }
-        });
     </script>
 
 </body>
