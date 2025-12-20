@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>乔治老师的托福语法课：句子成分全解析 (Notion版)</title>
+    <title>乔治老师的托福语法第一课：句子成分全解 (完整版)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0"
         rel="stylesheet">
@@ -15,418 +15,445 @@
         body {
             font-family: 'Noto Sans SC', sans-serif;
             background-color: #ffffff;
-        }
-
-        .notion-card {
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-            transition: all 0.2s;
-            border: 1px solid #e5e7eb;
-        }
-
-        .notion-card:hover {
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
-            transform: translateY(-2px);
-        }
-
-        .highlight-yellow {
-            background-color: #fff9c4;
-            padding: 2px 4px;
-            border-radius: 4px;
-        }
-
-        .highlight-blue {
-            background-color: #e3f2fd;
-            padding: 2px 4px;
-            border-radius: 4px;
-        }
-
-        .highlight-green {
-            background-color: #e8f5e9;
-            padding: 2px 4px;
-            border-radius: 4px;
-        }
-
-        .highlight-purple {
-            background-color: #f3e5f5;
-            padding: 2px 4px;
-            border-radius: 4px;
-        }
-
-        .highlight-red {
-            background-color: #fee2e2;
-            padding: 2px 4px;
-            border-radius: 4px;
-        }
-
-        .sidebar-item:hover {
-            background-color: #f3f4f6;
-        }
-
-        .notion-h1 {
-            font-size: 1.875rem;
-            font-weight: 700;
-            border-bottom: 1px solid #eaeaea;
-            padding-bottom: 0.5rem;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .notion-h2 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-top: 1.5rem;
-            margin-bottom: 0.75rem;
             color: #374151;
         }
 
-        .floating-download {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            z-index: 50;
+        /* Notion Colors */
+        .n-bg-gray {
+            background-color: #F1F1EF;
         }
 
-        @media (max-width: 768px) {
-            .sidebar {
-                display: none;
-            }
+        .n-bg-brown {
+            background-color: #F4EEEE;
         }
 
-        /* Quiz Styles */
-        .quiz-option {
-            cursor: pointer;
+        .n-bg-orange {
+            background-color: #FBECDD;
+        }
+
+        .n-bg-yellow {
+            background-color: #FBF3DB;
+        }
+
+        .n-bg-green {
+            background-color: #EDF3EC;
+        }
+
+        .n-bg-blue {
+            background-color: #E7F3F8;
+        }
+
+        .n-bg-purple {
+            background-color: #F6F3F9;
+        }
+
+        .n-bg-pink {
+            background-color: #FBF2F5;
+        }
+
+        .n-bg-red {
+            background-color: #FDEBEC;
+        }
+
+        .n-callout {
+            padding: 16px;
+            border-radius: 4px;
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .n-quote {
+            border-left: 3px solid #111;
+            padding-left: 14px;
+            margin: 8px 0;
+            font-style: italic;
+            color: #4B5563;
+        }
+
+        .n-code {
+            font-family: 'JetBrains Mono', monospace;
+            background: #F1F1EF;
+            color: #EB5757;
+            padding: 2px 5px;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        /* Custom UI */
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 10px;
+            border-radius: 6px;
+            color: #6B7280;
+            font-size: 14px;
             transition: all 0.2s;
         }
 
-        .quiz-option:hover {
-            background-color: #f3f4f6;
+        .sidebar-link:hover {
+            background: #F3F4F6;
+            color: #111827;
         }
 
-        .quiz-option.correct {
-            background-color: #dcfce7;
-            border-color: #166534;
-            color: #166534;
+        .sidebar-link.active {
+            background: #E7F3F8;
+            color: #111827;
+            font-weight: 500;
         }
 
-        .quiz-option.wrong {
-            background-color: #fee2e2;
-            border-color: #991b1b;
-            color: #991b1b;
-        }
-
-        .quote-block {
-            border-left: 4px solid #3b82f6;
-            background: #f8fafc;
-            padding: 1rem;
-            color: #475569;
-            font-style: italic;
-            border-radius: 0 0.5rem 0.5rem 0;
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-top: 3rem;
             margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid #E5E7EB;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .sub-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            color: #1F2937;
+        }
+
+        .card {
+            border: 1px solid #E5E7EB;
+            border-radius: 8px;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+            transition: box-shadow 0.2s;
+            background: white;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .example-row {
+            display: flex;
+            border-bottom: 1px solid #F3F4F6;
+            padding: 12px;
+            align-items: center;
+        }
+
+        .example-row:last-child {
+            border-bottom: none;
+        }
+
+        .example-label {
+            width: 120px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #9CA3AF;
+            flex-shrink: 0;
+        }
+
+        .example-content {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            flex-grow: 1;
         }
     </style>
 </head>
 
-<body class="text-slate-800 antialiased">
+<body class="flex flex-col min-h-screen">
 
-    <!-- Top Action Bar -->
-    <nav
-        class="sticky top-0 z-40 w-full bg-white/80 backdrop-blur-md border-b border-slate-200 px-6 py-3 flex justify-between items-center">
-        <div class="flex items-center gap-2">
-            <span class="material-symbols-outlined text-blue-600">school</span>
-            <span class="font-bold text-slate-700 tracking-tight">新东方在线 · 托福基础段语法</span>
-        </div>
-        <div class="flex items-center gap-4">
-            <button onclick="downloadCurrentPage()"
-                class="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700 transition shadow-md">
-                <span class="material-symbols-outlined text-sm">download</span>
-                下载本课笔记
+    <!-- Top Navigation -->
+    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-blue-600">school</span>
+                <span class="font-bold text-gray-800">新东方在线 · 托福基础语法</span>
+                <span class="text-xs bg-gray-100 text-gray-500 px-2 py-0.5 rounded ml-2">Lesson 1</span>
+            </div>
+            <button onclick="downloadPage()"
+                class="text-sm font-medium text-blue-600 hover:text-blue-700 flex items-center gap-1">
+                <span class="material-symbols-outlined text-lg">download</span> 下载讲义
             </button>
         </div>
-    </nav>
+    </header>
 
-    <div class="max-w-7xl mx-auto px-4 md:px-8 py-10 flex gap-12">
+    <div class="flex-1 flex max-w-7xl mx-auto w-full">
 
         <!-- Sidebar -->
-        <aside class="sidebar w-64 flex-shrink-0">
-            <div class="sticky top-24 space-y-6">
-                <div class="flex items-center gap-3 px-2">
-                    <div
-                        class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-xl border border-slate-200 overflow-hidden">
-                        <img src="virtual_studio_teacher_1766243391676.png" class="object-cover w-full h-full"
-                            alt="George">
-                    </div>
-                    <div>
-                        <p class="text-sm font-bold">乔治老师</p>
-                        <p class="text-xs text-slate-500 italic">"千里之行，始于足下"</p>
-                    </div>
+        <aside class="w-64 hidden md:block pt-8 pr-8 sticky top-14 h-[calc(100vh-3.5rem)] overflow-y-auto">
+            <div class="flex items-center gap-3 mb-8 px-2">
+                <img src="virtual_studio_teacher_1766243391676.png"
+                    class="w-10 h-10 rounded-full object-cover border border-gray-200">
+                <div>
+                    <p class="text-sm font-bold text-gray-900">George Teacher</p>
+                    <p class="text-xs text-gray-500">冰洁老师</p>
                 </div>
+            </div>
 
-                <nav class="space-y-1">
-                    <p class="px-2 text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-2">章节大纲</p>
-                    <a href="#welcome"
-                        class="sidebar-item flex items-center gap-3 p-2 rounded-lg text-sm text-slate-600 transition">
-                        <span class="material-symbols-outlined text-slate-500 text-[18px]">waving_hand</span> 欢迎 & 虚拟演播室
-                    </a>
-                    <a href="#definition"
-                        class="sidebar-item flex items-center gap-3 p-2 rounded-lg text-sm text-slate-600 transition">
-                        <span class="material-symbols-outlined text-blue-500 text-[18px]">info</span> 句子的定义
-                    </a>
-                    <a href="#subject"
-                        class="sidebar-item flex items-center gap-3 p-2 rounded-lg text-sm text-slate-600 transition">
-                        <span class="material-symbols-outlined text-indigo-500 text-[18px]">person</span> 主语 (Subject)
-                    </a>
-                    <a href="#predicate"
-                        class="sidebar-item flex items-center gap-3 p-2 rounded-lg text-sm text-slate-600 transition">
-                        <span class="material-symbols-outlined text-red-500 text-[18px]">bolt</span> 谓语 (Predicate)
-                    </a>
-                    <a href="#object"
-                        class="sidebar-item flex items-center gap-3 p-2 rounded-lg text-sm text-slate-600 transition">
-                        <span class="material-symbols-outlined text-green-500 text-[18px]">adjust</span> 宾语 (Object)
-                    </a>
-                    <a href="#predicative"
-                        class="sidebar-item flex items-center gap-3 p-2 rounded-lg text-sm text-slate-600 transition">
-                        <span class="material-symbols-outlined text-orange-500 text-[18px]">link</span> 表语 (Predicative)
-                    </a>
-                    <a href="#modifiers"
-                        class="sidebar-item flex items-center gap-3 p-2 rounded-lg text-sm text-slate-600 transition">
-                        <span class="material-symbols-outlined text-purple-500 text-[18px]">auto_fix_high</span> 定、状、补
-                    </a>
-                    <a href="#quiz"
-                        class="sidebar-item flex items-center gap-3 p-2 rounded-lg text-sm text-slate-600 transition">
-                        <span class="material-symbols-outlined text-yellow-500 text-[18px]">quiz</span> 互动挑战
-                    </a>
-                </nav>
+            <div class="space-y-1">
+                <p class="px-2 text-xs font-bold text-gray-400 uppercase mb-2">目录 Contents</p>
+                <a href="#intro" class="sidebar-link"><span class="material-symbols-outlined text-lg">mic</span>
+                    课前导语</a>
+                <a href="#definition" class="sidebar-link"><span class="material-symbols-outlined text-lg">help</span>
+                    什么是句子</a>
+                <a href="#subject" class="sidebar-link"><span class="material-symbols-outlined text-lg">person</span> 主语
+                    Subject</a>
+                <a href="#predicate" class="sidebar-link"><span class="material-symbols-outlined text-lg">bolt</span> 谓语
+                    Predicate</a>
+                <a href="#review1" class="sidebar-link ml-4 text-xs">✍️ 随堂练习 1</a>
+                <a href="#object" class="sidebar-link"><span class="material-symbols-outlined text-lg">adjust</span> 宾语
+                    Object</a>
+                <a href="#predicative" class="sidebar-link"><span class="material-symbols-outlined text-lg">link</span>
+                    表语 Predicative</a>
+                <a href="#review2" class="sidebar-link ml-4 text-xs">✍️ 随堂练习 2</a>
+                <a href="#modifiers" class="sidebar-link"><span
+                        class="material-symbols-outlined text-lg">auto_fix_high</span> 定语 & 状语</a>
+                <a href="#complement" class="sidebar-link"><span
+                        class="material-symbols-outlined text-lg">add_circle</span> 补语 Complement</a>
+                <a href="#summary" class="sidebar-link"><span class="material-symbols-outlined text-lg">summarize</span>
+                    总结与预告</a>
             </div>
         </aside>
 
-        <!-- Content -->
-        <main class="flex-1 max-w-4xl">
+        <!-- Main Content -->
+        <main class="flex-1 max-w-3xl pt-8 pb-20 px-4 md:px-0">
 
-            <!-- Welcome / Studio Section -->
-            <section id="welcome" class="mb-12">
-                <div class="rounded-3xl overflow-hidden relative group shadow-2xl">
-                    <!-- Using local image -->
-                    <img src="virtual_studio_teacher_1766243391676.png" alt="George Studio"
-                        class="w-full h-[360px] object-cover object-top group-hover:scale-105 transition duration-700">
-                    <div
-                        class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex items-end p-8 md:p-12">
-                        <div class="text-white">
-                            <div class="flex gap-2 mb-3">
-                                <span
-                                    class="bg-blue-600 text-white text-xs px-2 py-1 rounded font-bold tracking-wide">LESSON
-                                    1</span>
-                                <span
-                                    class="bg-white/20 backdrop-blur text-white text-xs px-2 py-1 rounded font-bold">基础段课程</span>
-                            </div>
-                            <h1 class="text-3xl md:text-5xl font-black italic mb-4">句子成分 Sentence Structure</h1>
-                            <p class="text-slate-200 text-sm md:text-lg leading-relaxed max-w-3xl">
-                                大家好，欢迎来到新东方在线的托福课程！我是冰洁老师，大家也可以叫我<b>乔治老师 (George)</b>。<br>
-                                虽然我坐在一个蓝色的虚拟演播室里，但我希望大家想象自己正坐在宽敞的教室中。今天这第一课至关重要——它是所有托福长难句、阅读、写作复杂结构的基石。千里之行，始于足下，让我们开始吧！
-                            </p>
+            <!-- Intro Section -->
+            <section id="intro" class="mb-12">
+                <div
+                    class="rounded-xl overflow-hidden bg-gradient-to-br from-blue-900 to-slate-900 text-white relative shadow-xl">
+                    <div class="absolute top-0 right-0 p-4 opacity-20">
+                        <span class="material-symbols-outlined text-9xl">videocam</span>
+                    </div>
+                    <div class="p-8 md:p-12 relative z-10">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span class="bg-blue-500 text-xs font-bold px-2 py-1 rounded text-white">虚拟演播室</span>
+                            <span class="text-blue-200 text-sm">Welcome to Class</span>
                         </div>
+                        <h1 class="text-3xl font-bold mb-4">Hello everyone! 我是冰洁老师 (George)</h1>
+                        <p class="text-blue-100 leading-relaxed mb-6">
+                            大家好！今天我坐在这个虚拟演播室里（背面是一面蓝色的墙，前面只有一台摄像机），全靠我一个人的表演！请大家想象自己正坐在电脑前认真听课。<br><br>
+                            <b>今天第一课的主题是：句子成分 (Sentence Structure)。</b><br>
+                            不管是 TPO 里的长难句，还是未来的写作阅读，所有复杂的结构都源于此。<br>
+                            <i class="opacity-80">“千里之行，始于足下。”</i> 让我们开始吧！
+                        </p>
                     </div>
                 </div>
             </section>
 
             <!-- Definition -->
-            <section id="definition" class="mb-16">
-                <h1 class="notion-h1">1. 什么是句子？(Definition)</h1>
-                <div class="quote-block">
-                    “句子是至少有一个主语和一个动词，并且能够表述<span class="highlight-yellow font-bold text-slate-800">完整意义</span>的词的组合。”
-                </div>
-                <p class="text-slate-600 mb-6">关键在于“表述完整的意义”，要把话说全。我们来看几个反例（Fragments）：</p>
+            <section id="definition">
+                <h2 class="section-title text-blue-600">
+                    <span class="material-symbols-outlined text-3xl">help</span> 1. 什么是句子？
+                </h2>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div class="notion-card p-6 bg-red-50 border-red-100">
-                        <h3 class="flex items-center gap-2 font-bold text-red-600 mb-4">
-                            <span class="material-symbols-outlined">cancel</span> 碎片 (Fragments) - <span
-                                class="text-sm font-normal">千万别这么写</span>
-                        </h3>
-                        <ul class="space-y-4 text-sm font-mono text-slate-700">
-                            <li class="flex items-start gap-3">
-                                <span
-                                    class="bg-red-200 text-red-700 w-6 h-6 flex-shrink-0 flex items-center justify-center rounded text-[10px] mt-0.5">X</span>
-                                <div>...wants to go to Harvard.<br><span class="text-xs text-red-400">谁想去？缺主语。</span>
-                                </div>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <span
-                                    class="bg-red-200 text-red-700 w-6 h-6 flex-shrink-0 flex items-center justify-center rounded text-[10px] mt-0.5">X</span>
-                                <div>George, to major in Chemistry.<br><span
-                                        class="text-xs text-red-400">要去还是想去？缺谓语。</span></div>
-                            </li>
-                            <li class="flex items-start gap-3">
-                                <span
-                                    class="bg-red-200 text-red-700 w-6 h-6 flex-shrink-0 flex items-center justify-center rounded text-[10px] mt-0.5">X</span>
-                                <div>George loves...<br><span class="text-xs text-red-400">爱什么？意义不完整。</span></div>
-                            </li>
-                        </ul>
+                <div class="n-callout n-bg-yellow">
+                    <span class="material-symbols-outlined text-yellow-600">lightbulb</span>
+                    <div>
+                        <h4 class="font-bold text-gray-800">定义 (Definition)</h4>
+                        <p class="text-sm text-gray-600">句子是至少有一个主语和一个动词，并且能够表述<b
+                                class="bg-yellow-200 px-1">完整意义</b>的词的组合。</p>
                     </div>
-                    <div class="notion-card p-6 bg-green-50 border-green-100 flex flex-col justify-center">
-                        <h3 class="flex items-center gap-2 font-bold text-green-600 mb-4">
-                            <span class="material-symbols-outlined">task_alt</span> 课程目标
-                        </h3>
-                        <p class="text-sm text-slate-600 mb-4">最简单的 <i>I love you</i> 是主谓宾，最复杂的 TPO 长难句也是主谓宾。我们的目标是：</p>
-                        <div class="space-y-3 pl-2 border-l-2 border-green-200">
-                            <div class="flex items-center gap-3">
-                                <span class="text-lg font-black text-green-300">01</span>
-                                <span class="text-slate-700 font-medium">写完整 (Complete)</span>
+                </div>
+
+                <div class="mb-8">
+                    <h3 class="sub-title">反面教材：碎片 (Fragments)</h3>
+                    <p class="text-sm text-gray-500 mb-2">如果没把话说全，就不是句子：</p>
+                    <div class="card">
+                        <div class="example-row">
+                            <div class="example-label text-red-500">缺少主语</div>
+                            <div class="example-content">...wants to go to Harvard. <span
+                                    class="text-gray-400">(谁想去？没交代)</span></div>
+                        </div>
+                        <div class="example-row">
+                            <div class="example-label text-red-500">缺少谓语</div>
+                            <div class="example-content">George, to major in Chemistry. <span
+                                    class="text-gray-400">(要去还是想去？缺动作)</span></div>
+                        </div>
+                        <div class="example-row">
+                            <div class="example-label text-red-500">意义不全</div>
+                            <div class="example-content">George loves... <span class="text-gray-400">(爱谁？爱什么？没说完)</span>
                             </div>
-                            <div class="flex items-center gap-3">
-                                <span class="text-lg font-black text-green-300">02</span>
-                                <span class="text-slate-700 font-medium">写正确 (Correct)</span>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <span class="text-lg font-black text-green-300">03</span>
-                                <span class="text-slate-700 font-medium italic">写漂亮 (Elegant)</span>
-                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="n-callout n-bg-green items-center">
+                    <span class="material-symbols-outlined text-green-600">flag</span>
+                    <div class="flex-1">
+                        <h4 class="font-bold text-gray-800">我们的目标</h4>
+                        <div class="flex gap-4 mt-1 text-sm font-medium text-gray-600">
+                            <span>1. 写完整 (Complete)</span>
+                            <span>→</span>
+                            <span>2. 写正确 (Correct)</span>
+                            <span>→</span>
+                            <span>3. 写漂亮 (Elegant)</span>
                         </div>
                     </div>
                 </div>
             </section>
 
             <!-- Subject -->
-            <section id="subject" class="mb-16">
-                <h1 class="notion-h1">2. 主语 (Subject)</h1>
-                <p class="text-slate-600 mb-6">句子叙述的主体，通常位于句首。大家要记住一个核心特点：<span
-                        class="highlight-blue font-bold text-blue-700">任何名词性质的词都可以做主语</span>。</p>
+            <section id="subject">
+                <h2 class="section-title text-indigo-600">
+                    <span class="material-symbols-outlined text-3xl">person</span> 2. 主语 (Subject)
+                </h2>
+                <p class="mb-4">句子叙述的主体，通常位于句首。<b>核心特征：名词性质。</b></p>
 
-                <div class="space-y-4">
-                    <div class="notion-card p-5 border-l-4 border-blue-500 hover:bg-slate-50">
-                        <div class="flex flex-col md:flex-row gap-4">
-                            <div
-                                class="bg-blue-100 p-2 rounded-lg text-blue-600 flex-shrink-0 w-10 h-10 flex items-center justify-center">
-                                <span class="material-symbols-outlined">person</span>
-                            </div>
-                            <div>
-                                <p class="font-bold text-slate-800 text-lg">名词 & 代词 (Noun / Pronoun)</p>
-                                <p class="text-sm text-slate-500 mb-2">最常见的形式。</p>
-                                <div class="bg-white border rounded p-3 font-mono text-sm text-slate-600">
-                                    • <span class="highlight-blue font-bold">Papa and George</span> love feeding bread
-                                    to ducks.<br>
-                                    • <span class="highlight-blue font-bold">She</span> left without a word.
-                                    (代指人、物、动物均可)
-                                </div>
-                            </div>
+                <div class="card">
+                    <div class="p-3 bg-gray-50 border-b text-xs font-bold text-gray-500 uppercase">做主语的 5 种形式</div>
+
+                    <div class="example-row hover:bg-indigo-50/50">
+                        <div class="example-label">1. 名词 (Noun)</div>
+                        <div class="example-content">
+                            <span class="n-code">Papa and George</span> love feeding bread to ducks.<br>
+                            <span class="text-xs text-gray-400 block mt-1">Common nouns like names, people.</span>
                         </div>
                     </div>
 
-                    <div class="notion-card p-5 border-l-4 border-indigo-500 hover:bg-slate-50">
-                        <div class="flex flex-col md:flex-row gap-4">
-                            <div
-                                class="bg-indigo-100 p-2 rounded-lg text-indigo-600 flex-shrink-0 w-10 h-10 flex items-center justify-center">
-                                <span class="material-symbols-outlined">move_up</span>
-                            </div>
-                            <div>
-                                <p class="font-bold text-slate-800 text-lg">非谓语动词 (Infinitive / Gerund)</p>
-                                <p class="text-sm text-slate-500 mb-2">把动词变成名词性质（to do 或 doing）。</p>
-                                <div class="bg-white border rounded p-3 font-mono text-sm text-slate-600">
-                                    • <span class="highlight-blue font-bold">To see</span> is to believe. (眼见为实)<br>
-                                    • <span class="highlight-blue font-bold">Seeing</span> is believing. (动名词含义相同)
-                                </div>
-                            </div>
+                    <div class="example-row hover:bg-indigo-50/50">
+                        <div class="example-label">2. 代词 (Pronoun)</div>
+                        <div class="example-content">
+                            <span class="n-code">She</span> left without a word.<br>
+                            <span class="text-xs text-gray-400 block mt-1">He / She / It / They...</span>
                         </div>
                     </div>
 
-                    <div class="notion-card p-5 border-l-4 border-purple-500 hover:bg-slate-50">
-                        <div class="flex flex-col md:flex-row gap-4">
-                            <div
-                                class="bg-purple-100 p-2 rounded-lg text-purple-600 flex-shrink-0 w-10 h-10 flex items-center justify-center">
-                                <span class="material-symbols-outlined">featured_play_list</span>
-                            </div>
-                            <div>
-                                <p class="font-bold text-slate-800 text-lg">主语从句 (Clause)</p>
-                                <p class="text-sm text-slate-500 mb-2">大句子里套着一个小句子充当主语。</p>
-                                <div class="bg-white border rounded p-3 font-mono text-sm text-slate-600">
-                                    • <span class="highlight-blue font-bold">What he said</span> is not the truth.
-                                </div>
-                            </div>
+                    <div class="example-row hover:bg-indigo-50/50">
+                        <div class="example-label">3. 不定式 (To do)</div>
+                        <div class="example-content">
+                            <span class="n-code">To see</span> is to believe.<br>
+                            <span class="text-xs text-gray-400 block mt-1">"眼见为实"。把动词变成名词性。</span>
                         </div>
                     </div>
+
+                    <div class="example-row hover:bg-indigo-50/50">
+                        <div class="example-label">4. 动名词 (Doing)</div>
+                        <div class="example-content">
+                            <span class="n-code">Seeing</span> is believing.<br>
+                            <span class="n-code">Smoking</span> is bad for health.<br>
+                            <span class="text-xs text-gray-400 block mt-1">动词+ing，摇身一变名词化。</span>
+                        </div>
+                    </div>
+
+                    <div class="example-row hover:bg-indigo-50/50">
+                        <div class="example-label">5. 主语从句</div>
+                        <div class="example-content">
+                            <span class="n-code">What he said</span> is not the truth.<br>
+                            <span class="text-xs text-gray-400 block mt-1">"他所说的"——整个句子做一个大主语。</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-2 text-xs text-gray-500 text-right">* 无论动词想怎么做主语，必须变身（变 To do, 变 Doing, 变从句）。</div>
+            </section>
+
+            <!-- Predicate -->
+            <section id="predicate">
+                <h2 class="section-title text-red-600">
+                    <span class="material-symbols-outlined text-3xl">bolt</span> 3. 谓语 (Predicate)
+                </h2>
+                <p class="mb-4">对主语动作或状态的陈述。<b>核心特征：动词性质。</b></p>
+
+                <div class="card mb-8">
+                    <div class="p-3 bg-gray-50 border-b text-xs font-bold text-gray-500 uppercase">谓语的表现形式</div>
+
+                    <div class="example-row">
+                        <div class="example-label">1. 简单动词</div>
+                        <div class="example-content">
+                            She <span class="n-code">left</span> without a word.
+                        </div>
+                    </div>
+                    <div class="example-row">
+                        <div class="example-label">2. 动词短语</div>
+                        <div class="example-content">
+                            George <span class="n-code">jumped into</span> the muddy puddles.<br>
+                            <span class="text-xs text-gray-400">Jump + into (Preposition)</span>
+                        </div>
+                    </div>
+                    <div class="example-row">
+                        <div class="example-label">3. 情态动词+V</div>
+                        <div class="example-content">
+                            George <span class="n-code">can play</span> the ukulele.<br>
+                            <span class="text-xs text-gray-400">Includes: would, should, could, might...</span>
+                        </div>
+                    </div>
+                    <div class="example-row">
+                        <div class="example-label">4. 助动词+V</div>
+                        <div class="example-content">
+                            George <span class="n-code">doesn't agree</span> with Papa.<br>
+                            <span class="text-xs text-gray-400">表示否定时需要借助助动词 (do/does/did).</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 1 -->
+                <div id="review1" class="n-callout n-bg-blue flex-col">
+                    <div class="flex items-center gap-2 font-bold text-blue-800">
+                        <span class="material-symbols-outlined">edit</span> 随堂巩固：请找出以下句子的主语和谓语
+                    </div>
+                    <ul class="space-y-2 text-sm text-slate-700 list-decimal list-inside pl-2">
+                        <li><b>George is good at playing the piano.</b> <span class="text-gray-400">(主: George / 谓:
+                                is)</span></li>
+                        <li><b>He can speak English well.</b> <span class="text-gray-400">(主: He / 谓: can speak)</span>
+                        </li>
+                        <li><b>Smoking is bad for health.</b> <span class="text-gray-400">(主: Smoking / 谓: is)</span>
+                        </li>
+                        <li><b>We have finished reading.</b> <span class="text-gray-400">(主: We / 谓: have finished
+                                [完成时助动词])</span></li>
+                    </ul>
                 </div>
             </section>
 
-            <!-- Predicate & Object -->
-            <section id="predicate" class="mb-16">
-                <h1 class="notion-h1">3. 谓语与宾语 (Predicate &amp; Object)</h1>
+            <!-- Object -->
+            <section id="object">
+                <h2 class="section-title text-green-600">
+                    <span class="material-symbols-outlined text-3xl">adjust</span> 4. 宾语 (Object)
+                </h2>
+                <p class="mb-4">动作的承受者。通常跟在谓语后面。</p>
 
-                <div class="mb-8">
-                    <h2 class="text-xl font-bold text-slate-800 mb-4">A. 谓语 (Predicate)</h2>
-                    <p class="text-slate-600 mb-4">对主语动作或状态的陈述。主语要是名词性的，那谓语就必须是<span
-                            class="highlight-red font-bold text-red-700">动词性的</span>。</p>
-
-                    <div class="notion-card bg-slate-50 overflow-hidden">
-                        <table class="w-full text-sm text-left text-slate-600">
-                            <thead class="text-xs text-slate-700 uppercase bg-slate-100 border-b">
-                                <tr>
-                                    <th class="px-6 py-3">类型</th>
-                                    <th class="px-6 py-3">例句 (Highlight部分为谓语)</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr class="bg-white border-b">
-                                    <td class="px-6 py-4 font-medium">简单动词</td>
-                                    <td class="px-6 py-4 font-mono">She <span
-                                            class="bg-red-100 text-red-600 px-1 rounded font-bold">left</span> without a
-                                        word.</td>
-                                </tr>
-                                <tr class="bg-white border-b">
-                                    <td class="px-6 py-4 font-medium">动词短语</td>
-                                    <td class="px-6 py-4 font-mono">George <span
-                                            class="bg-red-100 text-red-600 px-1 rounded font-bold">jumped into</span>
-                                        the muddy puddles.</td>
-                                </tr>
-                                <tr class="bg-white border-b">
-                                    <td class="px-6 py-4 font-medium">情态动词+动词</td>
-                                    <td class="px-6 py-4 font-mono">George <span
-                                            class="bg-red-100 text-red-600 px-1 rounded font-bold">can play</span> the
-                                        ukulele.</td>
-                                </tr>
-                                <tr class="bg-white">
-                                    <td class="px-6 py-4 font-medium">助动词+动词</td>
-                                    <td class="px-6 py-4 font-mono">George <span
-                                            class="bg-red-100 text-red-600 px-1 rounded font-bold">doesn't agree</span>
-                                        with Papa.</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div id="object">
-                    <h2 class="text-xl font-bold text-slate-800 mb-4">B. 宾语 (Object)</h2>
-                    <p class="text-slate-600 mb-4">动作的承受者。通常紧跟在谓语动词之后。</p>
-
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Regular Object -->
-                        <div class="notion-card p-6">
-                            <h3 class="font-bold text-green-700 mb-2">普通宾语</h3>
-                            <p class="text-sm text-slate-500 mb-3">动作的唯一对象。</p>
-                            <p class="font-mono text-sm bg-slate-50 p-2 rounded">I hope <span
-                                    class="highlight-green font-bold">to see you again</span>.</p>
-                            <p class="text-xs text-slate-400 mt-1">(不定式作宾语，因为还没发生)</p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <!-- Basic Object -->
+                    <div>
+                        <h3 class="font-bold text-gray-800 mb-2">普通宾语</h3>
+                        <div class="card p-4 text-sm space-y-3">
+                            <div>
+                                <p class="n-code inline-block mb-1">I hope <span class="text-black">to see you
+                                        again</span>.</p>
+                                <p class="text-gray-500 text-xs">宾语是不定式：希望的内容。</p>
+                            </div>
+                            <div>
+                                <p class="n-code inline-block mb-1">I gave him <span class="text-black">what he asked
+                                        for</span>.</p>
+                                <p class="text-gray-500 text-xs">宾语是从句：给的内容。</p>
+                            </div>
                         </div>
+                    </div>
 
-                        <!-- Double Object -->
-                        <div class="notion-card p-6 border-2 border-green-100 shadow-md">
-                            <h3 class="font-bold text-green-700 mb-2 flex items-center gap-2">
-                                <span class="material-symbols-outlined">diversity_3</span> 双宾语 (Double Objects)
-                            </h3>
-                            <p class="text-sm text-slate-500 mb-3">给某人某物，买某人某物，告诉某人某事。</p>
-                            <ul class="text-sm space-y-3 font-mono">
-                                <li>
-                                    I gave <span class="highlight-blue font-bold">him</span> (间宾) <span
-                                        class="highlight-green font-bold">what he asked for</span> (直宾).
-                                </li>
-                                <li>
-                                    He bought <span class="highlight-blue font-bold">his girlfriend</span> (间宾) <span
-                                        class="highlight-green font-bold">some flowers</span> (直宾).
-                                </li>
-                            </ul>
-                            <div class="mt-4 text-xs bg-yellow-50 text-yellow-800 p-2 rounded border border-yellow-100">
-                                💡 <b>Trick:</b> 两个宾语如果不打架，各司其职，就是双宾语。通常“人”是间接的，“物”是直接的。
+                    <!-- Double Object -->
+                    <div>
+                        <h3 class="font-bold text-green-700 mb-2 flex items-center gap-2">
+                            <span class="material-symbols-outlined text-sm">diversity_3</span> 双宾语 (重点)
+                        </h3>
+                        <div class="card p-4 border-l-4 border-l-green-500 text-sm space-y-3 bg-green-50">
+                            <div>
+                                <p class="font-mono">Give <b class="text-blue-600">the dog</b> <b
+                                        class="text-green-600">some food</b>.</p>
+                            </div>
+                            <div>
+                                <p class="font-mono">Tell <b class="text-blue-600">me</b> <b class="text-green-600">your
+                                        secret</b>.</p>
+                            </div>
+                            <div>
+                                <p class="font-mono">He bought <b class="text-blue-600">his girlfriend</b> <b
+                                        class="text-green-600">some flowers</b>.</p>
+                            </div>
+                            <div class="mt-2 pt-2 border-t border-green-200 text-xs text-green-800">
+                                <b>窍门：</b>
+                                <br>• <span class="text-blue-600">间接宾语 (Indirect)</span> = 人 (女朋友)
+                                <br>• <span class="text-green-600">直接宾语 (Direct)</span> = 物 (花 - 动作直接承受者)
                             </div>
                         </div>
                     </div>
@@ -434,172 +461,239 @@
             </section>
 
             <!-- Predicative -->
-            <section id="predicative" class="mb-16">
-                <h1 class="notion-h1">4. 表语 (Predicative)</h1>
-                <p class="text-slate-600 mb-6">有的同学问，主谓宾定状补，为什么突然冒出个“表语”？<br>因为有一类不正经的动词叫——<span
-                        class="font-bold text-orange-600">系动词 (Link Verb)</span>。它们没有实际动作，只起“联系”作用。</p>
+            <section id="predicative">
+                <h2 class="section-title text-orange-600">
+                    <span class="material-symbols-outlined text-3xl">link</span> 5. 表语与系动词
+                </h2>
+                <p class="mb-4">为什么有表语？因为有一类“不正经”的动词叫 <b>系动词 (Link Verb)</b>。它们不表示动作，只起连接作用。</p>
 
-                <div class="space-y-4">
-                    <div class="notion-card p-6 bg-orange-50 border-orange-100">
-                        <h3 class="font-bold text-orange-800 text-lg mb-2">主系表结构</h3>
-                        <p class="text-sm text-orange-700 mb-4">主语 + 系动词 + 表语 (说明主语的性质/状态)</p>
-                        <div class="flex flex-col md:flex-row gap-6">
-                            <div class="flex-1">
-                                <h4 class="font-bold text-orange-900 mb-2 text-sm">常见的系动词：</h4>
-                                <ul class="list-disc list-inside text-sm text-slate-700 space-y-1">
-                                    <li><b>Be动词:</b> am, is, are</li>
-                                    <li><b>变化:</b> become, get, turn</li>
-                                    <li><b>保持:</b> remain, keep</li>
-                                    <li><b>感官 (重要!):</b> look, feel, taste, smell, sound</li>
-                                </ul>
-                            </div>
-                            <div class="flex-1 bg-white p-4 rounded-lg shadow-sm">
-                                <h4 class="font-bold text-slate-800 mb-2 text-sm">实战练习：找出表语</h4>
-                                <ul class="space-y-2 text-sm font-mono text-slate-600">
-                                    <li>My job is <span class="highlight-yellow">teaching English</span>. (动名词)</li>
-                                    <li>The music sounds <span class="highlight-yellow">great</span>. (形容词)</li>
-                                    <li>The picture is <span class="highlight-yellow">on the wall</span>. (介词短语)</li>
-                                    <li>The question is <span class="highlight-yellow">whether he loves me</span>.
-                                        (表语从句)</li>
-                                </ul>
+                <div class="card bg-orange-50 border-orange-200 mb-6">
+                    <div class="p-4 grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h4 class="font-bold text-orange-800 mb-3">系动词家族成员：</h4>
+                            <ul class="list-disc list-inside text-sm text-gray-700 space-y-2">
+                                <li><b class="text-gray-900">Be动词:</b> am, is, are, was, were</li>
+                                <li><b class="text-gray-900">表示变化:</b> become (handsome), get (old), turn</li>
+                                <li><b class="text-gray-900">表示保持:</b> remain, keep (calm)</li>
+                                <li>
+                                    <span
+                                        class="bg-white px-1 border border-orange-300 rounded text-orange-600 font-bold">⚠️
+                                        感官动词 (Sense Verbs)</span>
+                                    <div class="pl-4 mt-1 text-xs text-gray-500">
+                                        look (看起来), sound (听起来), taste (尝起来), smell (闻起来), feel (摸起来/感觉).<br>
+                                        <span class="text-red-500 font-bold">注意：它们没有被动语态！</span>
+                                        <br>Eg: <i>"It feels good." (Not 'is felt')</i>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div id="review2">
+                            <h4 class="font-bold text-gray-800 mb-3 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-sm">quiz</span>
+                                识别表语 (Practice)
+                            </h4>
+                            <div class="space-y-3 text-sm">
+                                <div class="bg-white p-2 rounded border border-orange-100 shadow-sm">
+                                    <p class="font-mono">My job is <b class="text-orange-500">teaching English</b>.</p>
+                                    <span class="text-xs text-gray-400">动名词作表语</span>
+                                </div>
+                                <div class="bg-white p-2 rounded border border-orange-100 shadow-sm">
+                                    <p class="font-mono">The music sounds <b class="text-orange-500">great</b>.</p>
+                                    <span class="text-xs text-gray-400">形容词作表语 (感官动词sound)</span>
+                                </div>
+                                <div class="bg-white p-2 rounded border border-orange-100 shadow-sm">
+                                    <p class="font-mono">The picture is <b class="text-orange-500">on the wall</b>.</p>
+                                    <span class="text-xs text-gray-400">介词短语作表语</span>
+                                </div>
+                                <div class="bg-white p-2 rounded border border-orange-100 shadow-sm">
+                                    <p class="font-mono">The question is <b class="text-orange-500">whether he loves
+                                            me</b>.</p>
+                                    <span class="text-xs text-gray-400">表语从句</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Modifiers -->
-            <section id="modifiers" class="mb-16">
-                <h1 class="notion-h1">5. 定、状、补 (Modifiers)</h1>
-                <p class="text-slate-600 mb-6">主谓宾搞定骨架，剩下的肉就是定状补。它们让句子更具体、更丰富。</p>
+            <!-- Modifiers (Attribute & Adverbial) -->
+            <section id="modifiers">
+                <h2 class="section-title text-purple-600">
+                    <span class="material-symbols-outlined text-3xl">auto_fix_high</span> 6. 定语 & 状语 (Modifiers)
+                </h2>
+                <p class="mb-6">主谓宾是骨架，定状补是血肉。它们让句子更具体。</p>
 
-                <div class="grid grid-cols-1 gap-6">
+                <div class="grid md:grid-cols-2 gap-8">
                     <!-- Attribute -->
-                    <div class="notion-card p-6 border-l-4 border-purple-500">
-                        <h4 class="text-lg font-bold text-purple-700 mb-2 flex items-center gap-2">
-                            <span class="material-symbols-outlined">palette</span> 定语 (Attribute)
-                        </h4>
-                        <p class="text-sm text-slate-500 mb-4 italic">"修饰或限定名词/代词。翻译成中文经常带‘...的’。"</p>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm font-mono">
-                            <div class="bg-gray-50 p-2 rounded">The <span class="highlight-purple">lazy</span> boy.
-                                (形容词)</div>
-                            <div class="bg-gray-50 p-2 rounded">The man <span class="highlight-purple">over
-                                    there</span>. (副词)</div>
-                            <div class="bg-gray-50 p-2 rounded">The woman <span class="highlight-purple">with a
-                                    baby</span>. (介词短语)</div>
-                            <div class="bg-gray-50 p-2 rounded">The tree <span class="highlight-purple">planted last
-                                    year</span>. (分词)</div>
+                    <div>
+                        <h3 class="font-bold text-gray-800 border-l-4 border-purple-500 pl-3 mb-4">定语 (Attribute)</h3>
+                        <p class="text-xs text-gray-500 mb-4">修饰名词/代词。翻译为“xxx<b>的</b>”。</p>
+
+                        <div class="card text-sm space-y-0">
+                            <div class="example-row p-3">
+                                <div class="w-20 font-bold text-gray-400">形容词</div>
+                                <div>The <span class="text-purple-600 font-bold">lazy</span> boy.</div>
+                            </div>
+                            <div class="example-row p-3">
+                                <div class="w-20 font-bold text-gray-400">副词</div>
+                                <div>The man <span class="text-purple-600 font-bold">over there</span> is my dad.</div>
+                            </div>
+                            <div class="example-row p-3">
+                                <div class="w-20 font-bold text-gray-400">介词短语</div>
+                                <div>The woman <span class="text-purple-600 font-bold">with a baby</span> is my
+                                    aunt.<br>The picture <span class="text-purple-600 font-bold">on the wall</span>...
+                                </div>
+                            </div>
+                            <div class="example-row p-3">
+                                <div class="w-20 font-bold text-gray-400">过去分词</div>
+                                <div>The tree <span class="text-purple-600 font-bold">planted last year</span> is
+                                    growing well.</div>
+                            </div>
+                            <div class="example-row p-3">
+                                <div class="w-20 font-bold text-gray-400">不定式</div>
+                                <div>I have an idea <span class="text-purple-600 font-bold">to solve the problem</span>.
+                                </div>
+                            </div>
+                            <div class="example-row p-3">
+                                <div class="w-20 font-bold text-gray-400">数词</div>
+                                <div><span class="text-purple-600 font-bold">Thirty</span> girls.</div>
+                            </div>
                         </div>
                     </div>
 
                     <!-- Adverbial -->
-                    <div class="notion-card p-6 border-l-4 border-emerald-500">
-                        <h4 class="text-lg font-bold text-emerald-700 mb-2 flex items-center gap-2">
-                            <span class="material-symbols-outlined">timer</span> 状语 (Adverbial)
-                        </h4>
-                        <p class="text-sm text-slate-500 mb-4">修饰动词、形容词或全句。说明时间、地点、原因、目的、条件、让步等。</p>
-                        <div class="space-y-2 text-sm font-mono">
-                            <div class="flex gap-2"><span
-                                    class="bg-emerald-100 text-emerald-800 px-2 rounded text-xs w-16 text-center shrink-0">Place</span>
-                                George lives <span class="highlight-green">on the 1st floor</span>.</div>
-                            <div class="flex gap-2"><span
-                                    class="bg-emerald-100 text-emerald-800 px-2 rounded text-xs w-16 text-center shrink-0">Time</span>
-                                George goes to school <span class="highlight-green">at 6:00</span>.</div>
-                            <div class="flex gap-2"><span
-                                    class="bg-emerald-100 text-emerald-800 px-2 rounded text-xs w-16 text-center shrink-0">Reason</span>
-                                George was late <span class="highlight-green">because the alarm didn't work</span>.
-                            </div>
-                            <div class="flex gap-2"><span
-                                    class="bg-emerald-100 text-emerald-800 px-2 rounded text-xs w-16 text-center shrink-0">Purpose</span>
-                                <span class="highlight-green">In order to lose weight</span>, George...</div>
-                        </div>
-                    </div>
+                    <div>
+                        <h3 class="font-bold text-gray-800 border-l-4 border-teal-500 pl-3 mb-4">状语 (Adverbial)</h3>
+                        <p class="text-xs text-gray-500 mb-4">修饰动词/全句。表示时间/地点/原因/条件等逻辑。</p>
 
-                    <!-- Complement -->
-                    <div class="notion-card p-6 border-l-4 border-yellow-500">
-                        <h4 class="text-lg font-bold text-yellow-700 mb-2 flex items-center gap-2">
-                            <span class="material-symbols-outlined">add_circle</span> 补语 (Complement)
-                        </h4>
-                        <p class="text-sm text-slate-500 mb-4">补充说明主语或宾语。<b>秘诀：补谁就是什么补。</b></p>
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                            <div class="bg-blue-50 p-4 rounded-lg">
-                                <span
-                                    class="text-xs font-bold text-blue-800 px-2 py-1 bg-white rounded border border-blue-200 uppercase">主补</span>
-                                <p class="text-sm mt-2 font-mono">George was found <span
-                                        class="highlight-yellow font-bold">singing</span>.</p>
-                                <p class="text-xs text-slate-500 mt-1">补的是 George (主语)。</p>
+                        <div class="card text-sm space-y-0">
+                            <div class="example-row p-3">
+                                <div class="w-20 font-bold text-gray-400">地点</div>
+                                <div>George lives <span class="text-teal-600 font-bold">on the 1st floor</span>.</div>
                             </div>
-                            <div class="bg-green-50 p-4 rounded-lg">
-                                <span
-                                    class="text-xs font-bold text-green-800 px-2 py-1 bg-white rounded border border-green-200 uppercase">宾补</span>
-                                <p class="text-sm mt-2 font-mono">We found George <span
-                                        class="highlight-yellow font-bold">singing</span>.</p>
-                                <p class="text-xs text-slate-500 mt-1">补的是 George (宾语)。我们发现他在唱歌。</p>
+                            <div class="example-row p-3">
+                                <div class="w-20 font-bold text-gray-400">时间</div>
+                                <div>George goes to school <span class="text-teal-600 font-bold">at 6:00</span>.</div>
+                            </div>
+                            <div class="example-row p-3">
+                                <div class="w-20 font-bold text-gray-400">原因</div>
+                                <div>George was late <span class="text-teal-600 font-bold">because the alarm didn't
+                                        work</span>.</div>
+                            </div>
+                            <div class="example-row p-3">
+                                <div class="w-20 font-bold text-gray-400">条件</div>
+                                <div>George will feed ducks <span class="text-teal-600 font-bold">if it doesn't
+                                        rain</span>.</div>
+                            </div>
+                            <div class="example-row p-3">
+                                <div class="w-20 font-bold text-gray-400">目的</div>
+                                <div><span class="text-teal-600 font-bold">In order to lose weight</span>, George didn't
+                                    have dinner.</div>
+                            </div>
+                            <div class="example-row p-3">
+                                <div class="w-20 font-bold text-gray-400">让步</div>
+                                <div>George is doing homework <span class="text-teal-600 font-bold">though he is
+                                        sleepy</span>.</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Quiz Section -->
-            <section id="quiz" class="mb-20">
-                <div
-                    class="bg-gradient-to-r from-violet-600 to-indigo-600 rounded-3xl p-8 md:p-12 text-white shadow-2xl relative overflow-hidden">
-                    <span
-                        class="material-symbols-outlined absolute -right-10 -bottom-10 text-[200px] text-white/10 rotate-12">school</span>
-                    <div class="relative z-10 max-w-2xl">
-                        <h2 class="text-3xl font-bold mb-6 flex items-center gap-3">
-                            <span class="bg-white/20 p-2 rounded-lg material-symbols-outlined">psychology</span>
-                            随堂小测 (Pop Quiz)
-                        </h2>
+            <!-- Complement -->
+            <section id="complement" class="mb-16">
+                <h2 class="section-title text-yellow-600">
+                    <span class="material-symbols-outlined text-3xl">add_circle</span> 7. 补语 (Complement)
+                </h2>
+                <p class="mb-4">补充说明主语或宾语。<b>秘诀：补谁就是什么补。</b></p>
 
-                        <div class="bg-white/10 backdrop-blur-sm p-6 rounded-xl border border-white/20 mb-6">
-                            <p class="text-blue-100 mb-2 text-sm uppercase font-bold tracking-widest">SENTENCE ANALYSIS
-                            </p>
-                            <p class="font-mono text-lg leading-relaxed">
-                                "George found jumping in the muddy puddles <span
-                                    class="text-yellow-300 font-bold border-b-2 border-yellow-300">interesting</span>."
-                            </p>
-                            <p class="mt-4 text-sm text-blue-100">请分析：乔治觉得跳泥坑很有趣。划线的 <b>interesting</b> 是什么成分？</p>
-                        </div>
-
-                        <div class="space-y-3" id="quiz-options">
-                            <div onclick="checkAnswer(this, false)"
-                                class="quiz-option bg-white text-slate-800 p-4 rounded-lg font-bold flex items-center justify-between group hover:shadow-lg">
-                                <span>A. 宾语 (Object)</span>
-                                <span
-                                    class="hidden group-[.wrong]:inline material-symbols-outlined text-red-500">close</span>
+                <div class="n-callout n-bg-yellow mb-6">
+                    <div>
+                        <h5 class="font-bold mb-2">主补 vs 宾补</h5>
+                        <div class="grid md:grid-cols-2 gap-4 text-sm font-mono">
+                            <div>
+                                <p class="text-gray-500 text-xs mb-1">主语补足语 (补 George)</p>
+                                <p>George was found <span class="bg-yellow-200">singing</span>.</p>
+                                <p class="px-2 border-l-2 mt-1 py-1 text-gray-500">George 被发现正在厕所唱歌。<br>(Singing 补充说明
+                                    George 的状态)</p>
                             </div>
-                            <div onclick="checkAnswer(this, true)"
-                                class="quiz-option bg-white text-slate-800 p-4 rounded-lg font-bold flex items-center justify-between group hover:shadow-lg">
-                                <span>B. 宾语补足语 (Object Complement)</span>
-                                <span
-                                    class="hidden group-[.correct]:inline material-symbols-outlined text-green-600">check_circle</span>
-                            </div>
-                            <div onclick="checkAnswer(this, false)"
-                                class="quiz-option bg-white text-slate-800 p-4 rounded-lg font-bold flex items-center justify-between group hover:shadow-lg">
-                                <span>C. 定语 (Attribute)</span>
-                                <span
-                                    class="hidden group-[.wrong]:inline material-symbols-outlined text-red-500">close</span>
+                            <div>
+                                <p class="text-gray-500 text-xs mb-1">宾语补足语 (补 George)</p>
+                                <p>We found George <span class="bg-yellow-200">singing</span>.</p>
+                                <p class="px-2 border-l-2 mt-1 py-1 text-gray-500">我们发现 George 在唱歌。<br>(Singing 补充说明宾语
+                                    George)</p>
                             </div>
                         </div>
-                        <div id="quiz-feedback" class="h-6 mt-4 font-bold text-yellow-300 text-lg"></div>
+                    </div>
+                </div>
+
+                <div class="space-y-4">
+                    <h4 class="font-bold text-gray-800 text-sm">更多“宾补”例句 (重点)：</h4>
+                    <div class="card">
+                        <div class="example-row">
+                            <div class="example-content p-2">
+                                We believe George <span class="n-code">to be innocent</span>.<br>
+                                <span class="text-xs text-gray-400">相信乔治是无辜的 (不定式作宾补)。</span>
+                            </div>
+                        </div>
+                        <div class="example-row">
+                            <div class="example-content p-2">
+                                George found the bonbon box <span class="n-code">empty</span>.<br>
+                                <span class="text-xs text-gray-400">乔治发现糖果盒空了 (形容词作宾补，Bonbon=糖果)。</span>
+                            </div>
+                        </div>
+                        <div class="example-row">
+                            <div class="example-content p-2">
+                                George saw his face <span class="n-code">reflected in the water</span>.<br>
+                                <span class="text-xs text-gray-400">乔治看见自己的脸倒映在水里 (过去分词短语作宾补)。</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Ultimate Challenge -->
+                <div class="mt-8 p-6 bg-gradient-to-r from-violet-600 to-indigo-600 rounded-xl text-white shadow-lg">
+                    <h4 class="font-bold text-lg mb-4 flex items-center gap-2">
+                        <span class="material-symbols-outlined">psychology</span> 终极挑战 (Ultimate Challenge)
+                    </h4>
+                    <p class="font-mono text-lg mb-2">"George found jumping in the muddy puddles <span
+                            class="text-yellow-300 font-bold border-b-2 border-yellow-300">interesting</span>."</p>
+                    <div class="text-sm text-blue-100 space-y-2">
+                        <p><b>Q: 划线词 interesting 是什么成分？</b></p>
+                        <div class="bg-white/10 p-3 rounded-lg">
+                            <p class="font-bold text-yellow-300 mb-1">Answer: 宾语补足语 (Object Complement)</p>
+                            <ul class="list-disc list-inside opacity-90 text-xs space-y-1">
+                                <li>主语: George</li>
+                                <li>谓语: found</li>
+                                <li>宾语: jumping in the muddy puddles (动名词短语)</li>
+                                <li>宾补: interesting (补充说明跳泥坑这件事很有趣)</li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Final Summary -->
-            <section class="mb-20">
-                <div class="text-center py-10 border-t border-slate-200">
-                    <img src="notion_style_grammar_visual_1766243414964.png" alt="Grammar Visual"
-                        class="mx-auto w-64 md:w-80 mb-6 rounded-xl shadow-lg hover:rotate-1 transition cursor-pointer"
-                        title="语法乐高">
-                    <h2 class="text-2xl font-bold text-slate-800 mb-4">"六大金刚，各司其职"</h2>
-                    <div class="max-w-xl mx-auto text-slate-600 mb-8 space-y-2">
-                        <p>主谓是核心 (最关键，缺一不可)</p>
-                        <p>宾语受动作，系表是一对</p>
-                        <p>定状补来修饰 (让句子更具体)</p>
-                        <p class="text-sm text-slate-400 mt-4">掌握了这些单个的“音符”，下节课我们就能谱写《五大句型》的乐章了！</p>
+            <!-- Summary -->
+            <section id="summary" class="mb-20">
+                <h2 class="section-title text-gray-800">
+                    <span class="material-symbols-outlined text-3xl">summarize</span> 总结与预告
+                </h2>
+                <div class="card p-8 bg-slate-50 text-center">
+                    <img src="notion_style_grammar_visual_1766243414964.png"
+                        class="w-64 max-w-full mx-auto mb-6 rounded shadow-sm">
+                    <p class="text-lg text-gray-700 italic mb-4">
+                        "这六个成分（主谓宾定状补）就像一个个单独的<b>音符</b>。"
+                    </p>
+                    <p class="text-gray-500">
+                        单个音符构不成乐章。想要谱写出优美的文章，我们必须学会如何将它们串联起来。<br>
+                        这，就是我们下一节课的内容——<b>《五大基本句型》</b>。
+                    </p>
+                    <div class="mt-8 pt-6 border-t border-gray-200">
+                        <button
+                            class="bg-blue-600 text-white px-6 py-2 rounded-full font-bold hover:bg-blue-700 transition shadow-lg">
+                            期待下一课 →
+                        </button>
                     </div>
                 </div>
             </section>
@@ -607,64 +701,41 @@
         </main>
     </div>
 
-    <!-- Footer -->
-    <footer class="bg-slate-50 border-t border-slate-200 py-12">
-        <div
-            class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center text-slate-400 text-sm">
-            <p>© 乔治老师的托福语法笔记 Lesson 1</p>
-            <div class="flex gap-6 mt-4 md:mt-0">
-                <a href="#" class="hover:text-slate-600">Designed with 💙 & Notion Style</a>
-            </div>
-        </div>
-    </footer>
-
     <script>
-        /**
-         * Downloads the current page as an HTML file.
-         */
-        function downloadCurrentPage() {
+        function downloadPage() {
             const pageContent = document.documentElement.outerHTML;
             const blob = new Blob([pageContent], { type: 'text/html' });
             const url = URL.createObjectURL(blob);
             const a = document.createElement('a');
             a.href = url;
-            a.download = 'TOEFL_Grammar_Lesson_1_George.html';
+            a.download = 'Lesson1_Sentence_Structure_Full.html';
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
             URL.revokeObjectURL(url);
         }
 
-        // Smooth Scrolling for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    window.scrollTo({
-                        top: target.offsetTop - 100,
-                        behavior: 'smooth'
-                    });
+        // ScrollSpy Logic for Sidebar
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.sidebar-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= (sectionTop - 150)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current)) {
+                    link.classList.add('active');
                 }
             });
         });
-
-        // Quiz Logic
-        function checkAnswer(el, isCorrect) {
-            const allOptions = document.querySelectorAll('.quiz-option');
-            allOptions.forEach(opt => {
-                opt.style.pointerEvents = 'none'; // Disable further clicks
-                if (opt !== el) opt.style.opacity = '0.5';
-            });
-
-            if (isCorrect) {
-                el.classList.add('correct');
-                document.getElementById('quiz-feedback').innerHTML = "✅ Bingo! 'Interesting' 补充说明 'Jumping', 所以是宾语补足语。";
-            } else {
-                el.classList.add('wrong');
-                document.getElementById('quiz-feedback').innerHTML = "❌ 再想想，interesting 是在形容 'muddy puddles' 还是 'jumping' 这件事？";
-            }
-        }
     </script>
 
 </body>
