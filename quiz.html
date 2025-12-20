@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>乔治老师的托福语法挑战 · 20题闯关</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Noto Sans SC', 'sans-serif'],
+                        display: ['Fredoka', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        cream: '#FDFBF7',
+                        paper: '#FFFFFF',
+                        primary: '#4F46E5',
+                        accent: '#F59E0B',
+                        ink: '#1F2937',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #FDFBF7;
+            color: #1F2937;
+            font-family: 'Noto Sans SC', sans-serif;
+        }
+
+        .n-code {
+            font-family: 'JetBrains Mono', monospace;
+            background: #F3F4F6;
+            padding: 2px 6px;
+            border-radius: 4px;
+            color: #DC2626;
+        }
+
+        .option-card {
+            transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .option-card:hover {
+            transform: translateY(-2px);
+            border-color: #4F46E5;
+            background-color: #EEF2FF;
+        }
+
+        .option-card.selected {
+            background-color: #4F46E5;
+            color: white;
+            border-color: #4F46E5;
+        }
+
+        .option-card.correct {
+            background-color: #10B981;
+            color: white;
+            border-color: #10B981;
+        }
+
+        .option-card.wrong {
+            background-color: #EF4444;
+            color: white;
+            border-color: #EF4444;
+        }
+    </style>
+</head>
+
+<body class="min-h-screen flex flex-col">
+
+    <!-- Top Navigation -->
+    <nav class="p-6 flex justify-between items-center max-w-4xl mx-auto w-full">
+        <a href="index.html" class="flex items-center gap-2 text-gray-500 hover:text-primary transition font-bold">
+            <span class="material-symbols-rounded">arrow_back</span>
+            返回课程
+        </a>
+        <div class="text-xs font-mono bg-gray-200 px-3 py-1 rounded-full text-gray-600">Grammar Quiz 1.0</div>
+    </nav>
+
+    <main class="flex-grow flex items-center justify-center p-4">
+        <div class="max-w-2xl w-full">
+
+            <!-- Start Screen -->
+            <div id="start-screen" class="bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-gray-100 text-center"
+                data-aos="zoom-in">
+                <div
+                    class="w-20 h-20 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-6 text-indigo-600">
+                    <span class="material-symbols-rounded text-4xl">psychology</span>
+                </div>
+                <h1 class="text-4xl font-display font-bold mb-4 text-gray-800">随堂大闯关</h1>
+                <p class="text-gray-600 mb-8 text-lg">20道精选题目，检验你对“句子成分”的掌握程度。</p>
+
+                <div class="grid grid-cols-2 gap-4 text-left mb-8 max-w-sm mx-auto bg-gray-50 p-6 rounded-xl">
+                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                        <span class="material-symbols-rounded text-green-500">check_circle</span> 20 Questions
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                        <span class="material-symbols-rounded text-blue-500">timer</span> Unlimited Time
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                        <span class="material-symbols-rounded text-orange-500">emoji_events</span> Instant Feedback
+                    </div>
+                    <div class="flex items-center gap-2 text-sm text-gray-600">
+                        <span class="material-symbols-rounded text-purple-500">school</span> Level: Beginner
+                    </div>
+                </div>
+
+                <button onclick="quizApp.start()"
+                    class="bg-primary hover:bg-indigo-600 text-white text-xl font-bold px-10 py-4 rounded-xl shadow-lg shadow-indigo-200 transition transform hover:-translate-y-1">
+                    开始挑战
+                </button>
+            </div>
+
+            <!-- Quiz Screen -->
+            <div id="quiz-screen"
+                class="hidden bg-white rounded-3xl p-8 md:p-10 shadow-xl border border-gray-100 relative overflow-hidden">
+                <!-- Progress Bar -->
+                <div class="absolute top-0 left-0 w-full h-2 bg-gray-100">
+                    <div id="progress-bar" class="h-full bg-primary transition-all duration-300" style="width: 0%">
+                    </div>
+                </div>
+
+                <div class="flex justify-between items-center mb-6 mt-2">
+                    <span class="text-sm font-bold text-gray-400 uppercase tracking-widest">Question <span
+                            id="q-current">1</span>/20</span>
+                    <span id="score-display"
+                        class="bg-indigo-50 text-indigo-600 px-3 py-1 rounded-lg text-sm font-bold">Score: 0</span>
+                </div>
+
+                <div id="question-container" class="mb-8">
+                    <h3 id="question-text" class="text-2xl font-bold text-gray-800 leading-relaxed mb-6">Question text
+                        goes here?</h3>
+                    <div id="options-container" class="space-y-3">
+                        <!-- Options injected by JS -->
+                    </div>
+                </div>
+
+                <!-- Feedback Area -->
+                <div id="feedback-area" class="hidden mb-6 p-4 rounded-xl">
+                    <p id="feedback-text" class="font-bold"></p>
+                    <p id="explanation-text" class="text-sm mt-2 opacity-90"></p>
+                </div>
+
+                <div class="flex justify-end">
+                    <button id="next-btn" onclick="quizApp.nextQuestion()"
+                        class="hidden bg-black text-white px-8 py-3 rounded-xl font-bold hover:opacity-80 transition flex items-center gap-2">
+                        下一题 <span class="material-symbols-rounded">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Result Screen -->
+            <div id="result-screen"
+                class="hidden text-center bg-white rounded-3xl p-8 md:p-12 shadow-xl border border-gray-100">
+                <div id="result-icon" class="text-6xl mb-4">🏆</div>
+                <h2 class="text-3xl font-display font-bold mb-2">挑战完成！</h2>
+                <div class="text-5xl font-bold text-primary mb-2" id="final-score">0/100</div>
+                <p class="text-gray-500 mb-8" id="result-message">Perfect score!</p>
+
+                <div class="grid grid-cols-2 gap-4 mb-8">
+                    <button onclick="location.reload()"
+                        class="bg-gray-100 text-gray-700 font-bold py-3 rounded-xl hover:bg-gray-200 transition flex items-center justify-center gap-2">
+                        <span class="material-symbols-rounded">refresh</span> 再试一次
+                    </button>
+                    <a href="index.html"
+                        class="bg-primary text-white font-bold py-3 rounded-xl hover:bg-indigo-600 transition flex items-center justify-center gap-2">
+                        <span class="material-symbols-rounded">school</span> 复习讲义
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <footer class="p-6 text-center text-gray-400 text-sm">
+        &copy; 2025 George Teacher TOEFL Series.
+    </footer>
+
+    <script>
+        AOS.init();
+
+        const questions = [
+            // 1-3 Subject
+            {
+                q: "找出句子中的主语：<br><span class='n-code'>Speaking English</span> is useful.",
+                options: ["Speaking", "English", "Speaking English", "is"],
+                answer: 2,
+                explanation: "动名词短语 'Speaking English' 整体作为主语。"
+            },
+            {
+                q: "找出句子中的主语：<br>To see is to believe.",
+                options: ["To see", "is", "To believe", "see"],
+                answer: 0,
+                explanation: "不定式 'To see' 作主语。"
+            },
+            {
+                q: "这是一个完整的句子吗？<br><span class='n-code'>Always wants to eat pizza.</span>",
+                options: ["是 (Complete)", "否 (Fragment)"],
+                answer: 1,
+                explanation: "缺少主语（谁想要吃？）。"
+            },
+
+            // 4-6 Predicate
+            {
+                q: "找出句子中的谓语：<br>He <span class='n-code'>might have been</span> late.",
+                options: ["might", "have", "been", "might have been"],
+                answer: 3,
+                explanation: "谓语包含情态动词、助动词和系动词整体。"
+            },
+            {
+                q: "找出句子中的谓语：<br>George enjoys playing basketball.",
+                options: ["George", "enjoys", "playing", "basketball"],
+                answer: 1,
+                explanation: "'enjoys' 是核心动词（谓语）。'playing' 是动名词作宾语。"
+            },
+            {
+                q: "这是一个完整的句子吗？<br><span class='n-code'>The girl sitting by the window.</span>",
+                options: ["是 (Complete)", "否 (Fragment)"],
+                answer: 1,
+                explanation: "缺少谓语。'sitting' 只是分词修饰 'girl'，没有真动词（如 is sitting）。"
+            },
+
+            // 7-9 Object
+            {
+                q: "找出句子中的宾语：<br>I want <span class='n-code'>to go home</span>.",
+                options: ["I", "want", "to go home", "home"],
+                answer: 2,
+                explanation: "不定式短语 'to go home' 整体作为 'want' 的宾语。"
+            },
+            {
+                q: "在句子 <span class='n-code'>She gave me a book</span> 中，'me' 是什么？",
+                options: ["直接宾语 (Direct Object)", "间接宾语 (Indirect Object)", "主语 (Subject)", "表语 (Predicative)"],
+                answer: 1,
+                explanation: "Me 是接受者（人），是间接宾语。Book 是被给的物，是直接宾语。"
+            },
+            {
+                q: "找出句子中的直接宾语：<br>He bought his mother a gift.",
+                options: ["He", "bought", "mother", "gift"],
+                answer: 3,
+                explanation: "Gift 是被买的东西（直接宾语），Mother 是受益者（间接宾语）。"
+            },
+
+            // 10-12 Predicative (Link Verb)
+            {
+                q: "句子 <span class='n-code'>The soup tastes good</span> 中的 'tastes' 是什么动词？",
+                options: ["行为动词 (Action Verb)", "系动词 (Link Verb)", "助动词 (Auxiliary Verb)"],
+                answer: 1,
+                explanation: "Sense verbs (感官动词) 如 taste, look, smell 通常是系动词，连接表语。"
+            },
+            {
+                q: "选词填空：<br>The music sounds _______.",
+                options: ["beautifully", "beautiful"],
+                answer: 1,
+                explanation: "系动词 sounds 后面接形容词 (Adjective) 作表语，而不是副词。"
+            },
+            {
+                q: "找出句子中的表语：<br>My dream is to become a doctor.",
+                options: ["My dream", "is", "to become a doctor", "doctor"],
+                answer: 2,
+                explanation: "系动词 is 后面的不定式短语说明了主语的内容，是表语。"
+            },
+
+            // 13-16 Modifiers (Att/Adv)
+            {
+                q: "句子 <span class='n-code'>The <b>sleeping</b> baby is cute</span> 中，bold部分是？",
+                options: ["谓语 (Predicate)", "定语 (Attribute)", "状语 (Adverbial)", "补语 (Complement)"],
+                answer: 1,
+                explanation: "修饰名词 baby，是定语。"
+            },
+            {
+                q: "句子 <span class='n-code'>I saw him <b>yesterday</b></span> 中，bold部分是？",
+                options: ["定语 (Attribute)", "状语 (Adverbial)", "宾语 (Object)"],
+                answer: 1,
+                explanation: "修饰动词 saw (时间)，是状语。"
+            },
+            {
+                q: "句子 <span class='n-code'>The book <b>on the desk</b> is mine</span> 中，bold部分是？",
+                options: ["定语 (Attribute)", "状语 (Adverbial)"],
+                answer: 0,
+                explanation: "修饰名词 book，表明是哪一本书，是定语（后置定语）。"
+            },
+            {
+                q: "句子 <span class='n-code'>He runs <b>fast</b></span> 中，bold部分是？",
+                options: ["形容词 (Adjective)", "副词 (Adverb)"],
+                answer: 1,
+                explanation: "修饰动词 runs，是副词作状语。"
+            },
+
+            // 17-18 Complement
+            {
+                q: "句子 <span class='n-code'>We keep the room clean</span> 中，'clean' 是什么？",
+                options: ["宾语 (Object)", "定语 (Attribute)", "宾语补足语 (Object Complement)", "谓语 (Predicate)"],
+                answer: 2,
+                explanation: "Clean 补充说明宾语 room 的状态（room is clean），是宾补。"
+            },
+            {
+                q: "句子 <span class='n-code'>He asked me to leave</span> 中，'to leave' 是什么？",
+                options: ["直接宾语", "状语", "宾语补足语", "主语"],
+                answer: 2,
+                explanation: "To leave 补充说明宾语 me 的动词（me leave），是宾补。"
+            },
+
+            // 19-20 Advanced / Mix
+            {
+                q: "分析结构：<br><span class='n-code'>What he needs is to relax.</span>",
+                options: ["主语从句 + 系动词 + 表语", "宾语从句 + 谓语 + 宾语", "定语从句 + 谓语 + 状语"],
+                answer: 0,
+                explanation: "'What he needs' 是主语从句，'is' 是系动词，'to relax' 是表语。"
+            },
+            {
+                q: "下列哪个句子结构是正确的？",
+                options: ["I very like it.", "I like it very much.", "I very much like it."],
+                answer: 1,
+                explanation: "Very much 是程度状语，通常放在句末修饰动词。"
+            }
+        ];
+
+        const quizApp = {
+            currentIdx: 0,
+            score: 0,
+            isAnswering: false,
+
+            init() {
+                // Preload anything if needed
+            },
+
+            start() {
+                document.getElementById('start-screen').classList.add('hidden');
+                document.getElementById('quiz-screen').classList.remove('hidden');
+                this.loadQuestion(0);
+            },
+
+            loadQuestion(idx) {
+                this.currentIdx = idx;
+                this.isAnswering = true;
+                const q = questions[idx];
+
+                // Update UI
+                document.getElementById('q-current').textContent = idx + 1;
+                document.getElementById('progress-bar').style.width = `${((idx) / questions.length) * 100}%`;
+
+                document.getElementById('question-text').innerHTML = q.q;
+
+                const optsContainer = document.getElementById('options-container');
+                optsContainer.innerHTML = '';
+
+                q.options.forEach((opt, i) => {
+                    const btn = document.createElement('div');
+                    btn.className = 'option-card border-2 border-gray-200 rounded-xl p-4 cursor-pointer font-medium text-gray-700';
+                    btn.textContent = opt;
+                    if (opt.includes('(')) {
+                        // Formatting optimization for options like "Yes (Complete)"
+                        // keeping text simple for now
+                    }
+                    btn.onclick = () => this.handleAnswer(i, btn);
+                    optsContainer.appendChild(btn);
+                });
+
+                // Reset feedback
+                document.getElementById('feedback-area').classList.add('hidden');
+                document.getElementById('next-btn').classList.add('hidden');
+            },
+
+            handleAnswer(selectedIndex, btnElement) {
+                if (!this.isAnswering) return;
+                this.isAnswering = false;
+
+                const q = questions[this.currentIdx];
+                const isCorrect = selectedIndex === q.answer;
+                const options = document.getElementById('options-container').children;
+
+                // Visual Feedback
+                if (isCorrect) {
+                    btnElement.classList.add('correct');
+                    this.score += 5; // 20 * 5 = 100
+                    document.getElementById('score-display').textContent = `Score: ${this.score}`;
+
+                    // Simple confetti
+                    confetti({
+                        particleCount: 50,
+                        spread: 60,
+                        origin: { y: 0.6 },
+                        colors: ['#10B981', '#34D399']
+                    });
+                } else {
+                    btnElement.classList.add('wrong');
+                    // Highlight correct answer
+                    options[q.answer].classList.add('correct');
+                }
+
+                // Make other options unclickable style
+                Array.from(options).forEach(el => el.classList.add('pointer-events-none'));
+
+                // Show Explanation
+                const fbArea = document.getElementById('feedback-area');
+                const fbText = document.getElementById('feedback-text');
+                const expText = document.getElementById('explanation-text');
+
+                fbArea.classList.remove('hidden');
+                if (isCorrect) {
+                    fbArea.className = 'mb-6 p-4 rounded-xl bg-green-50 text-green-800 border border-green-200';
+                    fbText.innerHTML = '<span class="material-symbols-rounded align-middle mr-1">check_circle</span> 回答正确！Correct!';
+                } else {
+                    fbArea.className = 'mb-6 p-4 rounded-xl bg-red-50 text-red-800 border border-red-200';
+                    fbText.innerHTML = '<span class="material-symbols-rounded align-middle mr-1">cancel</span> 回答错误 Oops!';
+                }
+                expText.textContent = q.explanation;
+
+                // Show Next Button
+                document.getElementById('next-btn').classList.remove('hidden');
+            },
+
+            nextQuestion() {
+                if (this.currentIdx < questions.length - 1) {
+                    this.loadQuestion(this.currentIdx + 1);
+                } else {
+                    this.showResults();
+                }
+            },
+
+            showResults() {
+                document.getElementById('quiz-screen').classList.add('hidden');
+                document.getElementById('result-screen').classList.remove('hidden');
+
+                const finalScore = this.score;
+                document.getElementById('final-score').textContent = finalScore + '/100';
+
+                let msg = "";
+                let icon = "";
+
+                if (finalScore === 100) {
+                    msg = "太棒了！你是语法大师！🎉";
+                    icon = "🏆";
+                    confetti({ particleCount: 200, spread: 100, origin: { y: 0.6 } });
+                } else if (finalScore >= 80) {
+                    msg = "做得很好！继续保持！✨";
+                    icon = "🥈";
+                } else if (finalScore >= 60) {
+                    msg = "及格啦！再接再厉！💪";
+                    icon = "🥉";
+                } else {
+                    msg = "别灰心，建议复习一下讲义哦！📚";
+                    icon = "💡";
+                }
+
+                document.getElementById('result-message').textContent = msg;
+                document.getElementById('result-icon').textContent = icon;
+            }
+        };
+    </script>
+</body>
+
+</html>
