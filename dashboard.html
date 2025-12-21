@@ -449,9 +449,10 @@
         }
 
         async function syncFromCloud() {
-            const appId = localStorage.getItem('LC_APP_ID');
-            const appKey = localStorage.getItem('LC_APP_KEY');
-            const serverUrl = localStorage.getItem('LC_SERVER_URL');
+            // Try LocalStorage first, then fallback to defaults (for this user's convenience)
+            const appId = localStorage.getItem('LC_APP_ID') || 'kpe4KCyx6ETp7FkAM74E1Z5a-MdYXbMMI';
+            const appKey = localStorage.getItem('LC_APP_KEY') || '5IT8N7IKw2VsfHmrtOha0S9w';
+            const serverUrl = localStorage.getItem('LC_SERVER_URL') || 'https://kpe4kcyx.api.lncldglobal.com';
 
             if (!appId || !appKey) {
                 toggleSettings();
