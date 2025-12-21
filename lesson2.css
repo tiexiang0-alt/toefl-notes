@@ -1,0 +1,41 @@
+/* Custom Styles for Lesson 2 */
+
+body {
+    background-color: #FDFBF7;
+    color: #1F2937;
+    overflow-x: hidden;
+}
+
+.hover-card {
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.hover-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.1);
+}
+
+.n-code {
+    font-family: 'JetBrains Mono', monospace;
+    color: #BE185D;
+    background: #FCE7F3;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.structure-card {
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.structure-card:hover {
+    transform: scale(1.02);
+}
+
+/* PDF Content Styling ( Hidden by default, exposed during print/generation ) */
+#pdf-content {
+    display: none;
+}

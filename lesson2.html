@@ -5,16 +5,20 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>乔治老师的托福语法探险 · 第二课 (五大基本句型)</title>
+    <!-- Tailwind CSS (via CDN for simplicity in this setup, normally would be built) -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- AOS CSS -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0"
         rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;700&family=JetBrains+Mono:wght@500&display=swap"
         rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="lesson2.css" rel="stylesheet">
 
+    <!-- Tailwind Config -->
     <script>
         tailwind.config = {
             theme: {
@@ -36,43 +40,6 @@
             }
         }
     </script>
-
-    <style>
-        body {
-            background-color: #FDFBF7;
-            color: #1F2937;
-            overflow-x: hidden;
-        }
-
-        .hover-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .hover-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.1);
-        }
-
-        .n-code {
-            font-family: 'JetBrains Mono', monospace;
-            color: #BE185D;
-            background: #FCE7F3;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-size: 0.9em;
-        }
-
-        .structure-card {
-            position: relative;
-            overflow: hidden;
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .structure-card:hover {
-            transform: scale(1.02);
-        }
-    </style>
 </head>
 
 <body class="selection:bg-pink-200 selection:text-pink-900">
@@ -97,7 +64,6 @@
     <header class="relative bg-white pt-20 pb-24 overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/graphy.png')]">
         </div>
-        <!-- Blobs -->
         <div
             class="absolute top-0 right-0 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-blob">
         </div>
@@ -145,7 +111,6 @@
                 <span class="text-sm font-normal text-gray-500 mt-2 bg-gray-100 px-2 py-1 rounded">万变不离其宗</span>
             </h2>
 
-            <!-- Cards Grid -->
             <div class="grid md:grid-cols-5 gap-4">
                 <!-- SV -->
                 <div class="structure-card bg-white p-6 rounded-2xl shadow-lg border border-gray-100 text-indigo-500 group"
@@ -647,93 +612,144 @@
 
     </main>
 
-    <!-- Hidden PDF Content -->
+    <!-- Hidden PDF Content: Detailed Notes Version -->
     <div id="pdf-content" style="display: none;">
         <div
-            style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333; padding: 40px; line-height: 1.5; max-width: 800px; margin: 0 auto;">
+            style="font-family: 'Times New Roman', Times, serif; color: #000; padding: 40px; line-height: 1.6; max-width: 800px; margin: 0 auto;">
+            <!-- Header -->
             <div
                 style="text-align: center; border-bottom: 2px solid #EC4899; padding-bottom: 20px; margin-bottom: 30px;">
                 <h1 style="font-size: 24pt; margin: 0; color: #1F2937;">TOEFL Grammar Course</h1>
                 <h2 style="font-size: 16pt; font-weight: normal; margin: 10px 0; color: #4B5563;">Lesson 2: The 5 Basic
-                    Sentence Patterns</h2>
+                    Sentence Patterns (五大句型)</h2>
                 <div style="font-size: 10pt; color: #6B7280; margin-top: 10px;">
                     <span style="margin-right: 15px;">👤 Instructor: George Teacher</span>
+                    <span>📅 Date: Dec 2025</span>
                 </div>
             </div>
 
-            <div style="margin-bottom: 20px;">
-                <h3>1. SV (主谓)</h3>
-                <p>The sun rose. / You jump, I jump. / The accident happened.</p>
-                <p style="font-size: 0.9em; color: #666;">Intransitive: die from, jump into.</p>
-            </div>
-            <div style="margin-bottom: 20px;">
-                <h3>2. SVO (主谓宾)</h3>
-                <p>I love you. / He grabbed my bag. / George plans to run away.</p>
-            </div>
-            <div style="margin-bottom: 20px;">
-                <h3>3. SLP (主系表)</h3>
-                <p>She is beautiful. / Everything looks different. / He became handsome.</p>
-            </div>
-            <div style="margin-bottom: 20px;">
-                <h3>4. SVOO (主谓宾宾)</h3>
-                <p>Give me your heart. / Father told me stories.</p>
-            </div>
-            <div style="margin-bottom: 20px;">
-                <h3>5. SVOC (主谓宾补)</h3>
-                <p>You make my life happy. / Father forced them to run.</p>
+            <!-- Intro -->
+            <div style="margin-bottom: 30px;">
+                <h3 style="color: #4F46E5; border-bottom: 1px solid #E5E7EB; padding-bottom: 5px;">Overview</h3>
+                <p style="font-size: 11pt;">All complex sentences in English are evolved from these 5 basic patterns.
+                    Mastering these is the key to conquering long and difficult sentences (长难句).</p>
             </div>
 
-            <div style="margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px;">
-                <h4>Writing Heat Map (Topic: Alone vs Group)</h4>
-                <p style="font-style: italic;">"I prefer to study with a group... partners can give us suggestions
-                    (SVOO)... studying together makes the process interesting (SVOC)..."</p>
+            <!-- The 5 Patterns Table -->
+            <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px; font-size: 11pt;">
+                <thead>
+                    <tr style="background-color: #F9FAFB; text-align: left;">
+                        <th style="padding: 10px; border: 1px solid #E5E7EB;">Pattern</th>
+                        <th style="padding: 10px; border: 1px solid #E5E7EB;">Description</th>
+                        <th style="padding: 10px; border: 1px solid #E5E7EB;">Examples</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #E5E7EB; font-weight: bold;">1. SV (主谓)</td>
+                        <td style="padding: 10px; border: 1px solid #E5E7EB;">Intransitive Verbs (Vi). No object needed.
+                        </td>
+                        <td style="padding: 10px; border: 1px solid #E5E7EB;">
+                            - The sun rose.<br>
+                            - You jump, I jump.<br>
+                            - Die <b>from</b> disease (with Prep).
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #E5E7EB; font-weight: bold;">2. SVO (主谓宾)</td>
+                        <td style="padding: 10px; border: 1px solid #E5E7EB;">Transitive Verbs (Vt). Object required.
+                        </td>
+                        <td style="padding: 10px; border: 1px solid #E5E7EB;">
+                            - I love you.<br>
+                            - He grabbed my bag.<br>
+                            - George plans <b>to run away</b>.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #E5E7EB; font-weight: bold;">3. SLP (主系表)</td>
+                        <td style="padding: 10px; border: 1px solid #E5E7EB;">Link Verbs (Be, Become, Sense). Describes
+                            state.</td>
+                        <td style="padding: 10px; border: 1px solid #E5E7EB;">
+                            - King Kong <b>is</b> strong.<br>
+                            - It <b>tastes</b> delicious.<br>
+                            - He <b>became</b> handsome.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #E5E7EB; font-weight: bold;">4. SVOO (主谓宾宾)</td>
+                        <td style="padding: 10px; border: 1px solid #E5E7EB;">Double Objects: Indirect (Person) + Direct
+                            (Thing).</td>
+                        <td style="padding: 10px; border: 1px solid #E5E7EB;">
+                            - Give <b>me</b> (IO) <b>your heart</b> (DO).<br>
+                            - Father told me stories.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px; border: 1px solid #E5E7EB; font-weight: bold;">5. SVOC (主谓宾补)</td>
+                        <td style="padding: 10px; border: 1px solid #E5E7EB;">Complement completes the object's meaning.
+                        </td>
+                        <td style="padding: 10px; border: 1px solid #E5E7EB;">
+                            - You make my life <b>happy</b>.<br>
+                            - Force them <b>to run</b>.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <!-- Sentence Evolution -->
+            <div style="margin-bottom: 30px; page-break-inside: avoid;">
+                <h3 style="color: #F59E0B; border-bottom: 1px solid #E5E7EB; padding-bottom: 5px;">Sentence Evolution
+                    (句子进化论)</h3>
+                <div style="background-color: #FFFBEB; padding: 15px; border-radius: 8px;">
+                    <p><b>Level 1 (Bronze):</b> <br>Old Tom is watching cartoons.</p>
+                    <p><b>Level 99 (King):</b> <br>Old Tom, <u>with his legs crossed</u>, is absorbed in watching a
+                        <u>popular</u> cartoon <u>named Peppa Pig</u> <b>on the couch</b>.</p>
+                    <p style="font-size: 0.9em; color: #666; margin-top: 5px;">* Adding modifiers (Attributive &
+                        Adverbial) makes sentences rich and visual.</p>
+                </div>
+            </div>
+
+            <!-- Long Sentence Analysis -->
+            <div style="margin-bottom: 30px; page-break-inside: avoid;">
+                <h3 style="color: #DC2626; border-bottom: 1px solid #E5E7EB; padding-bottom: 5px;">Long Sentence
+                    Analysis</h3>
+                <p style="font-family: monospace; background-color: #F3F4F6; padding: 10px; border-radius: 5px;">
+                    "Peisistratus... <b>strengthened</b> the <b>administration</b>... by appointing judges... producing
+                    coinage... adding festivals."
+                </p>
+                <p><b>Core:</b> SVO (Peisistratus strengthened administration).</p>
+                <p><b>Logic:</b> The 'by...' parts are all methods (Adverbials) explaining HOW he strengthened it.</p>
+            </div>
+
+            <!-- Writing Sample -->
+            <div style="margin-bottom: 20px; page-break-inside: avoid;">
+                <h3 style="color: #EC4899; border-bottom: 1px solid #E5E7EB; padding-bottom: 5px;">Writing Sample: Study
+                    Alone or Group?</h3>
+                <div style="font-size: 11pt; line-height: 1.8;">
+                    <p>
+                        I prefer to study with a group. Firstly, group study is efficient.
+                        When we encounter difficult problems, partners can give us suggestions (SVOO).
+                        For example, last week, my classmate taught me a math formula.
+                        Secondly, studying together makes the process interesting (SVOC).
+                        We can discuss various topics (SVO) during breaks.
+                        In conclusion, I find group study helpful because it keeps me focused and happy.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div
+                style="margin-top: 50px; text-align: center; color: #9CA3AF; font-size: 9pt; border-top: 1px solid #E5E7EB; padding-top: 20px;">
+                George Teacher TOEFL Series © 2025 | Scan for Audio/Video
             </div>
         </div>
     </div>
 
+    <!-- Scripts (External) -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    <script>
-        AOS.init({ duration: 800, offset: 50, once: true });
-
-        function scrollToId(id) {
-            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-        }
-
-        function toggleAnswer(id) {
-            const el = document.getElementById(id);
-            if (el.classList.contains('hidden')) {
-                el.classList.remove('hidden');
-            } else {
-                el.classList.add('hidden');
-            }
-        }
-
-        function downloadPage() {
-            const element = document.getElementById('pdf-content').firstElementChild.cloneNode(true);
-            const opt = {
-                margin: 0.5,
-                filename: 'George_TOEFL_Lesson2_Handout.pdf',
-                image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2, useCORS: true },
-                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
-            };
-
-            const container = document.createElement('div');
-            container.style.position = 'absolute';
-            container.style.left = '-9999px';
-            container.style.top = '0';
-            container.style.width = '800px';
-            container.appendChild(element);
-            document.body.appendChild(container);
-
-            html2pdf().set(opt).from(element).save().then(() => {
-                document.body.removeChild(container);
-            }).catch(err => {
-                console.error(err);
-                alert('PDF生成失败');
-            });
-        }
-    </script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <script src="lesson2.js"></script>
 </body>
 
 </html>
