@@ -27,8 +27,8 @@
                     colors: {
                         cream: '#FDFBF7',
                         paper: '#FFFFFF',
-                        primary: '#4F46E5',
-                        secondary: '#EC4899',
+                        primary: '#EC4899',
+                        secondary: '#8B5CF6',
                         accent: '#F59E0B',
                         ink: '#1F2937',
                     }
@@ -55,26 +55,22 @@
 
         .n-code {
             font-family: 'JetBrains Mono', monospace;
-            color: #DC2626;
-            background: #F3F4F6;
+            color: #BE185D;
+            background: #FCE7F3;
             padding: 2px 6px;
             border-radius: 4px;
-            font-size: 0.95em;
+            font-size: 0.9em;
         }
 
         .structure-card {
             position: relative;
             overflow: hidden;
+            cursor: pointer;
+            transition: all 0.3s;
         }
 
-        .structure-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: currentColor;
+        .structure-card:hover {
+            transform: scale(1.02);
         }
     </style>
 </head>
@@ -91,6 +87,8 @@
         <a href="#boss" class="hover:text-primary transition material-symbols-rounded" title="长难句挑战">swords</a>
         <a href="#practice" class="hover:text-primary transition material-symbols-rounded" title="翻译工坊">translate</a>
         <div class="w-px h-4 bg-gray-300"></div>
+        <a href="quiz2.html" target="_blank" class="hover:text-primary transition material-symbols-rounded"
+            title="20题闯关">quiz</a>
         <button onclick="downloadPage()" class="hover:text-primary transition material-symbols-rounded"
             title="下载讲义">download</button>
     </nav>
@@ -120,8 +118,8 @@
             <div class="bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg max-w-2xl mx-auto border border-gray-100 mb-8"
                 data-aos="fade-up" data-aos-delay="100">
                 <div class="flex items-start gap-4 text-left">
-                    <img src="virtual_studio_teacher_1766243391676.png"
-                        class="w-14 h-14 rounded-full border-2 border-white shadow-md bg-gray-100">
+                    <img src="https://api.dicebear.com/7.x/notionists/svg?seed=George"
+                        class="w-14 h-14 rounded-full border-2 border-white shadow-md bg-pink-100" alt="George Teacher">
                     <div>
                         <h3 class="font-bold text-gray-900 flex items-center gap-2">George Teacher <span
                                 class="text-xs text-gray-500 font-normal">Broadcasting...</span></h3>
@@ -129,7 +127,7 @@
                             "Hello大家好！欢迎回来。
                             上节课我们像认识<b>'音符'</b>一样认识了句子成分。<br>
                             今天，我们要学会把在这六种音符谱写成优美的<b>'乐章'</b>。<br>
-                            一切长难句，都源于这五种最基本的结构。"
+                            无论多长多难的句子，都源于这五种最基本的结构。"
                         </p>
                     </div>
                 </div>
@@ -150,53 +148,53 @@
             <!-- Cards Grid -->
             <div class="grid md:grid-cols-5 gap-4">
                 <!-- SV -->
-                <div class="structure-card bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-2 border border-gray-100 text-indigo-500 cursor-pointer group"
+                <div class="structure-card bg-white p-6 rounded-2xl shadow-lg border border-gray-100 text-indigo-500 group"
                     onclick="scrollToId('sec-sv')">
                     <div class="text-4xl font-display font-bold mb-2 opacity-20 group-hover:opacity-100 transition">SV
                     </div>
                     <div class="font-bold text-gray-800">主谓</div>
                     <div class="text-xs text-gray-500 mt-2">The sun rose.</div>
-                    <div class="mt-4 text-xs font-mono bg-indigo-50 text-indigo-600 px-2 py-1 rounded">不及物动词 (vi)</div>
+                    <div class="mt-4 text-xs font-mono bg-indigo-50 text-indigo-600 px-2 py-1 rounded">不及物 (Vi)</div>
                 </div>
 
                 <!-- SVO -->
-                <div class="structure-card bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-2 border border-gray-100 text-pink-500 cursor-pointer group"
+                <div class="structure-card bg-white p-6 rounded-2xl shadow-lg border border-gray-100 text-pink-500 group"
                     onclick="scrollToId('sec-svo')">
                     <div class="text-4xl font-display font-bold mb-2 opacity-20 group-hover:opacity-100 transition">SVO
                     </div>
                     <div class="font-bold text-gray-800">主谓宾</div>
                     <div class="text-xs text-gray-500 mt-2">I love you.</div>
-                    <div class="mt-4 text-xs font-mono bg-pink-50 text-pink-600 px-2 py-1 rounded">及物动词 (vt)</div>
+                    <div class="mt-4 text-xs font-mono bg-pink-50 text-pink-600 px-2 py-1 rounded">及物 (Vt)</div>
                 </div>
 
                 <!-- SLP -->
-                <div class="structure-card bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-2 border border-gray-100 text-yellow-500 cursor-pointer group"
+                <div class="structure-card bg-white p-6 rounded-2xl shadow-lg border border-gray-100 text-yellow-500 group"
                     onclick="scrollToId('sec-slp')">
                     <div class="text-4xl font-display font-bold mb-2 opacity-20 group-hover:opacity-100 transition">SLP
                     </div>
                     <div class="font-bold text-gray-800">主系表</div>
                     <div class="text-xs text-gray-500 mt-2">I am young.</div>
-                    <div class="mt-4 text-xs font-mono bg-yellow-50 text-yellow-600 px-2 py-1 rounded">系动词 (Link)</div>
+                    <div class="mt-4 text-xs font-mono bg-yellow-50 text-yellow-600 px-2 py-1 rounded">Link Verb</div>
                 </div>
 
                 <!-- SVIODO -->
-                <div class="structure-card bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-2 border border-gray-100 text-green-500 cursor-pointer group"
+                <div class="structure-card bg-white p-6 rounded-2xl shadow-lg border border-gray-100 text-green-500 group"
                     onclick="scrollToId('sec-sviodo')">
                     <div class="text-4xl font-display font-bold mb-2 opacity-20 group-hover:opacity-100 transition">SVOO
                     </div>
                     <div class="font-bold text-gray-800">主谓宾宾</div>
                     <div class="text-xs text-gray-500 mt-2">Give me $$$</div>
-                    <div class="mt-4 text-xs font-mono bg-green-50 text-green-600 px-2 py-1 rounded">双宾语</div>
+                    <div class="mt-4 text-xs font-mono bg-green-50 text-green-600 px-2 py-1 rounded">Double Object</div>
                 </div>
 
                 <!-- SVOC -->
-                <div class="structure-card bg-white p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all hover:-translate-y-2 border border-gray-100 text-purple-500 cursor-pointer group"
+                <div class="structure-card bg-white p-6 rounded-2xl shadow-lg border border-gray-100 text-purple-500 group"
                     onclick="scrollToId('sec-svoc')">
                     <div class="text-4xl font-display font-bold mb-2 opacity-20 group-hover:opacity-100 transition">SVOC
                     </div>
                     <div class="font-bold text-gray-800">主谓宾补</div>
                     <div class="text-xs text-gray-500 mt-2">Make me happy</div>
-                    <div class="mt-4 text-xs font-mono bg-purple-50 text-purple-600 px-2 py-1 rounded">宾补</div>
+                    <div class="mt-4 text-xs font-mono bg-purple-50 text-purple-600 px-2 py-1 rounded">Complement</div>
                 </div>
             </div>
         </section>
@@ -206,28 +204,47 @@
 
             <!-- SV Detail -->
             <section id="sec-sv" class="bg-white rounded-3xl p-8 shadow-sm border border-indigo-100 scroll-mt-24">
-                <div class="flex items-center gap-3 mb-4">
+                <div class="flex items-center gap-3 mb-6">
                     <div
                         class="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold">
                         1</div>
                     <h3 class="text-2xl font-bold text-gray-800">主谓结构 (SV)</h3>
+                    <span
+                        class="bg-indigo-50 text-indigo-600 px-2 py-1 rounded text-xs font-bold uppercase">Intransitive
+                        Verbs</span>
                 </div>
                 <div class="grid md:grid-cols-2 gap-8">
                     <div>
-                        <p class="text-gray-600 mb-4">核心：<b>不及物动词 (Intransitive Verb)</b>。后面不能直接加宾语。</p>
-                        <ul class="space-y-2 text-sm">
-                            <li class="flex items-center gap-2"><span class="text-red-500">×</span> <span
-                                    class="bg-gray-100 px-2 rounded">die the illness</span> (死于疾病?)</li>
-                            <li class="flex items-center gap-2"><span class="text-green-500">√</span> <span
-                                    class="bg-indigo-50 text-indigo-700 px-2 rounded font-bold">die from</span> the
-                                illness (加介词!)</li>
-                        </ul>
+                        <p class="text-gray-600 mb-4 leading-relaxed">
+                            特点：<b>不及物动词</b>。后面<b>不能直接加宾语</b>。
+                            <br>想加宾语怎么办？必须加上<b>介词 (Preposition)</b>。
+                        </p>
+                        <div class="space-y-3 font-mono text-sm">
+                            <div class="flex items-center gap-2">
+                                <span class="bg-red-100 text-red-600 px-2 rounded">×</span> die the illness
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="bg-green-100 text-green-600 px-2 rounded">√</span> die <b>from</b> the
+                                illness
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <span class="bg-green-100 text-green-600 px-2 rounded">√</span> jump <b>into</b> the
+                                water
+                            </div>
+                        </div>
                     </div>
                     <div class="bg-gray-50 p-6 rounded-xl border border-gray-200">
-                        <h4 class="font-bold text-sm mb-3">🎥 经典台词</h4>
-                        <blockquote class="italic text-gray-700 font-serif text-lg mb-2">"You jump, I jump."
-                        </blockquote>
-                        <div class="text-xs text-right text-gray-400">— Titanic</div>
+                        <h4 class="font-bold text-sm mb-3">🔥 常用不及物动词</h4>
+                        <div class="flex flex-wrap gap-2 text-sm text-gray-600">
+                            <span class="bg-white px-2 py-1 rounded border">happen</span>
+                            <span class="bg-white px-2 py-1 rounded border">appear/disappear</span>
+                            <span class="bg-white px-2 py-1 rounded border">come/go</span>
+                            <span class="bg-white px-2 py-1 rounded border">swim</span>
+                            <span class="bg-white px-2 py-1 rounded border">work</span>
+                        </div>
+                        <blockquote
+                            class="italic text-gray-700 font-serif text-lg mt-4 border-l-4 border-indigo-400 pl-4">"You
+                            jump, I jump."</blockquote>
                     </div>
                 </div>
             </section>
@@ -238,12 +255,22 @@
                     <div
                         class="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 font-bold">
                         2</div>
-                    <h3 class="text-2xl font-bold text-gray-800">主谓宾结构 (SVO)</h3>
+                    <h3 class="text-2xl font-bold text-gray-800">主谓宾 (SVO)</h3>
                 </div>
-                <p class="text-gray-600 mb-4">核心：<b>及物动词 (Transitive Verb)</b>。动作必须有承受者。</p>
-                <div class="bg-pink-50 p-4 rounded-xl text-center">
-                    <span class="text-2xl font-bold text-pink-600">I love you.</span>
-                    <p class="text-xs text-pink-400 mt-1">最简单也最有力</p>
+                <p class="text-gray-600 mb-4">核心：<b>及物动词</b>。必须有动作承受者。</p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div class="bg-pink-50 p-4 rounded-xl">
+                        <p class="font-mono font-bold text-pink-700">He grabbed my bag.</p>
+                        <p class="text-xs text-pink-400 mt-1">Grabbed (Vt) + Bag</p>
+                    </div>
+                    <div class="bg-pink-50 p-4 rounded-xl">
+                        <p class="font-mono font-bold text-pink-700">The dog bit me.</p>
+                        <p class="text-xs text-pink-400 mt-1">Bit (Vt) + Me</p>
+                    </div>
+                    <div class="bg-pink-50 p-4 rounded-xl">
+                        <p class="font-mono font-bold text-pink-700">Plans to run away.</p>
+                        <p class="text-xs text-pink-400 mt-1">不定式 (To do) 作宾语</p>
+                    </div>
                 </div>
             </section>
 
@@ -253,22 +280,30 @@
                     <div
                         class="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center text-yellow-600 font-bold">
                         3</div>
-                    <h3 class="text-2xl font-bold text-gray-800">主系表结构 (SLP)</h3>
+                    <h3 class="text-2xl font-bold text-gray-800">主系表 (SLP)</h3>
                 </div>
-                <div class="flex flex-wrap gap-2 mb-6">
-                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm font-bold">Be动词</span>
-                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm font-bold">变化
-                        (Become/Get)</span>
-                    <span class="px-3 py-1 bg-yellow-100 text-yellow-800 rounded-full text-sm font-bold">感官
-                        (Look/Smell/Feel)</span>
-                </div>
-                <div class="border-l-4 border-yellow-400 pl-4 py-2 bg-yellow-50/50">
-                    <p class="font-mono text-gray-800">Everything <b>looks</b> different.</p>
-                    <p class="font-mono text-gray-800 mt-2">He <b>became</b> more and more handsome.</p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <ul class="space-y-4">
+                            <li class="flex items-start gap-3">
+                                <span class="badge bg-yellow-100 text-yellow-800 px-2 rounded font-bold">Be动词</span>
+                                <span>King Kong <b class="text-yellow-600">is</b> strong.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="badge bg-yellow-100 text-yellow-800 px-2 rounded font-bold">变化类</span>
+                                <span>He <b class="text-yellow-600">became</b> handsome.</span>
+                            </li>
+                            <li class="flex items-start gap-3">
+                                <span class="badge bg-yellow-100 text-yellow-800 px-2 rounded font-bold">感官类</span>
+                                <span>It <b class="text-yellow-600">feels</b> soft. / It <b
+                                        class="text-yellow-600">tastes</b> delicious.</span>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </section>
 
-            <!-- SVIODO Detail -->
+            <!-- SVOO Detail -->
             <section id="sec-sviodo" class="bg-white rounded-3xl p-8 shadow-sm border border-green-100 scroll-mt-24">
                 <div class="flex items-center gap-3 mb-4">
                     <div
@@ -276,16 +311,23 @@
                         4</div>
                     <h3 class="text-2xl font-bold text-gray-800">主谓宾宾 (SVOO)</h3>
                 </div>
-                <div class="relative overflow-hidden bg-green-50 rounded-2xl p-6">
-                    <div class="absolute top-0 right-0 p-4 opacity-10">
-                        <span class="material-symbols-rounded text-6xl">card_giftcard</span>
+                <div class="bg-green-50 rounded-2xl p-6 relative">
+                    <p class="text-green-900 font-bold mb-4">口诀：给某人某物 (Give sb sth)</p>
+                    <div class="space-y-3 font-mono">
+                        <div class="border-b border-green-200 pb-2">
+                            Santa Claus gave <span class="text-purple-600 font-bold">her</span> <span
+                                class="text-pink-600 font-bold">a magic book</span>.
+                        </div>
+                        <div>
+                            Father told <span class="text-purple-600 font-bold">me</span> <span
+                                class="text-pink-600 font-bold">stories</span>.
+                        </div>
                     </div>
-                    <p class="font-bold text-green-900 mb-2">Example: 讲个故事</p>
-                    <p class="text-lg">Father told <b class="text-indigo-600">me</b> <b
-                            class="text-pink-600">stories</b> about Haier Brothers.</p>
-                    <div class="flex gap-4 mt-4 text-xs font-bold uppercase tracking-wider">
-                        <div class="text-indigo-600">Me = 间接宾语 (人)</div>
-                        <div class="text-pink-600">Stories = 直接宾语 (物)</div>
+                    <div class="flex gap-4 mt-4 text-xs font-bold uppercase tracking-wider text-green-800/60">
+                        <span class="flex items-center gap-1"><span class="w-3 h-3 bg-purple-600 rounded-full"></span>
+                            间接宾语 (人)</span>
+                        <span class="flex items-center gap-1"><span class="w-3 h-3 bg-pink-600 rounded-full"></span>
+                            直接宾语 (物)</span>
                     </div>
                 </div>
             </section>
@@ -298,17 +340,17 @@
                         5</div>
                     <h3 class="text-2xl font-bold text-gray-800">主谓宾补 (SVOC)</h3>
                 </div>
-                <p class="text-gray-600 mb-4">补语用来补充说明宾语的状态或行为。</p>
+                <p class="text-gray-600 mb-4">补语 (Complement) 是必不可少的，少了它句意不完整。</p>
                 <div class="grid md:grid-cols-2 gap-4">
                     <div class="p-4 border border-purple-200 rounded-xl bg-purple-50">
-                        <h5 class="font-bold text-purple-800 mb-2">状态</h5>
-                        <p class="font-mono">You make my life <b class="bg-white px-1 rounded shadow-sm">happy</b>.</p>
-                        <p class="text-xs text-gray-500 mt-1">Happy 补 Life</p>
+                        <p class="font-mono">You make my life <b
+                                class="bg-white px-1 rounded shadow-sm text-purple-700">happy</b>.</p>
+                        <p class="text-xs text-gray-500 mt-1">Happy 补充说明 Life 的状态</p>
                     </div>
                     <div class="p-4 border border-purple-200 rounded-xl bg-purple-50">
-                        <h5 class="font-bold text-purple-800 mb-2">动作</h5>
-                        <p class="font-mono">Force them <b class="bg-white px-1 rounded shadow-sm">to run</b>.</p>
-                        <p class="text-xs text-gray-500 mt-1">Run 补 Them</p>
+                        <p class="font-mono">Father forced them <b
+                                class="bg-white px-1 rounded shadow-sm text-purple-700">to run</b>.</p>
+                        <p class="text-xs text-gray-500 mt-1">To run 补充说明 Them 的动作</p>
                     </div>
                 </div>
             </section>
@@ -318,46 +360,65 @@
         <section id="evolution" class="py-12" data-aos="fade-up">
             <h2 class="section-title text-center text-3xl font-bold mb-10">
                 <span class="text-transparent bg-clip-text bg-gradient-to-r from-orange-500 to-red-600">句子进化论</span>
-                <span class="block text-sm text-gray-400 font-normal mt-2">从青铜到王者 (Bronze to King)</span>
             </h2>
 
-            <div class="relative max-w-3xl mx-auto">
-                <!-- Bronze Level -->
-                <div
-                    class="bg-gray-100 p-6 rounded-t-3xl border-b border-gray-200 opacity-60 hover:opacity-100 transition-opacity">
-                    <div class="badge bg-gray-500 text-white text-xs px-2 py-1 rounded inline-block mb-2">Bronze Lv.1
+            <div class="relative max-w-3xl mx-auto space-y-4">
+                <!-- 1 -->
+                <div class="bg-gray-100 p-6 rounded-2xl border-l-4 border-gray-400">
+                    <div class="badge bg-gray-500 text-white text-xs px-2 py-1 rounded inline-block mb-2">Bronze (青铜)
                     </div>
                     <p class="font-mono text-xl">Old Tom is watching cartoons.</p>
-                    <p class="text-xs text-gray-500 mt-1">评价：Too simple, too naive.</p>
+                    <p class="text-xs text-gray-500 mt-1">评价：Too simple. 只是陈述事实。</p>
                 </div>
 
-                <!-- Gold Level -->
-                <div class="bg-orange-50 p-6 border-b border-orange-100 hover:shadow-lg transition">
-                    <div class="badge bg-orange-500 text-white text-xs px-2 py-1 rounded inline-block mb-2">Gold Lv.50
+                <!-- 2 -->
+                <div class="bg-orange-50 p-6 rounded-2xl border-l-4 border-orange-400">
+                    <div class="badge bg-orange-500 text-white text-xs px-2 py-1 rounded inline-block mb-2">Silver (白银)
                     </div>
-                    <p class="font-mono text-xl">Old Tom <span class="text-orange-600">is absorbed in</span> watching
-                        cartoons.</p>
-                    <p class="text-xs text-gray-500 mt-1">升级：用了 <i>be absorbed in</i> (全神贯注)</p>
+                    <p class="font-mono text-xl">Old Tom <b>is absorbed in</b> watching cartoons.</p>
+                    <p class="text-xs text-gray-500 mt-1">升级：使用高级词组 <i>be absorbed in</i> (全神贯注)。</p>
                 </div>
 
-                <!-- King Level -->
+                <!-- 3 -->
                 <div
-                    class="bg-gradient-to-r from-red-600 to-orange-600 p-8 rounded-b-3xl text-white shadow-2xl transform scale-105 relative z-10">
+                    class="bg-gradient-to-r from-red-600 to-orange-600 p-8 rounded-2xl text-white shadow-2xl relative z-10 transform scale-105">
                     <div
                         class="absolute -top-3 -right-3 bg-yellow-400 text-red-900 font-bold px-3 py-1 rounded-full shadow-lg animate-bounce">
                         KING</div>
                     <div class="badge bg-white/20 text-white text-xs px-2 py-1 rounded inline-block mb-4">Challenger
-                        Lv.99</div>
-                    <p class="font-mono text-xl md:text-2xl leading-relaxed">
-                        "Old Tom, <span class="border-b-2 border-yellow-400/50">with his legs crossed</span>, is
-                        absorbed in watching a <span class="border-b-2 border-yellow-400/50">popular</span> cartoon
-                        <span class="border-b-2 border-yellow-400/50">named Peppa Pig</span> <span
-                            class="font-bold text-yellow-300">on the couch</span>."
+                        (王者)</div>
+                    <p class="font-mono text-xl leading-relaxed">
+                        "Old Tom, <u class="decoration-yellow-400 decoration-2 underline-offset-4">with his legs
+                            crossed</u>, is absorbed in watching a <u
+                            class="decoration-yellow-400 decoration-2 underline-offset-4">popular</u> cartoon <u
+                            class="decoration-yellow-400 decoration-2 underline-offset-4">named Peppa Pig</u> <b
+                            class="text-yellow-300">on the couch</b>."
                     </p>
-                    <p class="text-white/80 text-sm mt-4">
-                        <span class="material-symbols-rounded text-sm align-middle">auto_awesome</span>
-                        加入了状语 (with...), 定语 (popular, named...), 地点状语 (on the couch)。画面感拉满！
+                    <p class="text-white/80 text-sm mt-4 border-t border-white/20 pt-2">
+                        解析：加入伴随状语(with...), 定语(popular, named...), 地点状语(on the couch)。画面感拉满！
                     </p>
+                </div>
+            </div>
+
+            <!-- Practice Expansion -->
+            <div class="max-w-3xl mx-auto mt-12 bg-white p-8 rounded-3xl border border-gray-200">
+                <h4 class="font-bold text-gray-800 mb-4 flex items-center gap-2"><span
+                        class="material-symbols-rounded text-primary">edit</span> 扩句挑战</h4>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div>
+                        <p class="text-sm text-gray-500 mb-2">Base Sentence:</p>
+                        <p class="font-bold mb-4">I will meet a friend.</p>
+                        <p class="text-sm text-gray-500 mb-2">Expansion:</p>
+                        <p class="font-mono text-sm text-indigo-600">"Tomorrow, I will meet a friend named Jay Chou from
+                            Taiwan at the airport."</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500 mb-2">Base Sentence:</p>
+                        <p class="font-bold mb-4">He left.</p>
+                        <p class="text-sm text-gray-500 mb-2">Expansion:</p>
+                        <p class="font-mono text-sm text-indigo-600">"He left sadly, with all his luggage taken away,
+                            without saying a word."</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -371,52 +432,52 @@
                 </div>
 
                 <h2 class="text-2xl font-bold flex items-center gap-2 mb-8 text-red-500">
-                    <span class="material-symbols-rounded">swords</span> BOSS FIGHT: 托福原句挑战
+                    <span class="material-symbols-rounded">swords</span> Lóng Nán Jù (长难句) Analysis
                 </h2>
 
                 <div class="prose prose-invert max-w-none text-lg leading-loose font-serif">
                     <span class="bg-blue-900/50 text-blue-200 px-1 rounded cursor-help"
-                        title="主语 Subject">Peisistratus</span>
+                        title="主语 (Subject)">Peisistratus</span>
                     <span
-                        class="text-gray-500 text-sm group relative cursor-pointer border-b border-gray-700 hover:text-gray-300 transition">
-                        [...succession of tyrants...]
-                        <span
-                            class="absolute bottom-full left-0 w-64 bg-black text-xs p-2 rounded mb-2 hidden group-hover:block">插入语，作为暴君的继承者...</span>
+                        class="text-gray-500 text-sm group relative cursor-pointer border-b border-gray-700 hover:text-gray-300 transition mx-1">
+                        (as the succession of tyrants... called...)
                     </span>
                     <span class="bg-red-900/50 text-red-200 px-1 rounded font-bold cursor-help"
-                        title="谓语 Predicate">strengthened</span>
-                    <span class="bg-green-900/50 text-green-200 px-1 rounded cursor-help" title="宾语 Object">the Athenian
-                        central administration</span>
-                    <span class="text-gray-400">at the expense of the aristocracy...</span>
+                        title="谓语 (Predicate)">strengthened</span>
+                    <span class="bg-green-900/50 text-green-200 px-1 rounded cursor-help" title="宾语 (Object)">the
+                        Athenian central administration</span>
+                    <span class="text-gray-400 block mt-4 text-base pl-4 border-l-2 border-gray-700">
+                        at the expense of the aristocracy <br>
+                        by appointing judges... <br>
+                        producing coinage... <br>
+                        adding and embellishing festivals...
+                    </span>
                 </div>
 
                 <div class="mt-8 p-4 bg-gray-800/50 rounded-xl border border-gray-700 text-sm">
-                    <p class="mb-2"><strong class="text-white">核心破解：</strong></p>
+                    <p class="mb-2"><strong class="text-white">核心破解 (Hack):</strong></p>
                     <p>抓主干：<b>Peisistratus strengthened administration.</b> (P君加强了中央集权)</p>
-                    <p class="mt-2 text-gray-500">后面长长的一串 (by appointing judges, producing coinage...)
-                        都是<b>状语</b>，表示他加强集权的<b>手段/方式</b>。</p>
+                    <p class="mt-2 text-gray-500">所有的 by... (通过任命法官、铸造钱币、增加节日) 都是<b>状语</b>，解释他加强集权的手段。</p>
                 </div>
             </div>
         </section>
 
         <!-- Translation Workshop -->
-        <section id="practice" class="mb-32 max-w-3xl mx-auto" data-aos="fade-up">
-            <h2 class="text-3xl font-display font-bold text-center mb-10">翻译工坊</h2>
-
-            <div class="space-y-4">
+        <section id="practice" class="mb-20 max-w-4xl mx-auto" data-aos="fade-up">
+            <h2 class="text-3xl font-display font-bold text-center mb-10">翻译工坊 (Translation Workshop)</h2>
+            <div class="grid md:grid-cols-2 gap-4">
                 <!-- Q1 -->
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden group">
                     <div class="p-6 cursor-pointer hover:bg-gray-50 transition" onclick="toggleAnswer('a1')">
                         <div class="flex justify-between items-center mb-2">
-                            <h4 class="font-bold text-gray-800">Q1. 听取他人建议是有帮助的。</h4>
+                            <h4 class="font-bold text-gray-800">1. 听取他人建议是有帮助的。</h4>
                             <span
                                 class="material-symbols-rounded text-gray-400 group-hover:text-primary transition">expand_more</span>
                         </div>
-                        <p class="text-sm text-gray-500">Hint: I find it helpful...</p>
                     </div>
-                    <div id="a1" class="hidden bg-indigo-50 p-6 border-t border-indigo-100">
-                        <p class="font-mono text-indigo-900">I find it helpful to listen to others' advice.</p>
-                        <p class="text-xs text-indigo-500 mt-1">主谓宾补 (it做形式宾语)</p>
+                    <div id="a1" class="hidden bg-pink-50 p-6 border-t border-pink-100">
+                        <p class="font-mono text-pink-900">I find it helpful to listen to others' advice when making an
+                            important decision.</p>
                     </div>
                 </div>
 
@@ -424,15 +485,14 @@
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden group">
                     <div class="p-6 cursor-pointer hover:bg-gray-50 transition" onclick="toggleAnswer('a2')">
                         <div class="flex justify-between items-center mb-2">
-                            <h4 class="font-bold text-gray-800">Q2. 学校提供给学生许多机会。</h4>
+                            <h4 class="font-bold text-gray-800">2. 学校提供给学生许多机会。</h4>
                             <span
                                 class="material-symbols-rounded text-gray-400 group-hover:text-primary transition">expand_more</span>
                         </div>
-                        <p class="text-sm text-gray-500">Hint: offer/give</p>
                     </div>
-                    <div id="a2" class="hidden bg-indigo-50 p-6 border-t border-indigo-100">
-                        <p class="font-mono text-indigo-900">Schools offer students many opportunities.</p>
-                        <p class="text-xs text-indigo-500 mt-1">主谓宾宾 (双宾语)</p>
+                    <div id="a2" class="hidden bg-pink-50 p-6 border-t border-pink-100">
+                        <p class="font-mono text-pink-900">School offers students many opportunities to learn various
+                            subjects.</p>
                     </div>
                 </div>
 
@@ -440,29 +500,154 @@
                 <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden group">
                     <div class="p-6 cursor-pointer hover:bg-gray-50 transition" onclick="toggleAnswer('a3')">
                         <div class="flex justify-between items-center mb-2">
-                            <h4 class="font-bold text-gray-800">Q3. 无经验的员工赚得少。</h4>
+                            <h4 class="font-bold text-gray-800">3. 无经验的员工赚得少。</h4>
                             <span
                                 class="material-symbols-rounded text-gray-400 group-hover:text-primary transition">expand_more</span>
                         </div>
                     </div>
-                    <div id="a3" class="hidden bg-indigo-50 p-6 border-t border-indigo-100">
-                        <p class="font-mono text-indigo-900">Inexperienced workers earn less money than experienced
-                            ones.</p>
+                    <div id="a3" class="hidden bg-pink-50 p-6 border-t border-pink-100">
+                        <p class="font-mono text-pink-900">Inexperienced workers earn less money than experienced
+                            workers.</p>
+                    </div>
+                </div>
+
+                <!-- Q4 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden group">
+                    <div class="p-6 cursor-pointer hover:bg-gray-50 transition" onclick="toggleAnswer('a4')">
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="font-bold text-gray-800">4. 发展中国家的人民...</h4>
+                            <span
+                                class="material-symbols-rounded text-gray-400 group-hover:text-primary transition">expand_more</span>
+                        </div>
+                    </div>
+                    <div id="a4" class="hidden bg-pink-50 p-6 border-t border-pink-100">
+                        <p class="font-mono text-pink-900">People in developing countries will become the major
+                            consumers of cars in the next few decades.</p>
+                    </div>
+                </div>
+
+                <!-- Q5 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden group">
+                    <div class="p-6 cursor-pointer hover:bg-gray-50 transition" onclick="toggleAnswer('a5')">
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="font-bold text-gray-800">5. 别人一起学习的明显好处...</h4>
+                            <span
+                                class="material-symbols-rounded text-gray-400 group-hover:text-primary transition">expand_more</span>
+                        </div>
+                    </div>
+                    <div id="a5" class="hidden bg-pink-50 p-6 border-t border-pink-100">
+                        <p class="font-mono text-pink-900">The most obvious advantage of studying with other people is
+                            that it keeps you away from distractions.</p>
+                    </div>
+                </div>
+
+                <!-- Q6 -->
+                <div class="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden group">
+                    <div class="p-6 cursor-pointer hover:bg-gray-50 transition" onclick="toggleAnswer('a6')">
+                        <div class="flex justify-between items-center mb-2">
+                            <h4 class="font-bold text-gray-800">6. 体育锻炼有助于身体健康。</h4>
+                            <span
+                                class="material-symbols-rounded text-gray-400 group-hover:text-primary transition">expand_more</span>
+                        </div>
+                    </div>
+                    <div id="a6" class="hidden bg-pink-50 p-6 border-t border-pink-100">
+                        <p class="font-mono text-pink-900">Many experts point out that physical exercises contribute
+                            directly to a person's physical fitness.</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Footer link -->
-        <div class="text-center mb-20">
-            <a href="index.html" class="inline-flex items-center gap-2 text-gray-500 hover:text-primary transition">
-                <span class="material-symbols-rounded">arrow_back</span> 回到第一课
-            </a>
-        </div>
+        <!-- Writing & Speaking Topics -->
+        <section class="mb-32 max-w-5xl mx-auto px-4 grid md:grid-cols-2 gap-8" data-aos="fade-up">
+            <!-- Writing -->
+            <div class="bg-white rounded-3xl p-8 shadow-lg border-t-8 border-pink-500">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="material-symbols-rounded text-pink-500 text-3xl">edit_note</span>
+                    <h3 class="text-2xl font-bold">Writing Heat Map</h3>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-xl mb-6">
+                    <p class="font-bold text-gray-800">Topic:</p>
+                    <p class="text-gray-600">Some people prefer to study alone, while others prefer to study with a
+                        group. Which do you prefer?</p>
+                </div>
+                <div class="prose prose-sm prose-pink max-w-none text-gray-600">
+                    <h4 class="font-bold text-gray-800">George's Sample (250 words):</h4>
+                    <p>
+                        I <span class="bg-indigo-100 px-1 rounded" title="SVO">prefer to study with a group</span>.
+                        Firstly, <span class="bg-yellow-100 px-1 rounded" title="SLP">group study is efficient</span>.
+                        When we encounter difficult problems, <span class="bg-green-100 px-1 rounded"
+                            title="SVOO">partners can give us suggestions</span>.
+                        For example, last week, my classmate <span class="bg-green-100 px-1 rounded" title="SVOO">taught
+                            me a math formula</span>.
+                        Secondly, <span class="bg-purple-100 px-1 rounded" title="SVOC">studying together makes the
+                            process interesting</span>.
+                        We can <span class="bg-pink-100 px-1 rounded" title="SVO">discuss various topics</span> during
+                        breaks.
+                        In conclusion, <span class="bg-indigo-100 px-1 rounded" title="SVO">I find group study
+                            helpful</span> because <span class="bg-purple-100 px-1 rounded" title="SVOC">it keeps me
+                            focused</span> and happy.
+                    </p>
+                    <p class="text-xs text-gray-400 mt-2">*Highlighted parts show the 5 sentence patterns learned today.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Speaking -->
+            <div class="bg-white rounded-3xl p-8 shadow-lg border-t-8 border-violet-500">
+                <div class="flex items-center gap-2 mb-4">
+                    <span class="material-symbols-rounded text-violet-500 text-3xl">record_voice_over</span>
+                    <h3 class="text-2xl font-bold">Speaking Task</h3>
+                </div>
+                <div class="bg-gray-50 p-4 rounded-xl mb-6">
+                    <p class="font-bold text-gray-800">Topic:</p>
+                    <p class="text-gray-600">Describe a memorable gathering with your friends.</p>
+                </div>
+                <div class="prose prose-sm prose-violet max-w-none text-gray-600">
+                    <h4 class="font-bold text-gray-800">Sample (150 words):</h4>
+                    <p>
+                        I remember a <span class="bg-yellow-100 px-1 rounded">gathering that was unforgettable</span>.
+                        Last year, <span class="bg-pink-100 px-1 rounded">I met my best friend, Jerry, at the city
+                            park</span>.
+                        He <span class="bg-green-100 px-1 rounded">brought me a guitar</span> as a birthday gift.
+                        <span class="bg-indigo-100 px-1 rounded">The sun shone brightly</span> that day.
+                        We <span class="bg-pink-100 px-1 rounded">sang songs together</span>.
+                        His visit <span class="bg-purple-100 px-1 rounded">made me extremely happy</span> because we
+                        hadn't seen each other for years.
+                        The gathering <span class="bg-yellow-100 px-1 rounded">was short but meaningful</span>.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Quiz CTA -->
+        <section class="mb-32 text-center" data-aos="zoom-in">
+            <div
+                class="bg-gradient-to-r from-pink-500 to-indigo-600 rounded-3xl p-12 text-white shadow-2xl max-w-4xl mx-auto relative overflow-hidden">
+                <div class="relative z-10">
+                    <h2 class="text-4xl font-bold mb-6 font-display">Ready for the Challenge?</h2>
+                    <p class="text-pink-100 text-xl mb-8">20道精选题目，检验你对五大句型的掌握程度。</p>
+                    <a href="quiz2.html" target="_blank"
+                        class="bg-white text-pink-600 px-10 py-4 rounded-xl font-bold text-xl hover:scale-105 transition shadow-lg inline-flex items-center gap-2">
+                        <span class="material-symbols-rounded">play_circle</span> 开始 20 题大闯关
+                    </a>
+                </div>
+                <!-- Decor -->
+                <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full blur-3xl -mr-20 -mt-20">
+                </div>
+                <div
+                    class="absolute bottom-0 left-0 w-64 h-64 bg-yellow-400 opacity-10 rounded-full blur-3xl -ml-20 -mb-20">
+                </div>
+            </div>
+        </section>
+
+        <footer class="text-center text-gray-400 mb-10 text-sm">
+            &copy; 2025 George Teacher TOEFL Series.
+        </footer>
 
     </main>
 
-    <!-- Hidden PDF Content (Reused Logic) -->
+    <!-- Hidden PDF Content -->
     <div id="pdf-content" style="display: none;">
         <div
             style="font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; color: #333; padding: 40px; line-height: 1.5; max-width: 800px; margin: 0 auto;">
@@ -478,30 +663,30 @@
 
             <div style="margin-bottom: 20px;">
                 <h3>1. SV (主谓)</h3>
-                <p>The sun rose. (Intransitive Verb)</p>
+                <p>The sun rose. / You jump, I jump. / The accident happened.</p>
+                <p style="font-size: 0.9em; color: #666;">Intransitive: die from, jump into.</p>
             </div>
             <div style="margin-bottom: 20px;">
                 <h3>2. SVO (主谓宾)</h3>
-                <p>I love you. (Transitive Verb)</p>
+                <p>I love you. / He grabbed my bag. / George plans to run away.</p>
             </div>
             <div style="margin-bottom: 20px;">
                 <h3>3. SLP (主系表)</h3>
-                <p>She is beautiful. (Link Verb)</p>
+                <p>She is beautiful. / Everything looks different. / He became handsome.</p>
             </div>
             <div style="margin-bottom: 20px;">
-                <h3>4. SVIODO (主谓宾宾)</h3>
-                <p>Give me money. (Double Object)</p>
+                <h3>4. SVOO (主谓宾宾)</h3>
+                <p>Give me your heart. / Father told me stories.</p>
             </div>
             <div style="margin-bottom: 20px;">
                 <h3>5. SVOC (主谓宾补)</h3>
-                <p>You make me happy. (Complement)</p>
+                <p>You make my life happy. / Father forced them to run.</p>
             </div>
 
             <div style="margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px;">
-                <h4>Sentence Evolution Example:</h4>
-                <p><b>Basic:</b> Old Tom is watching cartoons.</p>
-                <p><b>Advanced:</b> Old Tom, with his legs crossed, is absorbed in watching a popular cartoon named
-                    Peppa Pig on the couch.</p>
+                <h4>Writing Heat Map (Topic: Alone vs Group)</h4>
+                <p style="font-style: italic;">"I prefer to study with a group... partners can give us suggestions
+                    (SVOO)... studying together makes the process interesting (SVOC)..."</p>
             </div>
         </div>
     </div>
