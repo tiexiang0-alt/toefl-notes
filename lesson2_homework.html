@@ -42,15 +42,24 @@
     <!-- Navigation -->
     <nav
         class="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-200 shadow-sm px-6 py-4 flex items-center justify-between">
-        <a href="lesson2.html" class="flex items-center gap-2 text-gray-600 hover:text-primary transition font-bold">
-            <span class="material-symbols-rounded">arrow_back</span>
-            Back to Lesson 2
-        </a>
-        <h1 class="font-display font-bold text-lg text-gray-800">Homework Review</h1>
+        <div class="flex items-center gap-4">
+            <a href="lesson2.html"
+                class="flex items-center gap-2 text-gray-600 hover:text-primary transition font-bold text-sm">
+                <span class="material-symbols-rounded text-lg">arrow_back</span>
+                Back
+            </a>
+            <h1 class="font-display font-bold text-lg text-gray-800 hidden md:block">Homework Review</h1>
+        </div>
+
+        <button onclick="downloadHomework()"
+            class="flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-4 py-2 rounded-lg font-bold shadow-md transition-all text-sm hover:scale-105 active:scale-95">
+            <span class="material-symbols-rounded text-lg">download</span>
+            Save as PDF
+        </button>
     </nav>
 
     <!-- Main Content -->
-    <main class="max-w-4xl mx-auto px-4 pt-24 pb-20">
+    <main id="homework-content" class="max-w-4xl mx-auto px-4 pt-24 pb-20">
 
         <div class="text-center mb-10">
             <h2 class="text-3xl font-display font-bold text-gray-900 mb-2">My Writing Submission</h2>
@@ -272,7 +281,8 @@
                                             class="material-symbols-rounded text-base text-pink-500">auto_awesome</span>
                                         词汇 (Vocab)</h6>
                                     <p class="text-gray-600"><b>Fosters:</b> 培养/促进 (stronger than helps).
-                                        <b>Individually:</b> 独自地.</p>
+                                        <b>Individually:</b> 独自地.
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -647,6 +657,30 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <script src="lesson2.js"></script>
+    <script>
+        function downloadHomework() {
+            // Get the element
+            var element = document.getElementById('homework-content');
+
+            // Clone the element to modify styles for PDF without affecting the UI
+            var clone = element.cloneNode(true);
+
+            // Optional: Adjust styles for the clone if needed (e.g. remove shadows to save ink)
+            // clone.style.boxShadow = 'none';
+            // Array.from(clone.querySelectorAll('.shadow-xl')).forEach(el => el.classList.remove('shadow-xl'));
+
+            var opt = {
+                margin: [0.5, 0.5, 0.5, 0.5],
+                filename: 'George_Homework_Review_Lesson2.pdf',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2, useCORS: true, logging: false },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+            };
+
+            // New Promise-based usage:
+            html2pdf().set(opt).from(element).save();
+        }
+    </script>
 </body>
 
 </html>
