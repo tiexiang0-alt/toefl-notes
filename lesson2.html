@@ -690,331 +690,67 @@
                             </div>
                         </div>
 
-                        <!-- STUDENT SUBMISSION ANALYSIS (New Section) -->
-                        <div class="bg-gray-50 rounded-xl p-6 border border-gray-200 relative">
-                            <!-- Paper Clip Decor -->
+                        <!-- HOMEWORK & REVIEW SECTION -->
+                        <div id="homework"
+                            class="bg-gradient-to-br from-indigo-50 to-white rounded-xl p-8 border border-indigo-100 relative overflow-hidden group hover:shadow-lg transition-all duration-300">
+                            <!-- Background Decor -->
                             <div
-                                class="absolute -top-3 left-6 w-4 h-8 bg-gray-300 rounded-full border-2 border-white shadow-sm z-10">
+                                class="absolute top-0 right-0 w-64 h-64 bg-indigo-100/50 rounded-full mix-blend-multiply filter blur-3xl opacity-50 group-hover:scale-110 transition-transform duration-700">
                             </div>
 
-                            <h4 class="font-bold text-gray-800 mb-6 flex items-center gap-2">
-                                <span class="material-symbols-rounded text-pink-500">rate_review</span>
-                                <span>Student Submission & Critique</span>
-                            </h4>
-
-                            <!-- 1. Original with Markups -->
-                            <div class="mb-8 relative">
-                                <div class="flex justify-between items-center mb-2 z-10 relative">
-                                    <h5 class="text-xs font-bold text-gray-400 uppercase tracking-wider">Original Draft
-                                        (With Corrections)</h5>
-                                    <button onclick="toggleTeacherNote()"
-                                        class="text-xs flex items-center gap-1 bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full hover:bg-yellow-200 transition-colors font-bold shadow-sm">
-                                        <span class="material-symbols-rounded text-sm">sticky_note_2</span>
-                                        View Teacher's Note
-                                    </button>
-                                </div>
-
-                                <!-- Teacher's Note Dropdown (Absolute Position) -->
-                                <div id="teacher-note-card"
-                                    class="hidden absolute top-12 right-0 z-20 w-72 bg-yellow-100 p-5 shadow-xl transform rotate-1 font-handwritten border border-yellow-200 rounded-sm origin-top-right animate-drop-in"
-                                    style="font-family: 'Patrick Hand', cursive;">
-                                    <div
-                                        class="absolute -top-3 right-4 w-4 h-4 bg-yellow-100 transform rotate-45 border-l border-t border-yellow-200">
-                                    </div> <!-- Arrow -->
-                                    <button onclick="toggleTeacherNote()"
-                                        class="absolute top-2 right-2 text-yellow-600 hover:text-red-500">
-                                        <span class="material-symbols-rounded text-base">close</span>
-                                    </button>
-
-                                    <p
-                                        class="font-bold border-b border-yellow-300 pb-2 mb-3 text-center text-yellow-800 text-lg flex items-center justify-center gap-2">
-                                        👨‍🏫 Teacher's Note
-                                    </p>
-
-                                    <ul class="list-disc pl-4 space-y-2 text-gray-700 text-base leading-snug">
-                                        <li>Watch <strong class="text-blue-600">spelling</strong> (queit, patners).</li>
-                                        <li>Don't mix <strong class="text-blue-600">tenses</strong> (found vs find).
-                                        </li>
-                                        <li>Use <strong class="text-blue-600">academic words</strong>.</li>
-                                        <li>✨ Great specific example about the Civil War!</li>
-                                    </ul>
-                                </div>
-
+                            <div class="relative z-10 text-center">
                                 <div
-                                    class="bg-white p-8 rounded-lg shadow-inner font-mono text-sm leading-8 text-gray-600 relative overflow-hidden text-justify">
-                                    <!-- Handwriting Annotations Style -->
-                                    <style>
-                                        .handwritten {
-                                            font-family: 'Long Cang', 'Patrick Hand', cursive;
-                                            color: #DC2626;
-                                            display: inline-block;
-                                        }
-
-                                        .highlight-err {
-                                            text-decoration: line-through;
-                                            text-decoration-color: #F87171;
-                                            text-decoration-thickness: 2px;
-                                            background-color: #FEF2F2;
-                                            padding: 0 2px;
-                                        }
-
-                                        .grammar-note {
-                                            color: #2563EB;
-                                            font-family: 'Patrick Hand', cursive;
-                                        }
-                                    </style>
-
-                                    <p class="mb-6 relative">
-                                        I prefer to study alone rather than with a group. <span
-                                            class="highlight-err">while study</span><sup
-                                            class="handwritten text-xs ml-1">While studying</sup> with a group brings a
-                                        lot of <span class="highlight-err">coorperation</span><sup
-                                            class="handwritten text-xs ml-1">cooperation</sup> and <span
-                                            class="highlight-err">instant and strong problem-solving
-                                            conditions</span><sup class="handwritten text-xs ml-1">awkward! Try
-                                            "immediate assistance"</sup>, I <span class="highlight-err">found</span><sup
-                                            class="grammar-note text-xs ml-1">find (Keep tense consistent)</sup> <span
-                                            class="highlight-err">study alone</span><sup
-                                            class="handwritten text-xs ml-1">studying alone</sup> is more effective for
-                                        two main reasons.
-                                    </p>
-
-                                    <p class="mb-6 relative">
-                                        <span class="highlight-err">first of all</span><sup
-                                            class="handwritten text-xs ml-1">First,</sup> <span
-                                            class="highlight-err">study alone</span> brings me <span
-                                            class="text-indigo-600 font-bold bg-indigo-50 px-1 border-b-2 border-indigo-100">concentration
-                                            and deep learning</span><sup class="grammar-note text-xs ml-1">Good
-                                            point!</sup>. When we study with teammates, we <span
-                                            class="highlight-err">often distract</span><sup
-                                            class="grammar-note text-xs ml-1">are often distracted</sup> from <span
-                                            class="highlight-err">other's opinion</span><sup
-                                            class="handwritten text-xs ml-1">others' opinions</sup> or daily gossips
-                                        which <span class="highlight-err">shook</span><sup
-                                            class="handwritten text-xs ml-1">disturb/divert</sup> my own attention.
-                                        <span class="highlight-err">however</span><sup
-                                            class="handwritten text-xs ml-1">However</sup>, in a <span
-                                            class="highlight-err">queit</span><sup
-                                            class="handwritten text-xs ml-1">quiet</sup> evironment, I can really focus
-                                        on the main task.
-                                    </p>
-
-                                    <p class="mb-6 relative">
-                                        For example, last week, I was studying the history of the <span
-                                            class="highlight-err">chinese civil war</span><sup
-                                            class="handwritten text-xs ml-1">Chinese Civil War</sup>... I realized we
-                                        were wasting time <span class="highlight-err">cos</span><sup
-                                            class="handwritten text-xs ml-1">because (Too casual)</sup> we had <span
-                                            class="highlight-err">unclear plan</span><sup
-                                            class="grammar-note text-xs ml-1">an unclear plan</sup>... So we arranged...
-                                        and <span class="highlight-err">doing did</span><sup
-                                            class="handwritten text-xs ml-1">did</sup> <span class="highlight-err">every
-                                            thing</span><sup class="handwritten text-xs ml-1">everything</sup> by
-                                        ourselves...
-                                        <span
-                                            class="handwritten text-sm border border-red-200 p-2 bg-red-50 rounded shadow-sm block w-full mt-2 text-center text-red-600">
-                                            ⚠️ Logic Gap: You started studying TOGETHER, but later suggest you did
-                                            things BY YOURSELVES? Clarify the transition. 逻辑跳跃：需说明是分道扬镳了
-                                        </span>
-                                    </p>
-
-                                    <p class="mb-6 relative">
-                                        Secondly, I <span class="highlight-err">found</span><sup
-                                            class="grammar-note text-xs ml-1">find</sup> <span
-                                            class="highlight-err">study alone</span><sup
-                                            class="handwritten text-xs ml-1">independent study</sup> is really helpful
-                                        to <span class="highlight-err">reseach deeply</span><sup
-                                            class="handwritten text-xs ml-1">conduct deep research</sup>. History study
-                                        requires focus, not <span class="highlight-err">divergent discussion with
-                                            patners</span><sup class="handwritten text-xs ml-1">distractions from
-                                            partners</sup>... I organize the family trees... <span
-                                            class="highlight-err">alone makes me learn deeply and acheivable</span><sup
-                                            class="grammar-note text-xs ml-1">Grammar Error! Try "which fosters deep
-                                            learning and productivity"</sup>, especially with the help of <span
-                                            class="highlight-err">AI assistence</span><sup
-                                            class="handwritten text-xs ml-1">AI assistance</sup>.
-                                    </p>
-
-                                    <p class="mb-6 relative">
-                                        In conclusion, although many people <span class="highlight-err">suggest to
-                                            learn</span><sup class="grammar-note text-xs ml-1">suggest learning</sup> in
-                                        a team... <span class="highlight-err">it not only lead me study more
-                                            concentrate</span><sup class="grammar-note text-xs ml-1">This sentence is
-                                            broken. "It not only helps me concentrate..."</sup>, it brings deep thinking
-                                        and <span class="highlight-err">fixed knoeldege build</span><sup
-                                            class="handwritten text-xs ml-1">solid knowledge building</sup>. <span
-                                            class="highlight-err">therefore, i</span><sup
-                                            class="handwritten text-xs ml-1">Therefore, I</sup> will choose to study
-                                        alone...
-                                    </p>
+                                    class="w-16 h-16 bg-white rounded-2xl shadow-md flex items-center justify-center mx-auto mb-6 text-indigo-500 group-hover:scale-110 transition-transform duration-300">
+                                    <span class="material-symbols-rounded text-3xl">rate_review</span>
                                 </div>
+
+                                <h4 class="text-2xl font-bold text-gray-800 mb-2">作业点评与精修</h4>
+                                <p class="text-gray-500 mb-8 max-w-md mx-auto">
+                                    查看你的原始作文披着、乔治老师的详细评语，以及满分范文精修版。
+                                </p>
+
+                                <a href="lesson2_homework.html"
+                                    class="inline-flex items-center gap-2 bg-indigo-600 hover:bg-indigo-700 text-white px-8 py-3 rounded-full font-bold shadow-lg shadow-indigo-200 transition-all hover:-translate-y-1">
+                                    <span>进入作业讲评界面</span>
+                                    <span class="material-symbols-rounded text-sm">arrow_forward</span>
+                                </a>
                             </div>
-
-                            <!-- 2. Polished Version -->
-                            <div>
-                                <h5
-                                    class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2 flex items-center gap-2">
-                                    <span class="material-symbols-rounded text-green-500">check_circle</span>
-                                    Polished Version (TOEFL High-Score Standard)
-                                </h5>
-                                <div
-                                    class="bg-gradient-to-br from-white to-pink-50 p-6 rounded-lg border border-pink-100 text-gray-700 leading-relaxed shadow-sm">
-                                    <p class="mb-3">
-                                        When faced with the choice between studying alone or in a group, opinions often
-                                        vary.
-                                        While some argue that group work fosters collaboration, I personally believe
-                                        that
-                                        <span class="bg-indigo-100 px-1 font-semibold text-indigo-800">studying
-                                            individually is far more effective</span>.
-                                        This approach not only minimizes unnecessary distractions but also facilitates a
-                                        deeper level of cognitive engagement.
-                                    </p>
-                                    <p class="mb-3">
-                                        First and foremost, <span
-                                            class="bg-yellow-100 px-1 font-semibold text-yellow-800">studying alone
-                                            significantly enhances concentration</span>.
-                                        In a group setting, it is all too easy for academic discussions to devolve into
-                                        casual conversations.
-                                        For instance, last week, I attempted to collaborate with a partner on a project
-                                        regarding the <b>Chinese Civil War (1945-1949)</b>.
-                                        Instead of focusing on the strategic analysis, we ended up wasting valuable time
-                                        gossiping about anecdotes.
-                                        Realizing the inefficiency, I decided to work in a quiet environment.
-                                        Liberated from external disturbances, I clarified my research plan and executed
-                                        it with much greater <span class="bg-yellow-100 px-1">speed and
-                                            precision</span>.
-                                    </p>
-                                    <p class="mb-3">
-                                        Furthermore, independent study is <span
-                                            class="bg-purple-100 px-1 font-semibold text-purple-800">indispensable for
-                                            tasks requiring deep critical thinking</span>.
-                                        Unlike brainstorming sessions which benefit from divergent views, analyzing
-                                        complex historical data demands a singular, uninterrupted focus.
-                                        When I organized intricate timelines and political factions, working alone
-                                        allowed me to annotate materials and synthesize information deeply—something
-                                        difficult to achieve amidst the fragmented attention of group work.
-                                        With the assistance of <b>AI tools</b>, I could build a solid knowledge
-                                        framework efficiently.
-                                    </p>
-                                    <p>
-                                        In conclusion, while teamwork has its place, the benefits of solitary
-                                        study—specifically regarding <span class="bg-indigo-100 px-1">improved
-                                            concentration</span> and the ability to conduct <span
-                                            class="bg-indigo-100 px-1">deep research</span>—are undeniable.
-                                        Therefore, I prefer to study alone to maximize my academic performance.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- 3. Final Assessment -->
-                            <div class="mt-8 border-t border-gray-100 pt-8">
-                                <h5
-                                    class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-4 flex items-center gap-2">
-                                    <span class="material-symbols-rounded text-indigo-500">assignment_turned_in</span>
-                                    Final Writing Evaluation
-                                </h5>
-
-                                <div class="bg-indigo-50 rounded-xl p-6 border border-indigo-100">
-                                    <!-- Header Row -->
-                                    <div class="flex items-center justify-between mb-6 border-b border-indigo-100 pb-4">
-                                        <div class="flex items-center gap-3">
-                                            <div
-                                                class="w-12 h-12 rounded-full bg-white flex items-center justify-center text-2xl shadow-sm">
-                                                📊</div>
-                                            <div>
-                                                <h4 class="font-bold text-gray-800">George's Verdict</h4>
-                                                <p class="text-xs text-indigo-500 font-medium">Independent Writing Task
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div class="text-right">
-                                            <span class="block text-xs text-gray-500 uppercase font-bold">Est.
-                                                Score</span>
-                                            <span class="text-3xl font-black text-indigo-600">21<span
-                                                    class="text-lg text-gray-400 font-normal">/30</span></span>
-                                        </div>
-                                    </div>
-
-                                    <!-- Feedback Grid -->
-                                    <div class="grid md:grid-cols-2 gap-6 mb-6">
-                                        <!-- Strengths -->
-                                        <div>
-                                            <h6 class="font-bold text-gray-700 text-sm mb-2 flex items-center gap-2">
-                                                <span class="w-2 h-2 rounded-full bg-green-400"></span> Highlights
-                                            </h6>
-                                            <ul class="text-sm text-gray-600 space-y-2">
-                                                <li class="flex items-start gap-2">
-                                                    <span
-                                                        class="material-symbols-rounded text-green-500 text-base mt-0.5">check</span>
-                                                    <span><strong>Generic Structure:</strong> You have a clear SVO
-                                                        structure in your layout (Introduction, 2 Body Paragraphs,
-                                                        Conclusion).</span>
-                                                </li>
-                                                <li class="flex items-start gap-2">
-                                                    <span
-                                                        class="material-symbols-rounded text-green-500 text-base mt-0.5">check</span>
-                                                    <span><strong>Specific Example:</strong> The "Chinese Civil War"
-                                                        example is vivid and personal. This is a huge plus!</span>
-                                                </li>
-                                                <li class="flex items-start gap-2">
-                                                    <span
-                                                        class="material-symbols-rounded text-green-500 text-base mt-0.5">check</span>
-                                                    <span><strong>Opinion:</strong> Your stance is clear and consistent
-                                                        throughout the essay.</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-
-                                        <!-- Weaknesses -->
-                                        <div>
-                                            <h6 class="font-bold text-gray-700 text-sm mb-2 flex items-center gap-2">
-                                                <span class="w-2 h-2 rounded-full bg-red-400"></span> Areas to Improve
-                                            </h6>
-                                            <ul class="text-sm text-gray-600 space-y-2">
-                                                <li class="flex items-start gap-2">
-                                                    <span
-                                                        class="material-symbols-rounded text-red-400 text-base mt-0.5">warning</span>
-                                                    <span><strong>Grammar Basics:</strong> Frequent errors in
-                                                        subject-verb agreement (e.g., "study alone brings") and usage of
-                                                        passive voice.</span>
-                                                </li>
-                                                <li class="flex items-start gap-2">
-                                                    <span
-                                                        class="material-symbols-rounded text-red-400 text-base mt-0.5">warning</span>
-                                                    <span><strong>Logical Connectors:</strong> Transitions between ideas
-                                                        (e.g., team study -> individual study) need to be
-                                                        smoother.</span>
-                                                </li>
-                                                <li class="flex items-start gap-2">
-                                                    <span
-                                                        class="material-symbols-rounded text-red-400 text-base mt-0.5">warning</span>
-                                                    <span><strong>Vocabulary:</strong> Avoid casual words like "cos"
-                                                        (use "because") and "shook" (use "distract").</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
-
-                                    <!-- Action Plan -->
-                                    <div class="bg-white rounded-lg p-4 border border-indigo-100 shadow-sm">
-                                        <h6 class="font-bold text-indigo-600 text-sm mb-2 flex items-center gap-2">
-                                            <span class="material-symbols-rounded text-base">rocket_launch</span> Next
-                                            Steps
-                                        </h6>
-                                        <p class="text-sm text-gray-600 leading-relaxed">
-                                            To reach a score of 25+, focus on <strong>sentence variety</strong>. You
-                                            rely heavily on simple sentences (subject + verb). Try combining sentences
-                                            using "which", "although", or participle phrases (e.g., "Realizing the
-                                            inefficiency..."). Also, enable spell-check to eliminate basic typos!
-                                        </p>
-                                    </div>
-
-                                </div>
-                            </div>
-
                         </div>
+                        <li class="flex items-start gap-2">
+                            <span class="material-symbols-rounded text-red-400 text-base mt-0.5">warning</span>
+                            <span><strong>Logical Connectors:</strong> Transitions between ideas
+                                (e.g., team study -> individual study) need to be
+                                smoother.</span>
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="material-symbols-rounded text-red-400 text-base mt-0.5">warning</span>
+                            <span><strong>Vocabulary:</strong> Avoid casual words like "cos"
+                                (use "because") and "shook" (use "distract").</span>
+                        </li>
+                        </ul>
                     </div>
                 </div>
+
+                <!-- Action Plan -->
+                <div class="bg-white rounded-lg p-4 border border-indigo-100 shadow-sm">
+                    <h6 class="font-bold text-indigo-600 text-sm mb-2 flex items-center gap-2">
+                        <span class="material-symbols-rounded text-base">rocket_launch</span> Next
+                        Steps
+                    </h6>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        To reach a score of 25+, focus on <strong>sentence variety</strong>. You
+                        rely heavily on simple sentences (subject + verb). Try combining sentences
+                        using "which", "although", or participle phrases (e.g., "Realizing the
+                        inefficiency..."). Also, enable spell-check to eliminate basic typos!
+                    </p>
+                </div>
+
+            </div>
+            </div>
+
+            </div>
+            </div>
+            </div>
             </div>
 
             <!-- Speaking Module -->
