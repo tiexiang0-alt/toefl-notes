@@ -58,16 +58,15 @@ function downloadPage() {
     });
 }
 
-// Toggle Teacher Note Modal
+// Toggle Teacher Note Dropdown
 function toggleTeacherNote() {
-    const modal = document.getElementById('teacher-note-modal');
-    if (modal) {
-        if (modal.classList.contains('hidden')) {
-            modal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
+    const card = document.getElementById('teacher-note-card');
+    if (card) {
+        if (card.classList.contains('hidden')) {
+            card.classList.remove('hidden');
         } else {
-            modal.classList.add('hidden');
-            document.body.style.overflow = ''; // Restore scrolling
+            // Optional: Add exit animation logic if needed, for now just hide
+            card.classList.add('hidden');
         }
     }
 }
