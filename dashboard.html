@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teacher Data Center | George TOEFL</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- PapaParse for CSV -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Inter:wght@400;600;800&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        gray: {
+                            850: '#1f2937',
+                            900: '#111827',
+                            950: '#030712',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0F172A;
+            color: #E2E8F0;
+        }
+
+        /* Slate-900 */
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body class="min-h-screen p-6 font-sans antialiased text-slate-200">
+
+    <!-- Header -->
+    <header class="max-w-7xl mx-auto mb-10 flex justify-between items-center">
+        <div class="flex items-center gap-4">
+            <div
+                class="h-12 w-12 rounded-xl bg-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-500/30">
+                <span class="material-symbols-rounded text-2xl text-white">analytics</span>
+            </div>
+            <div>
+                <h1 class="text-2xl font-bold tracking-tight text-white">Teacher Data Center</h1>
+                <p class="text-slate-400 text-sm">Student Performance Analytics</p>
+            </div>
+        </div>
+        <a href="quiz.html" class="text-sm text-slate-400 hover:text-white transition flex items-center gap-2">
+            <span class="material-symbols-rounded">arrow_back</span> Return to Quiz
+        </a>
+    </header>
+
+    <!-- Main Dashboard container -->
+    <main class="max-w-7xl mx-auto space-y-8">
+
+        <!-- 1. Upload Section -->
+        <div id="upload-section"
+            class="glass-panel rounded-2xl p-10 text-center border-dashed border-2 border-slate-700 hover:border-indigo-500 transition-colors cursor-pointer group relative overflow-hidden">
+            <input type="file" id="csv-file-input" accept=".csv"
+                class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10">
+
+            <div class="relative z-0 pointer-events-none group-hover:scale-105 transition-transform duration-300">
+                <div
+                    class="w-16 h-16 bg-slate-800 rounded-full flex items-center justify-center mx-auto mb-4 text-indigo-400 group-hover:bg-indigo-600 group-hover:text-white transition-colors">
+                    <span class="material-symbols-rounded text-3xl">upload_file</span>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">Drop your Student Results CSV here</h3>
+                <p class="text-slate-400 text-sm max-w-md mx-auto">
+                    Export your data from Formsubmit.co (or use our template), then drop it here to unlock insights.
+                </p>
+            </div>
+        </div>
+
+        <!-- 2. Dashboard View (Hidden initially) -->
+        <div id="dashboard-view" class="hidden space-y-8 animate-fade-in">
+
+            <!-- Quick Stats Row -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+                <!-- Total Students -->
+                <div class="glass-panel p-6 rounded-2xl">
+                    <p class="text-slate-400 text-sm font-medium uppercase tracking-wider mb-1">Total Students</p>
+                    <p class="text-4xl font-black text-white" id="stat-total-students">-</p>
+                </div>
+                <!-- Avg Score -->
+                <div class="glass-panel p-6 rounded-2xl">
+                    <p class="text-slate-400 text-sm font-medium uppercase tracking-wider mb-1">Avg. Score</p>
+                    <div class="flex items-end gap-2">
+                        <p class="text-4xl font-black text-emerald-400" id="stat-avg-score">-</p>
+                        <span class="text-sm text-slate-500 mb-1">/ 100</span>
+                    </div>
+                </div>
+                <!-- Pass Rate -->
+                <div class="glass-panel p-6 rounded-2xl">
+                    <p class="text-slate-400 text-sm font-medium uppercase tracking-wider mb-1">Pass Rate (>60%)</p>
+                    <p class="text-4xl font-black text-blue-400" id="stat-pass-rate">-</p>
+                </div>
+                <!-- Top Performer -->
+                <div class="glass-panel p-6 rounded-2xl relative overflow-hidden">
+                    <div class="absolute -right-4 -top-4 text-slate-800 opacity-20">
+                        <span class="material-symbols-rounded text-9xl">emoji_events</span>
+                    </div>
+                    <p class="text-slate-400 text-sm font-medium uppercase tracking-wider mb-1">Top Performer</p>
+                    <p class="text-2xl font-bold text-yellow-400 truncate" id="stat-top-student">-</p>
+                    <p class="text-xs text-slate-500 mt-1" id="stat-top-score">Score: -</p>
+                </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                <!-- Score Distribution (Main Chart) -->
+                <div class="glass-panel p-6 rounded-2xl lg:col-span-2">
+                    <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                        <span class="material-symbols-rounded text-indigo-400">bar_chart</span>
+                        Score Distribution
+                    </h3>
+                    <div class="h-64">
+                        <canvas id="scoreChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Hardest Questions (Side Chart) -->
+                <div class="glass-panel p-6 rounded-2xl">
+                    <h3 class="text-lg font-bold text-white mb-6 flex items-center gap-2">
+                        <span class="material-symbols-rounded text-red-400">warning</span>
+                        Common Mistakes
+                    </h3>
+                    <div class="h-64 flex items-center justify-center text-slate-500 text-sm" id="mistakes-container">
+                        <p>Upload data containing "wrong_answers" column to see analysis.</p>
+                        <!-- Chart or List will go here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Table -->
+            <div class="glass-panel rounded-2xl overflow-hidden">
+                <div class="p-6 border-b border-slate-700/50 flex justify-between items-center">
+                    <h3 class="text-lg font-bold text-white">Student Roster</h3>
+                    <button
+                        class="text-xs bg-slate-700 hover:bg-slate-600 text-white px-3 py-1.5 rounded-lg transition">Export
+                        Report</button>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm text-slate-400">
+                        <thead class="bg-slate-800/50 text-xs uppercase font-medium text-slate-300">
+                            <tr>
+                                <th class="px-6 py-4">Name</th>
+                                <th class="px-6 py-4">Date</th>
+                                <th class="px-6 py-4">Score</th>
+                                <th class="px-6 py-4 text-right">Status</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-700/50" id="roster-body">
+                            <!-- Rows injected by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+
+    </main>
+
+    <footer class="mt-20 text-center text-slate-600 text-xs py-8">
+        <p>Data is processed locally in your browser. No data is sent to any server.</p>
+    </footer>
+
+    <script>
+        // --- 1. File Handling ---
+        const fileInput = document.getElementById('csv-file-input');
+        const uploadSection = document.getElementById('upload-section');
+        const dashboardView = document.getElementById('dashboard-view');
+
+        fileInput.addEventListener('change', function (e) {
+            const file = e.target.files[0];
+            if (file) {
+                parseCSV(file);
+            }
+        });
+
+        // --- 2. Parser Logic ---
+        function parseCSV(file) {
+            Papa.parse(file, {
+                header: true,
+                skipEmptyLines: true,
+                complete: function (results) {
+                    console.log("Parsed Data:", results.data);
+                    if (validateData(results.data)) {
+                        generateDashboard(results.data);
+                        showDashboard();
+                    } else {
+                        alert("Invalid CSV format. Please ensure it has 'name' and 'score' columns.");
+                    }
+                }
+            });
+        }
+
+        function validateData(data) {
+            if (data.length === 0) return false;
+            // Flexible validation: check for key columns
+            const firstRow = data[0];
+            // FormSubmit exports usually capitalize keys or allow custom names. 
+            // We'll look for variations or assume 'name' and 'score' exist based on our quiz.html setup
+            // In quiz.html we sent: name, score (e.g. "80/100"), date, wrong_answers
+            return (firstRow['name'] || firstRow['Name']) && (firstRow['score'] || firstRow['Score']);
+        }
+
+        function showDashboard() {
+            uploadSection.classList.add('hidden');
+            dashboardView.classList.remove('hidden');
+        }
+
+        // --- 3. Dashboard Generation ---
+        function generateDashboard(data) {
+            // Clean Keys (Handle Case Sensitivity)
+            const cleanData = data.map(row => {
+                const newRow = {};
+                Object.keys(row).forEach(key => {
+                    newRow[key.toLowerCase()] = row[key];
+                });
+                return newRow;
+            });
+
+            // Calculate Stats
+            const total = cleanData.length;
+
+            // Parse scores (remove "/100" if exists and convert to int)
+            const scores = cleanData.map(d => {
+                const s = d.score ? d.score.toString() : "0";
+                return parseInt(s.replace('/100', '').trim()) || 0;
+            });
+
+            const avg = Math.round(scores.reduce((a, b) => a + b, 0) / total);
+            const passCount = scores.filter(s => s >= 60).length;
+            const passRate = Math.round((passCount / total) * 100);
+
+            // Find Top Student
+            let maxScore = -1;
+            let topStudent = "";
+            cleanData.forEach((d, i) => {
+                const s = scores[i];
+                if (s > maxScore) {
+                    maxScore = s;
+                    topStudent = d.name;
+                }
+            });
+
+            // Update DOM Stats
+            document.getElementById('stat-total-students').textContent = total;
+            document.getElementById('stat-avg-score').textContent = avg;
+            document.getElementById('stat-pass-rate').textContent = passRate + '%';
+            document.getElementById('stat-top-student').textContent = topStudent;
+            document.getElementById('stat-top-score').textContent = 'Score: ' + maxScore;
+
+            // Update Roster Table
+            const tbody = document.getElementById('roster-body');
+            tbody.innerHTML = '';
+            cleanData.forEach((d, i) => {
+                const tr = document.createElement('tr');
+                const scoreVal = scores[i];
+                let statusColor = scoreVal >= 60 ? 'text-emerald-400' : 'text-red-400';
+                let statusText = scoreVal >= 60 ? 'PASS' : 'REVIEW';
+
+                tr.innerHTML = `
+                    <td class="px-6 py-4 font-medium text-white">${d.name || 'Unknown'}</td>
+                    <td class="px-6 py-4">${d.date || '-'}</td>
+                    <td class="px-6 py-4 text-white">${scoreVal}</td>
+                    <td class="px-6 py-4 text-right ${statusColor} font-bold text-xs">${statusText}</td>
+                `;
+                tbody.appendChild(tr);
+            });
+
+            // Render Charts
+            renderScoreChart(scores);
+        }
+
+        function renderScoreChart(scores) {
+            const ctx = document.getElementById('scoreChart').getContext('2d');
+
+            // Binning logic (0-59, 60-79, 80-89, 90-100)
+            let bins = [0, 0, 0, 0];
+            scores.forEach(s => {
+                if (s < 60) bins[0]++;
+                else if (s < 80) bins[1]++;
+                else if (s < 90) bins[2]++;
+                else bins[3]++;
+            });
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Needs Improv (<60)', 'Passing (60-79)', 'Good (80-89)', 'Excellent (90+)'],
+                    datasets: [{
+                        label: 'Students',
+                        data: bins,
+                        backgroundColor: [
+                            'rgba(239, 68, 68, 0.5)',   // red
+                            'rgba(59, 130, 246, 0.5)',  // blue
+                            'rgba(16, 185, 129, 0.5)',  // green
+                            'rgba(245, 158, 11, 0.5)'   // yellow
+                        ],
+                        borderColor: [
+                            '#ef4444',
+                            '#3b82f6',
+                            '#10b981',
+                            '#f59e0b'
+                        ],
+                        borderWidth: 1,
+                        borderRadius: 6,
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+
+</html>
