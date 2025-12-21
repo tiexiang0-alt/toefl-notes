@@ -103,7 +103,14 @@
                     <span class="material-symbols-rounded text-4xl">psychology</span>
                 </div>
                 <h1 class="text-4xl font-display font-bold mb-4 text-gray-800">随堂大闯关</h1>
-                <p class="text-gray-600 mb-8 text-lg">20道精选题目，检验你对“句子成分”的掌握程度。</p>
+                <p class="text-gray-600 mb-6 text-lg">20道精选题目，检验你对“句子成分”的掌握程度。</p>
+
+                <div class="mb-8 max-w-sm mx-auto">
+                    <label for="student-name" class="block text-left text-sm font-bold text-gray-700 mb-2">Student Name
+                        (Required)</label>
+                    <input type="text" id="student-name" placeholder="Enter your name (e.g., George)"
+                        class="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 outline-none transition-all text-gray-800 font-bold text-center text-lg">
+                </div>
 
                 <div class="grid grid-cols-2 gap-4 text-left mb-8 max-w-sm mx-auto bg-gray-50 p-6 rounded-xl">
                     <div class="flex items-center gap-2 text-sm text-gray-600">
@@ -121,7 +128,7 @@
                 </div>
 
                 <button onclick="quizApp.start()"
-                    class="bg-primary hover:bg-indigo-600 text-white text-xl font-bold px-10 py-4 rounded-xl shadow-lg shadow-indigo-200 transition transform hover:-translate-y-1">
+                    class="bg-primary hover:bg-indigo-600 text-white text-xl font-bold px-10 py-4 rounded-xl shadow-lg shadow-indigo-200 transition transform hover:-translate-y-1 w-full max-w-xs">
                     开始挑战
                 </button>
             </div>
@@ -334,12 +341,26 @@
             currentIdx: 0,
             score: 0,
             isAnswering: false,
+            studentName: '',
+            wrongAnswers: [],
 
             init() {
                 // Preload anything if needed
             },
 
             start() {
+                const nameInput = document.getElementById('student-name');
+                const name = nameInput.value.trim();
+
+                if (!name) {
+                    alert('Please enter your name to start! 请输入姓名开始测试。');
+                    nameInput.focus();
+                    nameInput.parentElement.classList.add('animate-pulse');
+                    setTimeout(() => nameInput.parentElement.classList.remove('animate-pulse'), 1000);
+                    return;
+                }
+
+                this.studentName = name;
                 document.getElementById('start-screen').classList.add('hidden');
                 document.getElementById('quiz-screen').classList.remove('hidden');
                 this.loadQuestion(0);
@@ -401,6 +422,13 @@
                     btnElement.classList.add('wrong');
                     // Highlight correct answer
                     options[q.answer].classList.add('correct');
+
+                    // Record wrong answer
+                    this.wrongAnswers.push({
+                        id: q.q.replace(/<[^>]*>?/gm, '').substring(0, 30) + '...', // Cleaner summary
+                        studentAnswer: q.options[selectedIndex],
+                        correctAnswer: q.options[q.answer]
+                    });
                 }
 
                 // Make other options unclickable style
@@ -437,6 +465,9 @@
                 document.getElementById('quiz-screen').classList.add('hidden');
                 document.getElementById('result-screen').classList.remove('hidden');
 
+                // Submit data
+                this.submitResults();
+
                 const finalScore = this.score;
                 document.getElementById('final-score').textContent = finalScore + '/100';
 
@@ -460,6 +491,42 @@
 
                 document.getElementById('result-message').textContent = msg;
                 document.getElementById('result-icon').textContent = icon;
+            },
+
+            submitResults() {
+                // Formsubmit.co Endpoint - REPLACE EMAIL HERE
+                const endpoint = "https://formsubmit.co/ajax/your-email@example.com";
+
+                const data = {
+                    _subject: `New Quiz Submission: ${this.studentName} - Score: ${this.score}`,
+                    name: this.studentName,
+                    score: `${this.score}/100`,
+                    date: new Date().toLocaleString(),
+                    wrong_answers: this.wrongAnswers.length > 0 ? JSON.stringify(this.wrongAnswers, null, 2) : "None! Perfect Score!"
+                };
+
+                fetch(endpoint, {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Success:', data);
+                        // Add success indicator to UI
+                        const resultScreen = document.getElementById('result-screen');
+                        const successMsg = document.createElement('p');
+                        successMsg.className = "text-green-500 text-sm mt-4 font-bold bg-green-50 py-2 px-4 rounded-full inline-block";
+                        successMsg.innerHTML = `<span class="material-symbols-rounded align-middle text-sm">cloud_done</span> Results sent to Teacher!`;
+                        document.getElementById('final-score').after(successMsg);
+                    })
+                    .catch((error) => {
+                        console.error('Error:', error);
+                        // Silently fail or show simple msg, learning doesn't stop
+                    });
             }
         };
     </script>
