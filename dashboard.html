@@ -404,11 +404,11 @@
             const el = document.getElementById('settings-modal');
             el.classList.toggle('hidden');
 
-            // Load saved settings
+            // Load saved settings or use defaults
             if (!el.classList.contains('hidden')) {
-                document.getElementById('lc-app-id').value = localStorage.getItem('LC_APP_ID') || '';
-                document.getElementById('lc-app-key').value = localStorage.getItem('LC_APP_KEY') || '';
-                document.getElementById('lc-server-url').value = localStorage.getItem('LC_SERVER_URL') || '';
+                document.getElementById('lc-app-id').value = localStorage.getItem('LC_APP_ID') || 'kpe4KCyx6ETp7FkAM74E1Z5a-MdYXbMMI';
+                document.getElementById('lc-app-key').value = localStorage.getItem('LC_APP_KEY') || '5IT8N7IKw2VsfHmrtOha0S9w';
+                document.getElementById('lc-server-url').value = localStorage.getItem('LC_SERVER_URL') || 'https://kpe4kcyx.api.lncldglobal.com';
             }
         }
 
