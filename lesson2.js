@@ -12,13 +12,18 @@ function scrollToId(id) {
 }
 
 // Toggle visibility of answer sections
+// Toggle visibility of answer sections and rotate icon
 function toggleAnswer(id) {
     const el = document.getElementById(id);
+    const icon = document.getElementById('icon-' + id);
+
     if (el) {
         if (el.classList.contains('hidden')) {
             el.classList.remove('hidden');
+            if (icon) icon.style.transform = 'rotate(180deg)';
         } else {
             el.classList.add('hidden');
+            if (icon) icon.style.transform = 'rotate(0deg)';
         }
     }
 }
@@ -26,7 +31,7 @@ function toggleAnswer(id) {
 // PDF Download Functionality
 function downloadPage() {
     const element = document.getElementById('pdf-content').firstElementChild.cloneNode(true);
-    
+
     const opt = {
         margin: [0.5, 0.5, 0.5, 0.5], // top, left, bottom, right
         filename: 'George_TOEFL_Lesson2_Handout.pdf',
@@ -34,7 +39,7 @@ function downloadPage() {
         html2canvas: { scale: 2, useCORS: true, logging: true },
         jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
     };
-    
+
     // Create a temporary container to render the PDF content off-screen
     const container = document.createElement('div');
     container.style.position = 'absolute';

@@ -523,64 +523,168 @@
             </div>
         </section>
 
-        <!-- Writing & Speaking Topics -->
+        <!-- Writing & Speaking Topics (Interactive) -->
         <section class="mb-32 max-w-5xl mx-auto px-4 grid md:grid-cols-2 gap-8" data-aos="fade-up">
-            <!-- Writing -->
-            <div class="bg-white rounded-3xl p-8 shadow-lg border-t-8 border-pink-500">
-                <div class="flex items-center gap-2 mb-4">
-                    <span class="material-symbols-rounded text-pink-500 text-3xl">edit_note</span>
-                    <h3 class="text-2xl font-bold">Writing Heat Map</h3>
+
+            <!-- Writing Module -->
+            <div
+                class="bg-white rounded-3xl shadow-lg border-t-8 border-pink-500 overflow-hidden transform transition hover:-translate-y-1 duration-300">
+                <!-- Header (Always Visible) -->
+                <div class="p-8 cursor-pointer hover:bg-gray-50 transition" onclick="toggleAnswer('writing-sample')">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="bg-pink-100 p-3 rounded-full">
+                            <span class="material-symbols-rounded text-pink-500 text-2xl">edit_note</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800">Writing Heat Map</h3>
+                            <p class="text-xs text-pink-500 font-bold uppercase tracking-wider mt-1">Click to Expand
+                                Sample</p>
+                        </div>
+                        <span
+                            class="material-symbols-rounded text-gray-400 ml-auto transform transition-transform duration-300"
+                            id="icon-writing-sample">expand_more</span>
+                    </div>
+
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                        <p class="font-bold text-gray-800 text-sm mb-1">🔥 Topic: Independent Writing</p>
+                        <p class="text-gray-600 italic">"Some people prefer to study alone, while others prefer to study
+                            with a group. Which do you prefer?"</p>
+                    </div>
                 </div>
-                <div class="bg-gray-50 p-4 rounded-xl mb-6">
-                    <p class="font-bold text-gray-800">Topic:</p>
-                    <p class="text-gray-600">Some people prefer to study alone, while others prefer to study with a
-                        group. Which do you prefer?</p>
-                </div>
-                <div class="prose prose-sm prose-pink max-w-none text-gray-600">
-                    <h4 class="font-bold text-gray-800">George's Sample (250 words):</h4>
-                    <p>
-                        I <span class="bg-indigo-100 px-1 rounded" title="SVO">prefer to study with a group</span>.
-                        Firstly, <span class="bg-yellow-100 px-1 rounded" title="SLP">group study is efficient</span>.
-                        When we encounter difficult problems, <span class="bg-green-100 px-1 rounded"
-                            title="SVOO">partners can give us suggestions</span>.
-                        For example, last week, my classmate <span class="bg-green-100 px-1 rounded" title="SVOO">taught
-                            me a math formula</span>.
-                        Secondly, <span class="bg-purple-100 px-1 rounded" title="SVOC">studying together makes the
-                            process interesting</span>.
-                        We can <span class="bg-pink-100 px-1 rounded" title="SVO">discuss various topics</span> during
-                        breaks.
-                        In conclusion, <span class="bg-indigo-100 px-1 rounded" title="SVO">I find group study
-                            helpful</span> because <span class="bg-purple-100 px-1 rounded" title="SVOC">it keeps me
-                            focused</span> and happy.
-                    </p>
-                    <p class="text-xs text-gray-400 mt-2">*Highlighted parts show the 5 sentence patterns learned today.
-                    </p>
+
+                <!-- Expanded Content (Hidden by default) -->
+                <div id="writing-sample" class="hidden bg-white border-t border-gray-100 p-8 pt-4">
+                    <div class="prose prose-sm prose-pink max-w-none text-gray-600 leading-relaxed text-justify">
+                        <h4 class="font-bold text-gray-800 mb-4 flex items-center gap-2">
+                            <span>📜 George's Sample (230 words)</span>
+                        </h4>
+                        <p>
+                            I strongly <span class="bg-indigo-100 px-1 rounded border-b-2 border-indigo-200"
+                                title="SVO">prefer to study with a group</span> rather than alone. While studying alone
+                            offers quietness, <span class="bg-indigo-100 px-1 rounded border-b-2 border-indigo-200"
+                                title="SVO">I find group study more effective</span> for two main reasons.
+                        </p>
+                        <p>
+                            First of all, <span class="bg-yellow-100 px-1 rounded border-b-2 border-yellow-200"
+                                title="SLP">group study is efficient</span>. When we study alone, we often get stuck on
+                            difficult problems. However, in a group, <span
+                                class="bg-green-100 px-1 rounded border-b-2 border-green-200" title="SVOO">partners can
+                                give us suggestions</span> immediately. For instance, last week, I was confused by a
+                            complex math equation. My classmate, Jerry, <span
+                                class="bg-green-100 px-1 rounded border-b-2 border-green-200" title="SVOO">taught me a
+                                simple formula</span>. His explanation <span
+                                class="bg-purple-100 px-1 rounded border-b-2 border-purple-200" title="SVOC">made the
+                                concept clear</span>. If I had studied alone, <span
+                                class="bg-indigo-100 px-1 rounded border-b-2 border-indigo-200" title="SVO">I would have
+                                wasted hours</span>.
+                        </p>
+                        <p>
+                            Secondly, <span class="bg-purple-100 px-1 rounded border-b-2 border-purple-200"
+                                title="SVOC">studying together makes the process interesting</span>. Preparing for TOEFL
+                            is a long and lonely journey. <span
+                                class="bg-yellow-100 px-1 rounded border-b-2 border-yellow-200" title="SLP">The silence
+                                feels oppressive</span> sometimes. But with friends, <span
+                                class="bg-pink-100 px-1 rounded border-b-2 border-pink-200" title="SVO">we can discuss
+                                various topics</span> during breaks. We share jokes and encourage each other. This
+                            positive atmosphere <span class="bg-purple-100 px-1 rounded border-b-2 border-purple-200"
+                                title="SVOC">keeps me focused</span>. We <span
+                                class="bg-yellow-100 px-1 rounded border-b-2 border-yellow-200" title="SLP">became
+                                confident</span> about the upcoming exam.
+                        </p>
+                        <p>
+                            In conclusion, although some people need absolute silence, <span
+                                class="bg-indigo-100 px-1 rounded border-b-2 border-indigo-200" title="SVO">I consider
+                                group study beneficial</span>. It not only solves problems faster but also <span
+                                class="bg-purple-100 px-1 rounded border-b-2 border-purple-200" title="SVOC">makes
+                                learning a joy</span>. Therefore, <span
+                                class="bg-pink-100 px-1 rounded border-b-2 border-pink-200" title="SVO">I will choose to
+                                study with my friends</span> whenever possible.
+                        </p>
+
+                        <!-- Legend -->
+                        <div class="mt-6 flex flex-wrap gap-2 text-[10px] uppercase font-bold text-gray-400">
+                            <span class="flex items-center gap-1"><span
+                                    class="w-2 h-2 rounded-full bg-indigo-200"></span>SV/SVO</span>
+                            <span class="flex items-center gap-1"><span
+                                    class="w-2 h-2 rounded-full bg-yellow-200"></span>SLP</span>
+                            <span class="flex items-center gap-1"><span
+                                    class="w-2 h-2 rounded-full bg-green-200"></span>SVOO</span>
+                            <span class="flex items-center gap-1"><span
+                                    class="w-2 h-2 rounded-full bg-purple-200"></span>SVOC</span>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <!-- Speaking -->
-            <div class="bg-white rounded-3xl p-8 shadow-lg border-t-8 border-violet-500">
-                <div class="flex items-center gap-2 mb-4">
-                    <span class="material-symbols-rounded text-violet-500 text-3xl">record_voice_over</span>
-                    <h3 class="text-2xl font-bold">Speaking Task</h3>
+            <!-- Speaking Module -->
+            <div
+                class="bg-white rounded-3xl shadow-lg border-t-8 border-violet-500 overflow-hidden transform transition hover:-translate-y-1 duration-300">
+                <!-- Header (Always Visible) -->
+                <div class="p-8 cursor-pointer hover:bg-gray-50 transition" onclick="toggleAnswer('speaking-sample')">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="bg-violet-100 p-3 rounded-full">
+                            <span class="material-symbols-rounded text-violet-500 text-2xl">record_voice_over</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800">Speaking Task</h3>
+                            <p class="text-xs text-violet-500 font-bold uppercase tracking-wider mt-1">Click to Expand
+                                Sample</p>
+                        </div>
+                        <span
+                            class="material-symbols-rounded text-gray-400 ml-auto transform transition-transform duration-300"
+                            id="icon-speaking-sample">expand_more</span>
+                    </div>
+
+                    <div class="bg-gray-50 p-4 rounded-xl border border-gray-100">
+                        <p class="font-bold text-gray-800 text-sm mb-1">🗣 Topic: Task 1 (Personal Choice)</p>
+                        <p class="text-gray-600 italic">"Describe a memorable gathering with your friends."</p>
+                    </div>
                 </div>
-                <div class="bg-gray-50 p-4 rounded-xl mb-6">
-                    <p class="font-bold text-gray-800">Topic:</p>
-                    <p class="text-gray-600">Describe a memorable gathering with your friends.</p>
-                </div>
-                <div class="prose prose-sm prose-violet max-w-none text-gray-600">
-                    <h4 class="font-bold text-gray-800">Sample (150 words):</h4>
-                    <p>
-                        I remember a <span class="bg-yellow-100 px-1 rounded">gathering that was unforgettable</span>.
-                        Last year, <span class="bg-pink-100 px-1 rounded">I met my best friend, Jerry, at the city
-                            park</span>.
-                        He <span class="bg-green-100 px-1 rounded">brought me a guitar</span> as a birthday gift.
-                        <span class="bg-indigo-100 px-1 rounded">The sun shone brightly</span> that day.
-                        We <span class="bg-pink-100 px-1 rounded">sang songs together</span>.
-                        His visit <span class="bg-purple-100 px-1 rounded">made me extremely happy</span> because we
-                        hadn't seen each other for years.
-                        The gathering <span class="bg-yellow-100 px-1 rounded">was short but meaningful</span>.
-                    </p>
+
+                <!-- Expanded Content (Hidden by default) -->
+                <div id="speaking-sample" class="hidden bg-white border-t border-gray-100 p-8 pt-4">
+                    <div class="prose prose-sm prose-violet max-w-none text-gray-600 leading-relaxed text-justify">
+                        <h4 class="font-bold text-gray-800 mb-4 flex items-center gap-2">
+                            <span>🎙 George's Sample (130 words)</span>
+                        </h4>
+                        <p>
+                            I would like to describe <span
+                                class="bg-indigo-100 px-1 rounded border-b-2 border-indigo-200">a gathering that was
+                                unforgettable</span>. It was a farewell party for my best friend, Tom, who was leaving
+                            for New York.
+                        </p>
+                        <p>
+                            <span class="bg-indigo-100 px-1 rounded border-b-2 border-indigo-200">The party happened
+                                last Friday</span>. We met at a popular Italian restaurant downtown. <span
+                                class="bg-indigo-100 px-1 rounded border-b-2 border-indigo-200">The sun shone
+                                brightly</span> outside, mirroring our mixed emotions. <span
+                                class="bg-yellow-100 px-1 rounded border-b-2 border-yellow-200">Tom looked
+                                handsome</span> in his new suit.
+                        </p>
+                        <p>
+                            During the dinner, <span class="bg-green-100 px-1 rounded border-b-2 border-green-200">we
+                                gave him a photo album</span>. It contained pictures of our high school days. <span
+                                class="bg-green-100 px-1 rounded border-b-2 border-green-200">He showed us his plane
+                                ticket</span>. We laughed and cried as we recalled old memories. <span
+                                class="bg-yellow-100 px-1 rounded border-b-2 border-yellow-200">The food tasted
+                                delicious</span>, especially the pizza, but our focus was on the conversation.
+                        </p>
+                        <p>
+                            After dinner, <span class="bg-pink-100 px-1 rounded border-b-2 border-pink-200">we sang
+                                songs together</span> at a karaoke bar. <span
+                                class="bg-pink-100 px-1 rounded border-b-2 border-pink-200">Tom sang a sad song</span>.
+                            His voice <span class="bg-purple-100 px-1 rounded border-b-2 border-purple-200">made
+                                everyone emotional</span>. Finally, we hugged goodbye.
+                        </p>
+                        <p>
+                            This gathering <span class="bg-yellow-100 px-1 rounded border-b-2 border-yellow-200">was
+                                short but meaningful</span>. It confirmed that <span
+                                class="bg-indigo-100 px-1 rounded border-b-2 border-indigo-200">distance cannot break
+                                our friendship</span>. <span
+                                class="bg-indigo-100 px-1 rounded border-b-2 border-indigo-200">I will remember this
+                                night</span> forever.
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -718,21 +822,51 @@
                     coinage... adding festivals."
                 </p>
                 <p><b>Core:</b> SVO (Peisistratus strengthened administration).</p>
-                <p><b>Logic:</b> The 'by...' parts are all methods (Adverbials) explaining HOW he strengthened it.</p>
             </div>
 
             <!-- Writing Sample -->
             <div style="margin-bottom: 20px; page-break-inside: avoid;">
                 <h3 style="color: #EC4899; border-bottom: 1px solid #E5E7EB; padding-bottom: 5px;">Writing Sample: Study
                     Alone or Group?</h3>
-                <div style="font-size: 11pt; line-height: 1.8;">
+                <div style="font-size: 11pt; line-height: 1.8; text-align: justify;">
                     <p>
-                        I prefer to study with a group. Firstly, group study is efficient.
-                        When we encounter difficult problems, partners can give us suggestions (SVOO).
-                        For example, last week, my classmate taught me a math formula.
-                        Secondly, studying together makes the process interesting (SVOC).
-                        We can discuss various topics (SVO) during breaks.
-                        In conclusion, I find group study helpful because it keeps me focused and happy.
+                        I strongly <b>prefer to study with a group</b> rather than alone. While studying alone offers
+                        quietness, <b>I find group study more effective</b> for two main reasons.<br>
+                        First of all, group study is efficient. When we study alone, we often get stuck on difficult
+                        problems. However, in a group, <b>partners can give us suggestions</b> immediately. For
+                        instance, last week, I was confused by a complex math equation. My classmate, Jerry, <b>taught
+                            me a simple formula</b>. His explanation <b>made the concept clear</b>. If I had studied
+                        alone, <b>I would have wasted hours</b>.<br>
+                        Secondly, <b>studying together makes the process interesting</b>. Preparing for TOEFL is a long
+                        and lonely journey. The silence feels oppressive sometimes. But with friends, <b>we can discuss
+                            various topics</b> during breaks. We share jokes and encourage each other. This positive
+                        atmosphere <b>keeps me focused</b>. We <b>became confident</b> about the upcoming exam.<br>
+                        In conclusion, although some people need absolute silence, <b>I consider group study
+                            beneficial</b>. It not only solves problems faster but also <b>makes learning a joy</b>.
+                        Therefore, <b>I will choose to study with my friends</b> whenever possible.
+                    </p>
+                </div>
+            </div>
+
+            <!-- Speaking Sample -->
+            <div style="margin-bottom: 20px; page-break-inside: avoid;">
+                <h3 style="color: #8B5CF6; border-bottom: 1px solid #E5E7EB; padding-bottom: 5px;">Speaking Sample:
+                    Memorable Gathering</h3>
+                <div style="font-size: 11pt; line-height: 1.8; text-align: justify;">
+                    <p>
+                        I would like to describe <b>a gathering that was unforgettable</b>. It was a farewell party for
+                        my best friend, Tom, who was leaving for New York.<br>
+                        <b>The party happened last Friday</b>. We met at a popular Italian restaurant downtown. <b>The
+                            sun shone brightly</b> outside, mirroring our mixed emotions. <b>Tom looked handsome</b> in
+                        his new suit.<br>
+                        During the dinner, <b>we gave him a photo album</b>. It contained pictures of our high school
+                        days. <b>He showed us his plane ticket</b>. We laughed and cried as we recalled old memories.
+                        <b>The food tasted delicious</b>, especially the pizza, but our focus was on the
+                        conversation.<br>
+                        After dinner, <b>we sang songs together</b> at a karaoke bar. <b>Tom sang a sad song</b>. His
+                        voice <b>made everyone emotional</b>. Finally, we hugged goodbye.<br>
+                        This gathering <b>was short but meaningful</b>. It confirmed that <b>distance cannot break our
+                            friendship</b>. <b>I will remember this night</b> forever.
                     </p>
                 </div>
             </div>
