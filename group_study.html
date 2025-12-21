@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>英语短文记忆助手 - Group Study</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,1,0"
+        rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&amp;family=Noto+Sans+SC:wght@400;500;700&amp;display=swap"
+        rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Nunito', 'Noto Sans SC', sans-serif;
+            background-color: #f0fdf4;
+            /* Green tint for focus/calm */
+        }
+
+        .fade-enter {
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        .fade-enter-active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .blur-text {
+            filter: blur(4px);
+            user-select: none;
+            transition: filter 0.3s ease;
+        }
+
+        .blur-text:hover {
+            filter: blur(0);
+            cursor: pointer;
+        }
+
+        .cloze-input {
+            border-bottom: 2px solid #4ade80;
+            background: transparent;
+            text-align: center;
+            color: #15803d;
+            font-weight: bold;
+            outline: none;
+            transition: all 0.2s;
+        }
+
+        .cloze-input:focus {
+            border-bottom-color: #166534;
+            background: rgba(74, 222, 128, 0.1);
+        }
+
+        .cloze-input.correct {
+            border-bottom-color: #16a34a;
+            color: #16a34a;
+            background-color: #dcfce7;
+        }
+
+        .cloze-input.incorrect {
+            border-bottom-color: #dc2626;
+            color: #dc2626;
+            background-color: #fee2e2;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-50 text-slate-800 min-h-screen flex flex-col">
+
+    <!-- Navbar -->
+    <nav class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-4xl mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <span class="material-symbols-outlined text-green-600 text-3xl">psychology</span>
+                <h1 class="text-xl font-bold text-slate-800">记忆助手 <span
+                        class="text-sm font-normal text-slate-500 hidden sm:inline">| Group Study vs. Alone</span></h1>
+            </div>
+
+            <div class="flex gap-2">
+                <button
+                    class="nav-btn px-3 py-1.5 rounded-full text-sm font-medium transition hover:bg-green-200 flex items-center gap-1 bg-green-100 text-green-700"
+                    id="btn-visual" onclick="switchMode('visual')">
+                    <span class="material-symbols-outlined text-lg">image</span> <span
+                        class="hidden sm:inline">图解模式</span>
+                </button>
+                <button
+                    class="nav-btn px-3 py-1.5 rounded-full text-sm font-medium hover:bg-slate-100 text-slate-600 transition flex items-center gap-1"
+                    id="btn-vanish" onclick="switchMode('vanish')">
+                    <span class="material-symbols-outlined text-lg">opacity</span> <span
+                        class="hidden sm:inline">渐隐回顾</span>
+                </button>
+                <button
+                    class="nav-btn px-3 py-1.5 rounded-full text-sm font-medium hover:bg-slate-100 text-slate-600 transition flex items-center gap-1"
+                    id="btn-cloze" onclick="switchMode('cloze')">
+                    <span class="material-symbols-outlined text-lg">edit_note</span> <span
+                        class="hidden sm:inline">填空测试</span>
+                </button>
+
+                <!-- Separator -->
+                <div class="w-px bg-gray-300 mx-1"></div>
+
+                <!-- Download Button -->
+                <button
+                    class="px-3 py-1.5 rounded-full text-sm font-medium bg-slate-800 text-white hover:bg-slate-700 transition flex items-center gap-1 shadow-sm"
+                    onclick="downloadPage()" title="下载网页到本地">
+                    <span class="material-symbols-outlined text-lg">download</span> <span
+                        class="hidden md:inline">下载</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="flex-grow max-w-4xl mx-auto w-full px-4 py-6">
+
+        <!-- Welcome Alert (Dismissible) -->
+        <div class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6 rounded-r shadow-sm flex justify-between items-start"
+            id="welcome-alert">
+            <div class="flex gap-3">
+                <span class="material-symbols-outlined text-blue-500">info</span>
+                <div>
+                    <h3 class="font-bold text-blue-800">记忆力差没关系！</h3>
+                    <p class="text-sm text-blue-700 mt-1">
+                        这个工具通过<b>视觉联想</b>、<b>渐进式回忆</b>和<b>主动测试</b>来帮助你。点击右上角的“下载”按钮可以将这个工具保存到你的电脑上。</p>
+                </div>
+            </div>
+            <button class="text-blue-400 hover:text-blue-600"
+                onclick="document.getElementById('welcome-alert').style.display='none'">
+                <span class="material-symbols-outlined">close</span>
+            </button>
+        </div>
+
+        <!-- MODE 1: VISUAL STORY (Default) -->
+        <div class="mode-container space-y-8" id="mode-visual">
+            <div class="text-center mb-8">
+                <h2 class="text-2xl font-bold text-slate-800 mb-2">步骤一：图解阅读</h2>
+                <p class="text-slate-500">看着图片听读音，建立场景联想。</p>
+                <button
+                    class="mt-4 px-6 py-2 bg-green-600 hover:bg-green-700 text-white rounded-full shadow transition flex items-center gap-2 mx-auto"
+                    onclick="playFullAudio()">
+                    <span class="material-symbols-outlined">volume_up</span> 朗读全文
+                </button>
+            </div>
+
+            <!-- Paragraph 1 -->
+            <div
+                class="bg-white rounded-2xl shadow-lg overflow-hidden md:flex flex-row-reverse transform transition hover:scale-[1.01] duration-300">
+                <div class="md:w-1/3 h-48 md:h-auto bg-gray-100 relative group">
+                    <img alt="Group Study" class="w-full h-full object-cover" src="group_study_library.png"
+                        go-data-src="/gen?prompt=diverse+group+of+students+studying+together+happily+in+a+cozy+library+setting+cartoon+style&amp;aspect=4:3"
+                        style="">
+                    <div class="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-10 transition"></div>
+                </div>
+                <div class="p-6 md:w-2/3 flex flex-col justify-center">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-bold tracking-wider text-green-600 uppercase">Introduction</span>
+                        <button class="text-slate-400 hover:text-green-600 transition"
+                            onclick="speakText(this.nextElementSibling.innerText)">
+                            <span class="material-symbols-outlined">volume_up</span>
+                        </button>
+                    </div>
+                    <p class="text-lg leading-relaxed text-slate-700">
+                        I strongly prefer to study with a <span class="font-bold text-green-700">group</span> rather
+                        than alone. While studying alone offers quietness, I find group study more <span
+                            class="font-bold text-green-700">effective</span> for two main reasons.
+                    </p>
+                    <p class="text-sm text-slate-400 mt-4 italic">Tip: 想象你在一个安静的房间里感到无聊，然后走进一个热闹的图书馆小组。</p>
+                </div>
+            </div>
+
+            <!-- Paragraph 2 -->
+            <div
+                class="bg-white rounded-2xl shadow-lg overflow-hidden md:flex transform transition hover:scale-[1.01] duration-300">
+                <div class="md:w-1/3 h-48 md:h-auto bg-gray-100 relative">
+                    <img alt="Jerry Teaching Math" class="w-full h-full object-cover" src="group_study_math.png"
+                        go-data-src="/gen?prompt=a+student+explaining+a+math+formula+on+paper+to+a+confused+classmate+who+then+understands+cartoon+style&amp;aspect=4:3"
+                        style="">
+                </div>
+                <div class="p-6 md:w-2/3 flex flex-col justify-center">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-bold tracking-wider text-blue-600 uppercase">Reason 1:
+                            Efficiency</span>
+                        <button class="text-slate-400 hover:text-blue-600 transition"
+                            onclick="speakText(this.nextElementSibling.innerText)">
+                            <span class="material-symbols-outlined">volume_up</span>
+                        </button>
+                    </div>
+                    <p class="text-lg leading-relaxed text-slate-700">
+                        First of all, group study is <span class="font-bold text-blue-700">efficient</span>. When we
+                        study alone, we often get stuck on difficult problems. However, in a group, partners can give us
+                        suggestions immediately. For instance, last week, I was confused by a <span
+                            class="font-bold text-blue-700">complex math equation</span>. My classmate, Jerry, taught me
+                        a simple formula. His explanation made the concept clear. If I had studied alone, I would have
+                        wasted hours.
+                    </p>
+                    <p class="text-sm text-slate-400 mt-4 italic">Tip: 记住 "Jerry" 这个角色和他教数学公式的画面。</p>
+                </div>
+            </div>
+
+            <!-- Paragraph 3 -->
+            <div
+                class="bg-white rounded-2xl shadow-lg overflow-hidden md:flex flex-row-reverse transform transition hover:scale-[1.01] duration-300">
+                <div class="md:w-1/3 h-48 md:h-auto bg-gray-100 relative">
+                    <img alt="Fun Break" class="w-full h-full object-cover" src="group_study_coffee.png"
+                        go-data-src="/gen?prompt=group+of+friends+laughing+and+chatting+drinking+coffee+during+a+study+break+positive+atmosphere+cartoon+style&amp;aspect=4:3"
+                        style="">
+                </div>
+                <div class="p-6 md:w-2/3 flex flex-col justify-center">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-bold tracking-wider text-purple-600 uppercase">Reason 2:
+                            Interest</span>
+                        <button class="text-slate-400 hover:text-purple-600 transition"
+                            onclick="speakText(this.nextElementSibling.innerText)">
+                            <span class="material-symbols-outlined">volume_up</span>
+                        </button>
+                    </div>
+                    <p class="text-lg leading-relaxed text-slate-700">
+                        Secondly, studying together makes the process <span
+                            class="font-bold text-purple-700">interesting</span>. Preparing for TOEFL is a long and
+                        lonely journey. The silence feels oppressive sometimes. But with friends, we can discuss various
+                        topics during breaks. We share jokes and encourage each other. This <span
+                            class="font-bold text-purple-700">positive atmosphere</span> keeps me focused. We became
+                        confident about the upcoming exam.
+                    </p>
+                    <p class="text-sm text-slate-400 mt-4 italic">Tip: 对比“孤独寂静”的感觉和“朋友开玩笑”的热闹。</p>
+                </div>
+            </div>
+
+            <!-- Paragraph 4 -->
+            <div
+                class="bg-white rounded-2xl shadow-lg overflow-hidden md:flex transform transition hover:scale-[1.01] duration-300">
+                <div class="md:w-1/3 h-48 md:h-auto bg-gray-100 relative">
+                    <img alt="Conclusion" class="w-full h-full object-cover" src="group_study_conclusion.png"
+                        go-data-src="/gen?prompt=a+confident+student+smiling+holding+books+with+friends+in+background+cartoon+style&amp;aspect=4:3"
+                        style="">
+                </div>
+                <div class="p-6 md:w-2/3 flex flex-col justify-center">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="text-xs font-bold tracking-wider text-amber-600 uppercase">Conclusion</span>
+                        <button class="text-slate-400 hover:text-amber-600 transition"
+                            onclick="speakText(this.nextElementSibling.innerText)">
+                            <span class="material-symbols-outlined">volume_up</span>
+                        </button>
+                    </div>
+                    <p class="text-lg leading-relaxed text-slate-700">
+                        In conclusion, although some people need absolute silence, I consider group study <span
+                            class="font-bold text-amber-700">beneficial</span>. It not only solves problems faster but
+                        also makes learning a joy. Therefore, I will <span class="font-bold text-amber-700">choose to
+                            study with my friends</span> whenever possible.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODE 2: VANISHING TEXT -->
+        <div class="mode-container hidden bg-white rounded-2xl shadow-lg p-6 md:p-8" id="mode-vanish">
+            <div class="mb-6">
+                <h2 class="text-2xl font-bold text-slate-800 mb-2">步骤二：渐隐回顾</h2>
+                <p class="text-slate-500 mb-4">拖动滑块，逐渐隐藏单词，尝试自己背诵出来。鼠标悬停可偷看。</p>
+                <div class="flex items-center gap-4 bg-slate-50 p-4 rounded-xl">
+                    <span class="text-sm font-bold text-slate-500">简单</span>
+                    <input class="w-full h-2 bg-green-200 rounded-lg appearance-none cursor-pointer accent-green-600"
+                        id="vanish-slider" max="100" min="0" type="range" value="0">
+                    <span class="text-sm font-bold text-slate-500">困难</span>
+                </div>
+            </div>
+            <div class="text-xl leading-loose font-serif text-slate-800 space-y-6" id="vanish-content">
+                <!-- Content injected via JS -->
+            </div>
+        </div>
+
+        <!-- MODE 3: CLOZE TEST -->
+        <div class="mode-container hidden bg-white rounded-2xl shadow-lg p-6 md:p-8" id="mode-cloze">
+            <div class="mb-6 flex justify-between items-end">
+                <div>
+                    <h2 class="text-2xl font-bold text-slate-800 mb-2">步骤三：填空冲刺</h2>
+                    <p class="text-slate-500">输入缺失的关键单词，检测你的记忆成果。</p>
+                </div>
+                <div class="text-right">
+                    <span class="text-3xl font-bold text-green-600" id="score-display">0</span>
+                    <span class="text-slate-400 text-sm">/ 10 分</span>
+                </div>
+            </div>
+            <div class="text-lg leading-loose text-slate-700 space-y-6 border-l-4 border-green-100 pl-4 md:pl-8"
+                id="cloze-content">
+                <!-- Content injected via JS -->
+            </div>
+            <div class="mt-8 flex gap-4">
+                <button
+                    class="flex-1 bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-xl shadow transition flex justify-center items-center gap-2"
+                    onclick="checkCloze()">
+                    <span class="material-symbols-outlined">check_circle</span> 提交检查
+                </button>
+                <button class="px-4 py-3 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl transition font-bold"
+                    onclick="resetCloze()">
+                    <span class="material-symbols-outlined">refresh</span>
+                </button>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // Data Source
+        const fullText = `I strongly prefer to study with a group rather than alone. While studying alone offers quietness, I find group study more effective for two main reasons.
+        First of all, group study is efficient. When we study alone, we often get stuck on difficult problems. However, in a group, partners can give us suggestions immediately. For instance, last week, I was confused by a complex math equation. My classmate, Jerry, taught me a simple formula. His explanation made the concept clear. If I had studied alone, I would have wasted hours.
+        Secondly, studying together makes the process interesting. Preparing for TOEFL is a long and lonely journey. The silence feels oppressive sometimes. But with friends, we can discuss various topics during breaks. We share jokes and encourage each other. This positive atmosphere keeps me focused. We became confident about the upcoming exam.
+        In conclusion, although some people need absolute silence, I consider group study beneficial. It not only solves problems faster but also makes learning a joy. Therefore, I will choose to study with my friends whenever possible.`;
+
+        const paragraphs = fullText.split('\n').map(p => p.trim()).filter(p => p.length > 0);
+
+        // Keywords to hide in Cloze mode (manually selected for relevance)
+        const keywords = [
+            "group", "alone", "effective",
+            "efficient", "stuck", "suggestions", "equation", "formula", "wasted",
+            "interesting", "lonely", "oppressive", "discuss", "encourage", "focused", "confident",
+            "silence", "beneficial", "joy", "friends"
+        ];
+
+        // --- Init Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            switchMode('visual'); // Default mode
+        });
+
+        // --- TTS Functionality ---
+        function speakText(text) {
+            window.speechSynthesis.cancel();
+            const utterance = new SpeechSynthesisUtterance(text);
+            utterance.lang = 'en-US';
+            utterance.rate = 0.9;
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function playFullAudio() {
+            speakText(fullText);
+        }
+
+        // --- Navigation ---
+        function switchMode(mode) {
+            // Update buttons
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('bg-green-100', 'text-green-700');
+                btn.classList.add('text-slate-600', 'hover:bg-slate-100');
+            });
+            const activeBtn = document.getElementById(`btn-${mode}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-100');
+                activeBtn.classList.add('bg-green-100', 'text-green-700');
+            }
+
+            // Update content
+            document.querySelectorAll('.mode-container').forEach(el => el.classList.add('hidden'));
+            const target = document.getElementById(`mode-${mode}`);
+            target.classList.remove('hidden');
+            target.classList.add('fade-enter');
+            requestAnimationFrame(() => target.classList.add('fade-enter-active'));
+            setTimeout(() => target.classList.remove('fade-enter', 'fade-enter-active'), 300);
+
+            // Initialize specific mode logic
+            if (mode === 'vanish') initVanishMode();
+            if (mode === 'cloze') initClozeMode();
+        }
+
+        // --- Vanish Mode Logic ---
+        function initVanishMode() {
+            const container = document.getElementById('vanish-content');
+            if (!container.hasChildNodes() || container.innerHTML.trim() === '') {
+                container.innerHTML = '';
+                paragraphs.forEach(para => {
+                    const pEl = document.createElement('p');
+                    const words = para.split(' ');
+
+                    words.forEach(word => {
+                        const span = document.createElement('span');
+                        span.textContent = word + ' ';
+                        span.className = 'transition-opacity duration-300 inline-block';
+                        span.dataset.word = word.replace(/[^a-zA-Z]/g, '');
+                        pEl.appendChild(span);
+                    });
+                    container.appendChild(pEl);
+                });
+            }
+            // Reset slider
+            const slider = document.getElementById('vanish-slider');
+            slider.addEventListener('input', (e) => applyVanish(e.target.value));
+            slider.value = 0;
+            applyVanish(0);
+        }
+
+        function applyVanish(percentage) {
+            const spans = document.querySelectorAll('#vanish-content span');
+            spans.forEach((span, index) => {
+                const randomVal = (Math.sin(index * 999) + 1) * 50;
+                if (percentage == 0) {
+                    span.style.opacity = 1;
+                    span.classList.remove('blur-text');
+                } else if (percentage == 100) {
+                    span.style.opacity = 0.1;
+                    span.classList.add('blur-text');
+                } else {
+                    if (randomVal < percentage) {
+                        span.style.opacity = 0.2;
+                        span.classList.add('blur-text');
+                    } else {
+                        span.style.opacity = 1;
+                        span.classList.remove('blur-text');
+                    }
+                }
+            });
+        }
+
+        // --- Cloze Mode Logic ---
+        function initClozeMode() {
+            const container = document.getElementById('cloze-content');
+            if (!container.hasChildNodes() || container.innerHTML.trim() === '') {
+                container.innerHTML = '';
+                paragraphs.forEach(para => {
+                    const pEl = document.createElement('p');
+                    let html = para;
+
+                    keywords.forEach(kw => {
+                        const regex = new RegExp(`\\b${kw}\\b`, 'gi');
+                        html = html.replace(regex, (match) => {
+                            return `<input type="text" class="cloze-input w-24 mx-1" data-answer="${match}" autocomplete="off">`;
+                        });
+                    });
+
+                    pEl.innerHTML = html;
+                    container.appendChild(pEl);
+                });
+            }
+        }
+
+        function checkCloze() {
+            const inputs = document.querySelectorAll('.cloze-input');
+            let correct = 0;
+            inputs.forEach(input => {
+                const val = input.value.trim().toLowerCase();
+                const ans = input.dataset.answer.toLowerCase();
+                if (val === ans) {
+                    input.classList.add('correct');
+                    input.classList.remove('incorrect');
+                    correct++;
+                } else {
+                    input.classList.add('incorrect');
+                    input.classList.remove('correct');
+                }
+            });
+
+            // Calculate score scaled to 10
+            const score = Math.round((correct / inputs.length) * 10);
+            document.getElementById('score-display').textContent = score;
+
+            if (score === 10) {
+                confetti({
+                    particleCount: 100,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+            }
+        }
+
+        function resetCloze() {
+            const inputs = document.querySelectorAll('.cloze-input');
+            inputs.forEach(input => {
+                input.value = '';
+                input.classList.remove('correct', 'incorrect');
+            });
+            document.getElementById('score-display').textContent = '0';
+        }
+
+        function downloadPage() {
+            // Simplified for now, just alerting
+            alert('按 Cmd+S (Mac) 或 Ctrl+S (Windows) 保存此页面到本地即可！');
+        }
+    </script>
+</body>
+
+</html>
