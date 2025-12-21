@@ -319,6 +319,64 @@
                     </div>
                 </div>
             </section>
+
+            <!-- Common Pitfalls (New Section) -->
+            <section class="bg-red-50 rounded-3xl p-8 shadow-sm border border-red-100 mt-12 mb-12 dashed-border">
+                <h3 class="text-2xl font-bold text-red-600 mb-6 flex items-center gap-2">
+                    <span class="material-symbols-rounded">warning</span> 易错警示 (Pitfalls)
+                </h3>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <!-- Pitfall 1: Vt vs Vi -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm">
+                        <h4 class="font-bold text-gray-800 mb-2">1. 及物与不及物的混淆</h4>
+                        <p class="text-sm text-gray-600 mb-3">切记：不及物动词 (Vi) 后面绝对不能直接加宾语。</p>
+                        <ul class="space-y-2 text-sm font-mono">
+                            <li class="flex items-center gap-2 text-red-400">
+                                <span class="material-symbols-rounded text-sm">close</span> I agree you.
+                            </li>
+                            <li class="flex items-center gap-2 text-green-600">
+                                <span class="material-symbols-rounded text-sm">check</span> I agree <b
+                                    class="bg-green-100 px-1">with</b> you.
+                            </li>
+                            <li class="flex items-center gap-2 text-red-400">
+                                <span class="material-symbols-rounded text-sm">close</span> Please listen me.
+                            </li>
+                            <li class="flex items-center gap-2 text-green-600">
+                                <span class="material-symbols-rounded text-sm">check</span> Please listen <b
+                                    class="bg-green-100 px-1">to</b> me.
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Pitfall 2: SVOO vs SVOC -->
+                    <div class="bg-white p-6 rounded-xl shadow-sm">
+                        <h4 class="font-bold text-gray-800 mb-2">2. 双宾误判为宾补</h4>
+                        <p class="text-sm text-gray-600 mb-3">判断方法：看宾语与后面的词是否构成 "Subject + Be" 的逻辑关系。</p>
+
+                        <div class="space-y-4">
+                            <div>
+                                <p class="font-mono text-sm border-l-4 border-green-400 pl-2 mb-1">I made him a cake.
+                                </p>
+                                <p class="text-xs text-gray-500">
+                                    He <span class="text-red-500">IS NOT</span> a cake. <br>
+                                    没有逻辑关系 → <span class="badge bg-green-100 text-green-800 px-1 rounded">SVOO
+                                        (双宾)</span>
+                                </p>
+                            </div>
+                            <div>
+                                <p class="font-mono text-sm border-l-4 border-purple-400 pl-2 mb-1">I made him Captain.
+                                </p>
+                                <p class="text-xs text-gray-500">
+                                    He <span class="text-green-500">IS</span> Captain. <br>
+                                    有逻辑关系 → <span class="badge bg-purple-100 text-purple-800 px-1 rounded">SVOC
+                                        (宾补)</span>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </div>
 
         <!-- Section: Sentence Evolution -->
@@ -710,6 +768,50 @@
             </div>
         </section>
 
+        <!-- Recitation Corner (Golden Sentences) -->
+        <section class="max-w-4xl mx-auto mb-20" data-aos="fade-up">
+            <div
+                class="bg-gradient-to-br from-indigo-900 to-purple-900 text-white rounded-3xl p-10 shadow-2xl relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-40 h-40 bg-white opacity-10 rounded-full blur-3xl -mr-10 -mt-10">
+                </div>
+
+                <h2 class="text-2xl font-bold mb-8 flex items-center gap-3">
+                    <span class="material-symbols-rounded text-yellow-400">auto_stories</span>
+                    <span>背诵角 (Recitation Corner)</span>
+                </h2>
+
+                <div class="space-y-6">
+                    <div class="flex gap-4">
+                        <div class="text-yellow-400 font-bold font-mono text-xl opacity-50">01</div>
+                        <div>
+                            <p class="text-lg font-serif italic mb-1">"Prosperity <span
+                                    class="text-pink-300 font-bold">brings</span> friends, adversity <span
+                                    class="text-pink-300 font-bold">tries</span> them."</p>
+                            <p class="text-sm text-indigo-200">富贵结朋友，患难见真情。</p>
+                        </div>
+                    </div>
+                    <div class="border-t border-indigo-700/50"></div>
+                    <div class="flex gap-4">
+                        <div class="text-yellow-400 font-bold font-mono text-xl opacity-50">02</div>
+                        <div>
+                            <p class="text-lg font-serif italic mb-1">"The best way to predict the future <span
+                                    class="text-yellow-300 font-bold">is</span> to create it."</p>
+                            <p class="text-sm text-indigo-200">预测未来最好的方式就是去创造它。</p>
+                        </div>
+                    </div>
+                    <div class="border-t border-indigo-700/50"></div>
+                    <div class="flex gap-4">
+                        <div class="text-yellow-400 font-bold font-mono text-xl opacity-50">03</div>
+                        <div>
+                            <p class="text-lg font-serif italic mb-1">"Experience <span
+                                    class="text-green-300 font-bold">teaches</span> us lessons."</p>
+                            <p class="text-sm text-indigo-200">经验给我们教训 (SVOO)。</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <footer class="text-center text-gray-400 mb-10 text-sm">
             &copy; 2025 George Teacher TOEFL Series.
         </footer>
@@ -807,7 +909,8 @@
                 <div style="background-color: #FFFBEB; padding: 15px; border-radius: 8px;">
                     <p><b>Level 1 (Bronze):</b> <br>Old Tom is watching cartoons.</p>
                     <p><b>Level 99 (King):</b> <br>Old Tom, <u>with his legs crossed</u>, is absorbed in watching a
-                        <u>popular</u> cartoon <u>named Peppa Pig</u> <b>on the couch</b>.</p>
+                        <u>popular</u> cartoon <u>named Peppa Pig</u> <b>on the couch</b>.
+                    </p>
                     <p style="font-size: 0.9em; color: #666; margin-top: 5px;">* Adding modifiers (Attributive &
                         Adverbial) makes sentences rich and visual.</p>
                 </div>
@@ -868,6 +971,27 @@
                         This gathering <b>was short but meaningful</b>. It confirmed that <b>distance cannot break our
                             friendship</b>. <b>I will remember this night</b> forever.
                     </p>
+                </div>
+            </div>
+
+            <!-- Recitation Corner (PDF Version) -->
+            <div
+                style="margin-bottom: 30px; page-break-inside: avoid; border: 2px dashed #4F46E5; padding: 20px; border-radius: 10px;">
+                <h3 style="color: #4F46E5; margin-top: 0; display: flex; align-items: center; gap: 10px;">
+                    <span>📖 Recitation Corner (背诵角)</span>
+                </h3>
+                <div style="font-family: serif; font-style: italic; color: #374151;">
+                    <p style="margin-bottom: 10px;">1. "Prosperity <b>brings</b> friends, adversity <b>tries</b> them."
+                        <br><span
+                            style="font-family: sans-serif; font-style: normal; font-size: 0.9em; color: #6B7280;">(患难见真情
+                            - SVO)</span></p>
+                    <p style="margin-bottom: 10px;">2. "The best way to predict the future <b>is</b> to create it."
+                        <br><span
+                            style="font-family: sans-serif; font-style: normal; font-size: 0.9em; color: #6B7280;">(预测未来靠创造
+                            - SLP)</span></p>
+                    <p style="margin-bottom: 0;">3. "Experience <b>teaches</b> us lessons." <br><span
+                            style="font-family: sans-serif; font-style: normal; font-size: 0.9em; color: #6B7280;">(经验带来教训
+                            - SVOO)</span></p>
                 </div>
             </div>
 
