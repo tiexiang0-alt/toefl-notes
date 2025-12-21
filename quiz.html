@@ -9,6 +9,8 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <!-- LeanCloud SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/leancloud-storage@4.12.0/dist/av-min.js"></script>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0"
         rel="stylesheet">
     <link
@@ -494,9 +496,8 @@
             },
 
             submitResults() {
-                // Formsubmit.co Endpoint - REPLACE EMAIL HERE
+                // --- 1. Formsubmit.co Email Logic ---
                 const endpoint = "https://formsubmit.co/ajax/tiexiang0@gmail.com";
-
                 const data = {
                     _subject: `New Quiz Submission: ${this.studentName} - Score: ${this.score}`,
                     name: this.studentName,
@@ -505,28 +506,67 @@
                     wrong_answers: this.wrongAnswers.length > 0 ? JSON.stringify(this.wrongAnswers, null, 2) : "None! Perfect Score!"
                 };
 
+                // Send Email via FormSubmit
                 fetch(endpoint, {
                     method: "POST",
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
+                    headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
                     body: JSON.stringify(data)
                 })
                     .then(response => response.json())
-                    .then(data => {
-                        console.log('Success:', data);
-                        // Add success indicator to UI
-                        const resultScreen = document.getElementById('result-screen');
-                        const successMsg = document.createElement('p');
-                        successMsg.className = "text-green-500 text-sm mt-4 font-bold bg-green-50 py-2 px-4 rounded-full inline-block";
-                        successMsg.innerHTML = `<span class="material-symbols-rounded align-middle text-sm">cloud_done</span> Results sent to Teacher!`;
-                        document.getElementById('final-score').after(successMsg);
-                    })
-                    .catch((error) => {
-                        console.error('Error:', error);
-                        // Silently fail or show simple msg, learning doesn't stop
-                    });
+                    .then(data => console.log('Email Sent:', data))
+                    .catch(error => console.error('Email Error:', error));
+
+
+                // --- 2. LeanCloud Sync Logic (Optional) ---
+                // Replace with your keys from LeanCloud Dashboard > Settings > App Keys
+                const APP_ID = "";  // e.g., "k1z2...-MdYXbMMI"
+                const APP_KEY = ""; // e.g., "X2y1...sKg"
+                const SERVER_URL = ""; // e.g., "https://your-id.api.lncldglobal.com"
+
+                if (APP_ID && APP_KEY) {
+                    try {
+                        // Init LeanCloud
+                        const config = { appId: APP_ID, appKey: APP_KEY };
+                        if (SERVER_URL) config.serverURL = SERVER_URL;
+                        AV.init(config);
+
+                        // Save Object
+                        const ResultObject = AV.Object.extend('StudentResults');
+                        const result = new ResultObject();
+
+                        result.set('name', this.studentName);
+                        result.set('score', `${this.score}/100`);
+                        result.set('wrong_answers', this.wrongAnswers.length > 0 ? JSON.stringify(this.wrongAnswers) : "None");
+                        // Date is auto-handled by 'createdAt'
+
+                        result.save().then((obj) => {
+                            console.log('LeanCloud Saved:', obj);
+                            this.showSuccessMessage();
+                        }, (error) => {
+                            console.error('LeanCloud Error:', error);
+                            // Even if cloud fails, email might have worked.
+                            this.showSuccessMessage();
+                        });
+                    } catch (e) {
+                        console.error('LeanCloud Init Error:', e);
+                        this.showSuccessMessage();
+                    }
+                } else {
+                    console.log("LeanCloud not configured. Skipped.");
+                    this.showSuccessMessage();
+                }
+            },
+
+            showSuccessMessage() {
+                // Prevent duplicate messages
+                if (document.getElementById('success-msg-check')) return;
+
+                const resultScreen = document.getElementById('result-screen');
+                const successMsg = document.createElement('p');
+                successMsg.id = 'success-msg-check';
+                successMsg.className = "text-green-500 text-sm mt-4 font-bold bg-green-50 py-2 px-4 rounded-full inline-block animate-bounce";
+                successMsg.innerHTML = `<span class="material-symbols-rounded align-middle text-sm">cloud_done</span> Results submitted!`;
+                document.getElementById('final-score').after(successMsg);
             }
         };
     </script>

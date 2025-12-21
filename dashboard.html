@@ -11,6 +11,8 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- PapaParse for CSV -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+    <!-- LeanCloud SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/leancloud-storage@4.12.0/dist/av-min.js"></script>
     <!-- Google Fonts -->
     <link
         href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@500&family=Inter:wght@400;600;800&display=swap"
@@ -67,9 +69,15 @@
                 <p class="text-slate-400 text-sm">Student Performance Analytics</p>
             </div>
         </div>
-        <a href="quiz.html" class="text-sm text-slate-400 hover:text-white transition flex items-center gap-2">
-            <span class="material-symbols-rounded">arrow_back</span> Return to Quiz
-        </a>
+        <div class="flex items-center gap-4">
+            <button onclick="toggleSettings()"
+                class="text-sm bg-slate-800 hover:bg-slate-700 text-slate-300 px-3 py-2 rounded-lg transition border border-slate-700">
+                <span class="material-symbols-rounded align-middle text-lg">settings</span> Setup Cloud
+            </button>
+            <a href="quiz.html" class="text-sm text-slate-400 hover:text-white transition flex items-center gap-2">
+                <span class="material-symbols-rounded">arrow_back</span> Return to Quiz
+            </a>
+        </div>
     </header>
 
     <!-- Main Dashboard container -->
@@ -181,6 +189,48 @@
         </div>
 
     </main>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal"
+        class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
+        <div class="glass-panel w-full max-w-md p-8 rounded-2xl relative">
+            <button onclick="toggleSettings()" class="absolute top-4 right-4 text-slate-500 hover:text-white">
+                <span class="material-symbols-rounded">close</span>
+            </button>
+            <h2 class="text-xl font-bold text-white mb-6">Cloud Settings (LeanCloud)</h2>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-slate-400 text-sm font-bold mb-2">App ID</label>
+                    <input type="text" id="lc-app-id"
+                        class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:border-indigo-500 outline-none font-mono text-sm"
+                        placeholder="Paste App ID here">
+                </div>
+                <div>
+                    <label class="block text-slate-400 text-sm font-bold mb-2">App Key</label>
+                    <input type="password" id="lc-app-key"
+                        class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:border-indigo-500 outline-none font-mono text-sm"
+                        placeholder="Paste App Key here">
+                </div>
+                <div>
+                    <label class="block text-slate-400 text-sm font-bold mb-2">REST API Server URL</label>
+                    <input type="text" id="lc-server-url"
+                        class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-3 text-white focus:border-indigo-500 outline-none font-mono text-sm"
+                        placeholder="e.g., https://your-id.api.lncldglobal.com">
+                    <p class="text-xs text-slate-500 mt-1">Found in LeanCloud Settings > App Keys. Required for some
+                        regions.</p>
+                </div>
+            </div>
+
+            <div class="mt-8 flex justify-end">
+                <button onclick="saveSettings()"
+                    class="bg-indigo-600 hover:bg-indigo-500 text-white px-6 py-2 rounded-lg font-bold shadow-lg shadow-indigo-500/30 transition">
+                    Save & Connect
+                </button>
+            </div>
+        </div>
+    </div>
+
 
     <footer class="mt-20 text-center text-slate-600 text-xs py-8">
         <p>Data is processed locally in your browser. No data is sent to any server.</p>
@@ -348,6 +398,112 @@
                 }
             });
         }
+
+        // --- 4. Cloud Sync Logic ---
+        function toggleSettings() {
+            const el = document.getElementById('settings-modal');
+            el.classList.toggle('hidden');
+
+            // Load saved settings
+            if (!el.classList.contains('hidden')) {
+                document.getElementById('lc-app-id').value = localStorage.getItem('LC_APP_ID') || '';
+                document.getElementById('lc-app-key').value = localStorage.getItem('LC_APP_KEY') || '';
+                document.getElementById('lc-server-url').value = localStorage.getItem('LC_SERVER_URL') || '';
+            }
+        }
+
+        function saveSettings() {
+            const appId = document.getElementById('lc-app-id').value.trim();
+            const appKey = document.getElementById('lc-app-key').value.trim();
+            const serverUrl = document.getElementById('lc-server-url').value.trim();
+
+            if (appId && appKey) {
+                localStorage.setItem('LC_APP_ID', appId);
+                localStorage.setItem('LC_APP_KEY', appKey);
+                localStorage.setItem('LC_SERVER_URL', serverUrl);
+
+                alert('Settings Saved! You can now try syncing.');
+                toggleSettings();
+                checkCloudStatus();
+            } else {
+                alert('Please enter both App ID and App Key.');
+            }
+        }
+
+        function checkCloudStatus() {
+            const hasKeys = localStorage.getItem('LC_APP_ID') && localStorage.getItem('LC_APP_KEY');
+            const statusEl = document.getElementById('cloud-status');
+            const btnEl = document.getElementById('btn-cloud-sync');
+
+            if (hasKeys) {
+                statusEl.textContent = "Ready to Sync";
+                statusEl.className = "text-emerald-500 text-xs mt-2 font-bold";
+                btnEl.disabled = false;
+                btnEl.classList.remove('opacity-50', 'cursor-not-allowed');
+            } else {
+                statusEl.textContent = "Requires Setup (Click 'Setup Cloud' above)";
+                statusEl.className = "text-orange-500 text-xs mt-2";
+                btnEl.disabled = true;
+                btnEl.classList.add('opacity-50', 'cursor-not-allowed');
+            }
+        }
+
+        async function syncFromCloud() {
+            const appId = localStorage.getItem('LC_APP_ID');
+            const appKey = localStorage.getItem('LC_APP_KEY');
+            const serverUrl = localStorage.getItem('LC_SERVER_URL');
+
+            if (!appId || !appKey) {
+                toggleSettings();
+                return;
+            }
+
+            const btn = document.getElementById('btn-cloud-sync');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = `<span class="material-symbols-rounded animate-spin">refresh</span> Syncing...`;
+
+            try {
+                // Initialize LeanCloud
+                const config = { appId, appKey };
+                if (serverUrl) config.serverURL = serverUrl;
+                AV.init(config);
+
+                // Query StudentResults
+                const query = new AV.Query('StudentResults');
+                query.descending('createdAt');
+                query.limit(100); // Get last 100 results
+
+                const results = await query.find();
+
+                // Convert to format expected by dashboard
+                const cleanData = results.map(obj => {
+                    const attr = obj.attributes;
+                    // Handle legacy data or different casing
+                    return {
+                        name: attr.name || attr.studentName || 'Unknown',
+                        score: attr.score, // Should be string "80/100" or number
+                        date: obj.createdAt.toLocaleString(),
+                        wrong_answers: attr.wrong_answers // optional
+                    };
+                });
+
+                if (cleanData.length > 0) {
+                    generateDashboard(cleanData);
+                    showDashboard();
+                } else {
+                    alert('Connected to Cloud, but found no records in "StudentResults" Class.');
+                }
+
+            } catch (error) {
+                console.error(error);
+                alert('Sync Failed: ' + (error.message || JSON.stringify(error)));
+            } finally {
+                btn.innerHTML = originalText;
+            }
+        }
+
+        // Initialize check
+        checkCloudStatus();
     </script>
 </body>
 
