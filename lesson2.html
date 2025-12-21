@@ -826,10 +826,10 @@
 
                             <!-- Teacher's Note Modal (Hidden by default) -->
                             <div id="teacher-note-modal"
-                                class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 animate-fade-in"
+                                class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 animate-fade-in"
                                 onclick="toggleTeacherNote()">
-                                <div class="bg-yellow-100 p-6 rounded-lg shadow-2xl max-w-sm w-full transform rotate-1 font-handwritten border-2 border-yellow-200 relative"
-                                    onclick="event.stopPropagation()">
+                                <div class="bg-yellow-100 p-6 rounded-lg shadow-2xl max-w-sm w-full border-2 border-yellow-200 relative"
+                                    style="font-family: 'Patrick Hand', cursive;" onclick="event.stopPropagation()">
                                     <button onclick="toggleTeacherNote()"
                                         class="absolute -top-2 -right-2 bg-white text-gray-500 rounded-full p-1 shadow hover:bg-red-50 hover:text-red-500 transition-colors">
                                         <span class="material-symbols-rounded text-lg block">close</span>
@@ -844,7 +844,8 @@
                                         <li>Watch your <strong
                                                 class="text-blue-600 bg-blue-50 px-1 rounded">spelling</strong>
                                             <br><span class="text-sm text-gray-500">(queit → quiet, patners →
-                                                partners)</span></li>
+                                                partners)</span>
+                                        </li>
                                         <li>Don't mix <strong
                                                 class="text-blue-600 bg-blue-50 px-1 rounded">tenses</strong> <br><span
                                                 class="text-sm text-gray-500">(found vs find)</span></li>
