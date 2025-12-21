@@ -57,3 +57,17 @@ function downloadPage() {
         document.body.removeChild(container); // Ensure cleanup even on error
     });
 }
+
+// Toggle Teacher Note Modal
+function toggleTeacherNote() {
+    const modal = document.getElementById('teacher-note-modal');
+    if (modal) {
+        if (modal.classList.contains('hidden')) {
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling
+        } else {
+            modal.classList.add('hidden');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+    }
+}

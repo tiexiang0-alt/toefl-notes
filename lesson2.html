@@ -704,8 +704,16 @@
 
                             <!-- 1. Original with Markups -->
                             <div class="mb-8">
-                                <h5 class="text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Original Draft
-                                    (With Detailed Corrections)</h5>
+                                <div class="flex justify-between items-center mb-2">
+                                    <h5 class="text-xs font-bold text-gray-400 uppercase tracking-wider">Original Draft
+                                        (With Corrections)</h5>
+                                    <button onclick="toggleTeacherNote()"
+                                        class="text-xs flex items-center gap-1 bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full hover:bg-yellow-200 transition-colors font-bold shadow-sm">
+                                        <span class="material-symbols-rounded text-sm">sticky_note_2</span>
+                                        View Teacher's Note
+                                    </button>
+                                </div>
+
                                 <div
                                     class="bg-white p-8 rounded-lg shadow-inner font-mono text-sm leading-8 text-gray-600 relative overflow-hidden text-justify">
                                     <!-- Handwriting Annotations Style -->
@@ -813,24 +821,44 @@
                                             class="handwritten text-xs ml-1">Therefore, I</sup> will choose to study
                                         alone...
                                     </p>
+                                </div>
+                            </div>
 
-                                    <!-- Teacher's Summary Sticky Note (Moved Inline) -->
-                                    <div
-                                        class="mt-8 mx-auto w-64 bg-yellow-100 p-4 shadow-lg transform rotate-1 font-handwritten text-sm text-gray-700 leading-tight handwriting border border-yellow-200 rounded-sm">
-                                        <p
-                                            class="font-bold border-b border-yellow-300 pb-2 mb-2 text-center text-yellow-800 text-lg">
-                                            👨‍🏫 Teacher's Note</p>
-                                        <ul class="list-disc pl-5 space-y-2">
-                                            <li>Watch your <strong class="text-blue-600">spelling</strong> (queit,
-                                                patners).</li>
-                                            <li>Don't mix <strong class="text-blue-600">tenses</strong> (found vs find).
-                                            </li>
-                                            <li>Use <strong class="text-blue-600">academic words</strong> suggested in
-                                                the polished version.</li>
-                                            <li>Great specific example about the Civil War! Keep it up! 🌟</li>
-                                        </ul>
+                            <!-- Teacher's Note Modal (Hidden by default) -->
+                            <div id="teacher-note-modal"
+                                class="hidden fixed inset-0 z-[100] flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 animate-fade-in"
+                                onclick="toggleTeacherNote()">
+                                <div class="bg-yellow-100 p-6 rounded-lg shadow-2xl max-w-sm w-full transform rotate-1 font-handwritten border-2 border-yellow-200 relative"
+                                    onclick="event.stopPropagation()">
+                                    <button onclick="toggleTeacherNote()"
+                                        class="absolute -top-2 -right-2 bg-white text-gray-500 rounded-full p-1 shadow hover:bg-red-50 hover:text-red-500 transition-colors">
+                                        <span class="material-symbols-rounded text-lg block">close</span>
+                                    </button>
+
+                                    <p
+                                        class="font-bold border-b border-yellow-300 pb-2 mb-4 text-center text-yellow-800 text-xl flex items-center justify-center gap-2">
+                                        👨‍🏫 Teacher's Note
+                                    </p>
+
+                                    <ul class="list-disc pl-5 space-y-3 text-gray-700 text-lg leading-relaxed">
+                                        <li>Watch your <strong
+                                                class="text-blue-600 bg-blue-50 px-1 rounded">spelling</strong>
+                                            <br><span class="text-sm text-gray-500">(queit → quiet, patners →
+                                                partners)</span></li>
+                                        <li>Don't mix <strong
+                                                class="text-blue-600 bg-blue-50 px-1 rounded">tenses</strong> <br><span
+                                                class="text-sm text-gray-500">(found vs find)</span></li>
+                                        <li>Use <strong class="text-blue-600 bg-blue-50 px-1 rounded">academic
+                                                words</strong> <br><span class="text-sm text-gray-500">Check the
+                                                polished version below!</span></li>
+                                        <li>✨ Great specific example about the Civil War! Keep it up!</li>
+                                    </ul>
+
+                                    <div class="mt-6 text-center">
+                                        <span
+                                            class="text-xs font-sans text-yellow-600 font-bold uppercase tracking-widest">Click
+                                            outside to close</span>
                                     </div>
-
                                 </div>
                             </div>
 
