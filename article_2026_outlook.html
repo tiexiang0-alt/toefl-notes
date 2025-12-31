@@ -423,20 +423,27 @@
             /* Full width article panel */
             main>div:first-child {
                 border-radius: 20px !important;
+                margin-bottom: 70px;
+                /* Space for audio bar */
             }
 
-            /* Analysis panel as bottom sheet */
-            main>div:last-child {
+            /* Analysis panel as bottom sheet - above audio bar */
+            #analysis-panel {
                 position: fixed !important;
-                bottom: 0;
+                bottom: 80px !important;
+                /* Above the audio bar */
                 left: 0;
                 right: 0;
                 width: 100% !important;
-                max-height: 60vh;
+                max-height: 50vh;
                 border-radius: 20px 20px 0 0 !important;
-                z-index: 50;
-                transform: translateY(calc(100% - 60px));
+                z-index: 45;
+                transform: translateY(100%);
                 transition: transform 0.3s ease;
+            }
+
+            #analysis-panel.show-panel {
+                transform: translateY(0);
             }
 
             main>div:last-child:focus-within,
@@ -718,9 +725,14 @@
         <div id="analysis-panel"
             class="w-full md:w-[450px] glass-panel rounded-3xl flex flex-col z-20 transition-transform duration-300 overflow-hidden">
 
-            <!-- Mobile Drag Handle -->
-            <div class="mobile-only mobile-drag-handle"
-                onclick="document.getElementById('analysis-panel').classList.toggle('expanded')"></div>
+            <!-- Mobile Header with Close Button -->
+            <div class="mobile-only flex items-center justify-between px-4 pt-3 pb-1">
+                <div class="mobile-drag-handle mx-0"></div>
+                <button onclick="document.getElementById('analysis-panel').classList.remove('show-panel')"
+                    class="w-8 h-8 rounded-full bg-white/10 text-slate-400 flex items-center justify-center">
+                    <span class="material-symbols-rounded text-lg">close</span>
+                </button>
+            </div>
 
             <!-- Empty State -->
             <div id="empty-state" class="flex-1 flex flex-col items-center justify-center p-8 text-center">
@@ -1787,6 +1799,12 @@
             emptyState.classList.add('hidden');
             analysisContent.classList.remove('hidden');
             analysisContent.classList.add('flex');
+
+            // Show analysis panel on mobile
+            const analysisPanel = document.getElementById('analysis-panel');
+            if (analysisPanel && window.innerWidth < 768) {
+                analysisPanel.classList.add('show-panel');
+            }
 
             // Populate Content
             analysisCn.innerText = data.cn;
