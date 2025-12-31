@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Design Trends 2026 | Human-Centric Digital Spaces</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet">
+    <style>
+        /* Custom Font Setup */
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: #F3F1E9;
+            color: #2D2D2D;
+        }
+
+        /* Cloud Dancer-ish base */
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Audio Player Styling */
+        .audio-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background-color: #E6E1D6;
+            color: #5A5A5A;
+            margin-right: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 12px;
+            vertical-align: middle;
+        }
+
+        .audio-btn:hover {
+            background-color: #D4CFC0;
+            color: #000;
+            transform: scale(1.1);
+        }
+
+        .audio-btn.playing {
+            background-color: #2D2D2D;
+            color: #FFF;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(45, 45, 45, 0.4);
+            }
+
+            70% {
+                box-shadow: 0 0 0 6px rgba(45, 45, 45, 0);
+            }
+
+            100% {
+                box-shadow: 0 0 0 0 rgba(45, 45, 45, 0);
+            }
+        }
+
+        /* Sentence Highlighting */
+        .sentence {
+            transition: background-color 0.3s ease;
+            padding: 2px 4px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .sentence:hover {
+            background-color: rgba(0, 0, 0, 0.03);
+        }
+
+        .sentence.active {
+            background-color: #E8DCC5;
+            color: #000;
+        }
+
+        /* Images */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 24px;
+        }
+    </style>
+</head>
+
+<body class="antialiased overflow-x-hidden">
+
+    <!-- Hero Section -->
+    <header class="relative w-full h-screen flex items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0">
+            <img src="images/agentic_web_design_1767207978549.png" alt="Agentic Web"
+                class="w-full h-full object-cover opacity-80 scale-105 transition-transform duration-[20s] ease-in-out hover:scale-100">
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent via-[#F3F1E9]/50 to-[#F3F1E9]"></div>
+        </div>
+
+        <div class="relative z-10 text-center px-4 max-w-4xl mx-auto mt-20">
+            <span
+                class="inline-block py-1 px-3 border border-gray-800 rounded-full text-xs font-bold tracking-widest uppercase mb-4">Outlook
+                2026</span>
+            <h1 class="text-6xl md:text-8xl font-bold leading-tight mb-6 tracking-tight">Human-Centric <br><span
+                    class="italic text-gray-600 font-light">Digital Spaces</span></h1>
+            <p class="text-xl md:text-2xl text-gray-700 max-w-2xl mx-auto font-light leading-relaxed">
+                The intersection of Warm Minimalism and AI-driven efficiency.
+            </p>
+        </div>
+    </header>
+
+    <!-- Intro Text -->
+    <section class="max-w-3xl mx-auto py-24 px-6 md:px-0 text-center">
+        <p class="text-2xl leading-relaxed text-gray-800 font-light">
+            <span class="sentence" data-audio="intro_1">
+                <button class="audio-btn" onclick="playAudio(this, 'intro_1')">▶</button>
+                In the rapidly evolving landscape of 2026, web design has moved beyond simple aesthetics to focus on
+                "Human-Centric Digital Spaces."
+            </span>
+            <br><br>
+            <span class="sentence" data-audio="intro_2">
+                <button class="audio-btn" onclick="playAudio(this, 'intro_2')">▶</button>
+                Modern web design ideas now emphasize a balance between AI-driven efficiency and authentic, tactile
+                human expression.
+            </span>
+        </p>
+    </section>
+
+    <!-- Trends Section -->
+    <section class="py-20 bg-white rounded-[3rem] mx-4 md:mx-12 shadow-sm">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-bold mb-4">Trending Concepts</h2>
+                <div class="sentence inline-block text-xl text-gray-500" data-audio="trend_intro">
+                    <button class="audio-btn" onclick="playAudio(this, 'trend_intro')">▶</button>
+                    The current year is defined by a "Warm Minimalism" and the "Human Layer" in digital interfaces.
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+
+                <!-- Card 1: Tactile -->
+                <div class="group cursor-pointer">
+                    <div
+                        class="overflow-hidden rounded-2xl mb-6 shadow-lg rotate-1 group-hover:rotate-0 transition duration-500">
+                        <img src="images/tactile_maximalism_design_1767207942156.png"
+                            class="w-full h-80 object-cover group-hover:scale-105 transition duration-700">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Tactile Maximalism</h3>
+                    <p class="text-gray-600 leading-relaxed sentence" data-audio="trend_1">
+                        <button class="audio-btn" onclick="playAudio(this, 'trend_1')">▶</button>
+                        After years of flat design, we are seeing a "more is more" approach using rich textures, layered
+                        visuals, and sculptural 3D typography to create a sense of depth you can almost touch.
+                    </p>
+                </div>
+
+                <!-- Card 2: Nature -->
+                <div class="group cursor-pointer md:mt-16">
+                    <div
+                        class="overflow-hidden rounded-2xl mb-6 shadow-lg -rotate-1 group-hover:rotate-0 transition duration-500">
+                        <img src="images/nature_distilled_design_1767207960675.png"
+                            class="w-full h-80 object-cover group-hover:scale-105 transition duration-700">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Nature Distilled</h3>
+                    <p class="text-gray-600 leading-relaxed sentence" data-audio="trend_2">
+                        <button class="audio-btn" onclick="playAudio(this, 'trend_2')">▶</button>
+                        Designers are moving toward organic shapes and muted, earthy palettes like the **Pantone 2026
+                        Color of the Year: Cloud Dancer**.
+                    </p>
+                </div>
+
+                <!-- Card 3: Agentic -->
+                <div class="group cursor-pointer">
+                    <div
+                        class="overflow-hidden rounded-2xl mb-6 shadow-lg rotate-1 group-hover:rotate-0 transition duration-500">
+                        <img src="images/agentic_web_design_1767207978549.png"
+                            class="w-full h-80 object-cover group-hover:scale-105 transition duration-700">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Agentic Web Experiences</h3>
+                    <div class="space-y-2">
+                        <p class="text-gray-600 leading-relaxed sentence" data-audio="trend_3a">
+                            <button class="audio-btn" onclick="playAudio(this, 'trend_3a')">▶</button>
+                            Websites are no longer just static pages; they act as "agents."
+                        </p>
+                        <p class="text-gray-600 leading-relaxed sentence" data-audio="trend_3b">
+                            <button class="audio-btn" onclick="playAudio(this, 'trend_3b')">▶</button>
+                            Using AI, they listen, watch, and respond to user needs in real-time, creating a
+                            conversational and highly personalized journey.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Card 4: Kinetic -->
+                <div class="group cursor-pointer md:mt-16">
+                    <div
+                        class="overflow-hidden rounded-2xl mb-6 shadow-lg -rotate-1 group-hover:rotate-0 transition duration-500">
+                        <img src="images/kinetic_typography_design_1767207996205.png"
+                            class="w-full h-80 object-cover group-hover:scale-105 transition duration-700">
+                    </div>
+                    <h3 class="text-2xl font-bold mb-2">Kinetic Typography</h3>
+                    <div class="space-y-2">
+                        <p class="text-gray-600 leading-relaxed sentence" data-audio="trend_4a">
+                            <button class="audio-btn" onclick="playAudio(this, 'trend_4a')">▶</button>
+                            Fonts are no longer sitting still.
+                        </p>
+                        <p class="text-gray-600 leading-relaxed sentence" data-audio="trend_4b">
+                            <button class="audio-btn" onclick="playAudio(this, 'trend_4b')">▶</button>
+                            Variable fonts now shift in weight, stretch, or react to your scroll and mouse movement,
+                            making the text itself part of the interface’s motion.
+                        </p>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Pillars Section -->
+    <section class="max-w-5xl mx-auto py-24 px-6">
+        <h2 class="text-3xl font-bold mb-8 text-center">Core Learning Pillars</h2>
+
+        <div class="text-center mb-12 sentence" data-audio="pillars_intro">
+            <button class="audio-btn" onclick="playAudio(this, 'pillars_intro')">▶</button>
+            If you are studying web design today, these are the essential skills for 2026.
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="glass-card p-8 hover:bg-white/60 transition">
+                <h4 class="font-bold text-lg mb-2 text-indigo-900">AI Collaboration</h4>
+                <p class="text-gray-600 text-sm leading-relaxed sentence" data-audio="pillar_1">
+                    <button class="audio-btn" onclick="playAudio(this, 'pillar_1')">▶</button>
+                    Moving from simple prompts to using AI as a "creative co-designer" for layout optimization and
+                    accessibility audits.
+                </p>
+            </div>
+
+            <div class="glass-card p-8 hover:bg-white/60 transition">
+                <h4 class="font-bold text-lg mb-2 text-rose-900">Micro-Interactions</h4>
+                <p class="text-gray-600 text-sm leading-relaxed sentence" data-audio="pillar_2">
+                    <button class="audio-btn" onclick="playAudio(this, 'pillar_2')">▶</button>
+                    Focusing on "Micro-delights"—subtle button bounces or tactile toggles that provide instant,
+                    satisfying feedback.
+                </p>
+            </div>
+
+            <div class="glass-card p-8 hover:bg-white/60 transition">
+                <h4 class="font-bold text-lg mb-2 text-emerald-900">Inclusive Design</h4>
+                <p class="text-gray-600 text-sm leading-relaxed sentence" data-audio="pillar_3">
+                    <button class="audio-btn" onclick="playAudio(this, 'pillar_3')">▶</button>
+                    Moving accessibility from a "checklist" to a "creative default," ensuring high contrast and
+                    screen-reader compatibility from day one.
+                </p>
+            </div>
+
+            <div class="glass-card p-8 hover:bg-white/60 transition">
+                <h4 class="font-bold text-lg mb-2 text-blue-900">Performance-First</h4>
+                <div class="space-y-2">
+                    <p class="text-gray-600 text-sm leading-relaxed sentence" data-audio="pillar_4a">
+                        <button class="audio-btn" onclick="playAudio(this, 'pillar_4a')">▶</button>
+                        Optimizing for speed as a design constraint.
+                    </p>
+                    <p class="text-gray-600 text-sm leading-relaxed sentence" data-audio="pillar_4b">
+                        <button class="audio-btn" onclick="playAudio(this, 'pillar_4b')">▶</button>
+                        Lightweight 3D and SVG-powered masks are used to keep sites fast but beautiful.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Toolkit Section -->
+    <section class="bg-[#2D2D2D] text-[#F3F1E9] py-20 rounded-t-[3rem]">
+        <div class="max-w-4xl mx-auto px-6">
+            <h2 class="text-3xl font-bold mb-8 flex items-center gap-3">
+                <span class="sentence" data-audio="toolkit_title">
+                    <button class="audio-btn bg-gray-600 text-white hover:bg-gray-500"
+                        onclick="playAudio(this, 'toolkit_title')">▶</button>
+                    Professional Toolkit for 2026
+                </span>
+            </h2>
+
+            <div class="space-y-6">
+                <div class="border-l-2 border-gray-600 pl-6 pb-6">
+                    <h5 class="font-bold text-xl mb-1 text-gray-400">Design & Prototyping</h5>
+                    <p class="text-gray-300 font-light sentence" data-audio="toolkit_1">
+                        <button class="audio-btn bg-gray-700 text-white hover:bg-gray-600"
+                            onclick="playAudio(this, 'toolkit_1')">▶</button>
+                        **Figma** remains the industry standard, but it's now heavily integrated with AI for rapid
+                        wireframing.
+                    </p>
+                </div>
+
+                <div class="border-l-2 border-gray-600 pl-6 pb-6">
+                    <h5 class="font-bold text-xl mb-1 text-gray-400">No-Code / Low-Code</h5>
+                    <p class="text-gray-300 font-light sentence" data-audio="toolkit_2">
+                        <button class="audio-btn bg-gray-700 text-white hover:bg-gray-600"
+                            onclick="playAudio(this, 'toolkit_2')">▶</button>
+                        **Framer** and **Webflow** are dominant for designers who want to build high-fidelity,
+                        interactive sites without a deep coding background.
+                    </p>
+                </div>
+
+                <div class="border-l-2 border-gray-600 pl-6">
+                    <h5 class="font-bold text-xl mb-1 text-gray-400">Emerging Tech</h5>
+                    <p class="text-gray-300 font-light sentence" data-audio="toolkit_3">
+                        <button class="audio-btn bg-gray-700 text-white hover:bg-gray-600"
+                            onclick="playAudio(this, 'toolkit_3')">▶</button>
+                        **Vibe Coding** is a new trend where designers use AI to bridge the gap between a design "vibe"
+                        and functional code.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-16 pt-8 border-t border-gray-700">
+                <p class="text-center text-gray-500 text-sm sentence" data-audio="inspiration_1">
+                    <button class="audio-btn bg-gray-800 text-white"
+                        onclick="playAudio(this, 'inspiration_1')">▶</button>
+                    To keep your ideas fresh, the top-rated galleries this year are Siteinspire, Landing Love, and
+                    Commerce Cream.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Audio Logic -->
+    <script>
+        let currentAudio = null;
+        let currentBtn = null;
+
+        function playAudio(btn, id) {
+            // Stop current
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0;
+                if (currentBtn) {
+                    currentBtn.classList.remove('playing');
+                    currentBtn.innerText = '▶';
+                    // Remove highlight from parent sentence
+                    currentBtn.closest('.sentence').classList.remove('active');
+                }
+            }
+
+            // If clicking the same button, just stop (toggle behavior)
+            if (currentBtn === btn) {
+                currentBtn = null;
+                currentAudio = null;
+                return;
+            }
+
+            // Play new
+            const audioPath = `audio/design_2026/${id}.mp3`;
+            const audio = new Audio(audioPath);
+
+            btn.classList.add('playing');
+            btn.innerText = '❚❚';
+            btn.closest('.sentence').classList.add('active');
+
+            audio.play();
+
+            currentAudio = audio;
+            currentBtn = btn;
+
+            audio.onended = () => {
+                btn.classList.remove('playing');
+                btn.innerText = '▶';
+                btn.closest('.sentence').classList.remove('active');
+                currentBtn = null;
+                currentAudio = null;
+            };
+        }
+    </script>
+</body>
+
+</html>
