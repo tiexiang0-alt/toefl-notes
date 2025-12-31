@@ -603,6 +603,50 @@
         </div>
     </div>
 
+    <!-- Floating Article Audio Player (Bottom) -->
+    <div id="article-audio-bar"
+        class="fixed bottom-0 left-0 right-0 z-50 bg-[#0B1120]/95 backdrop-blur-xl border-t border-white/10 px-4 py-3 md:px-6 md:py-4 transition-transform duration-300"
+        style="transform: translateY(100%)">
+        <div class="max-w-4xl mx-auto flex items-center gap-4">
+            <!-- Play/Pause Button -->
+            <button id="article-play-btn" onclick="toggleArticleAudio()"
+                class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-violet-600 text-white flex items-center justify-center shadow-lg shadow-violet-500/30 hover:bg-violet-500 transition active:scale-95 flex-shrink-0">
+                <span class="material-symbols-rounded text-2xl md:text-3xl" id="article-play-icon">play_arrow</span>
+            </button>
+
+            <!-- Progress Section -->
+            <div class="flex-1 min-w-0">
+                <div class="flex items-center justify-between mb-1">
+                    <span class="text-xs text-slate-400 truncate">🎧 The Economist - The World in Brief</span>
+                    <span class="text-xs text-violet-400 font-mono" id="article-time">0:00 / 0:00</span>
+                </div>
+                <div class="h-2 bg-white/10 rounded-full w-full overflow-hidden cursor-pointer"
+                    onclick="seekArticleAudio(event)">
+                    <div class="h-full bg-gradient-to-r from-violet-600 to-violet-400 rounded-full transition-all duration-100"
+                        id="article-progress" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- Speed Control -->
+            <button onclick="cycleSpeed()"
+                class="hidden md:flex items-center gap-1 px-3 py-1 rounded-full bg-white/5 border border-white/10 text-slate-400 text-xs hover:bg-white/10 transition">
+                <span id="speed-display">1x</span>
+            </button>
+
+            <!-- Close Button -->
+            <button onclick="hideAudioBar()"
+                class="w-8 h-8 rounded-full bg-white/5 text-slate-400 flex items-center justify-center hover:bg-white/10 transition">
+                <span class="material-symbols-rounded text-lg">close</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile Floating Listen Button -->
+    <button id="mobile-listen-btn" onclick="showAudioBar()"
+        class="md:hidden fixed bottom-4 right-4 z-40 w-14 h-14 rounded-full bg-violet-600 text-white flex items-center justify-center shadow-xl shadow-violet-500/40 active:scale-95 transition">
+        <span class="material-symbols-rounded text-2xl">headphones</span>
+    </button>
+
     <!-- Glass Header -->
     <header
         class="header-glass h-16 flex items-center justify-between px-6 flex-shrink-0 z-30 relative mx-4 mt-4 rounded-2xl">
@@ -2185,6 +2229,73 @@
         // Init
         renderArticle();
         renderInlineWidgets();
+
+        // === ARTICLE AUDIO PLAYER ===
+        const articleAudio = new Audio('audio/article_original.mp3');
+        const articleAudioBar = document.getElementById('article-audio-bar');
+        const articlePlayIcon = document.getElementById('article-play-icon');
+        const articleProgress = document.getElementById('article-progress');
+        const articleTimeDisplay = document.getElementById('article-time');
+        const mobileListenBtn = document.getElementById('mobile-listen-btn');
+
+        let audioSpeeds = [0.75, 1, 1.25, 1.5, 2];
+        let currentSpeedIdx = 1;
+
+        function formatTime(seconds) {
+            const mins = Math.floor(seconds / 60);
+            const secs = Math.floor(seconds % 60);
+            return `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function showAudioBar() {
+            articleAudioBar.style.transform = 'translateY(0)';
+            if (mobileListenBtn) mobileListenBtn.style.display = 'none';
+        }
+
+        function hideAudioBar() {
+            articleAudio.pause();
+            articleAudioBar.style.transform = 'translateY(100%)';
+            articlePlayIcon.textContent = 'play_arrow';
+            if (mobileListenBtn) mobileListenBtn.style.display = 'flex';
+        }
+
+        function toggleArticleAudio() {
+            if (articleAudio.paused) {
+                articleAudio.play();
+                articlePlayIcon.textContent = 'pause';
+            } else {
+                articleAudio.pause();
+                articlePlayIcon.textContent = 'play_arrow';
+            }
+        }
+
+        function seekArticleAudio(event) {
+            const bar = event.currentTarget;
+            const rect = bar.getBoundingClientRect();
+            const percent = (event.clientX - rect.left) / rect.width;
+            articleAudio.currentTime = percent * articleAudio.duration;
+        }
+
+        function cycleSpeed() {
+            currentSpeedIdx = (currentSpeedIdx + 1) % audioSpeeds.length;
+            articleAudio.playbackRate = audioSpeeds[currentSpeedIdx];
+            document.getElementById('speed-display').textContent = audioSpeeds[currentSpeedIdx] + 'x';
+        }
+
+        articleAudio.addEventListener('timeupdate', () => {
+            const percent = (articleAudio.currentTime / articleAudio.duration) * 100;
+            articleProgress.style.width = percent + '%';
+            articleTimeDisplay.textContent = `${formatTime(articleAudio.currentTime)} / ${formatTime(articleAudio.duration || 0)}`;
+        });
+
+        articleAudio.addEventListener('ended', () => {
+            articlePlayIcon.textContent = 'play_arrow';
+        });
+
+        // Auto-show audio bar on desktop
+        if (window.innerWidth >= 768) {
+            setTimeout(() => showAudioBar(), 2000);
+        }
 
     </script>
 </body>
