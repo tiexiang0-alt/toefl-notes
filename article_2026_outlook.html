@@ -22,11 +22,14 @@
                         serif: ['Playfair Display', 'serif'],
                     },
                     colors: {
-                        news: {
-                            paper: '#F3F1E9',
-                            dark: '#1a1a1a',
-                            accent: '#C0392B',
-                        }
+                        deep: {
+                            space: '#0B1120',
+                            card: 'rgba(255, 255, 255, 0.08)',
+                        },
+                        vocab: 'rgba(139, 92, 246, 0.3)',
+                        logic: 'rgba(249, 115, 22, 0.5)',
+                        correct: 'rgba(34, 197, 94, 0.5)',
+                        accent: '#8B5CF6',
                     }
                 }
             }
@@ -35,118 +38,380 @@
 
     <style>
         :root {
-            /* Warm Minimalism / Cloud Dancer Palette */
-            --bg-gradient: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
-            --glass-bg: rgba(255, 255, 255, 0.45);
-            --glass-border: rgba(255, 255, 255, 0.6);
-            --glass-highlight: rgba(255, 255, 255, 0.8);
-            --text-color: #1a1a1a;
+            /* Glassmorphism v2 - Deep Space TOEFL Theme */
+            --bg-canvas: #0B1120;
+            --bg-card-l2: rgba(255, 255, 255, 0.08);
+            --bg-card-l3: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --glass-highlight: rgba(255, 255, 255, 0.2);
+            --text-primary: #F1F5F9;
+            --text-secondary: rgba(241, 245, 249, 0.7);
+            --vocab-violet: rgba(139, 92, 246, 0.4);
+            --logic-orange: rgba(249, 115, 22, 0.5);
+            --correct-emerald: rgba(34, 197, 94, 0.5);
+            --neon-purple: #A78BFA;
+            --neon-orange: #FB923C;
         }
 
-        /* Animated Warm Mesh Gradient */
+        /* L1: Deep Space Canvas with Mesh Gradient */
         body {
             font-family: 'Outfit', sans-serif;
-            background-color: #e0eafc;
-            color: var(--text-color);
+            background-color: var(--bg-canvas);
+            color: var(--text-primary);
             background-image:
-                radial-gradient(at 0% 0%, hsla(210, 40%, 90%, 1) 0, transparent 50%),
-                radial-gradient(at 100% 0%, hsla(280, 20%, 90%, 1) 0, transparent 50%),
-                radial-gradient(at 100% 100%, hsla(200, 30%, 85%, 1) 0, transparent 50%),
-                radial-gradient(at 0% 100%, hsla(240, 30%, 95%, 1) 0, transparent 50%);
+                radial-gradient(at 0% 0%, rgba(139, 92, 246, 0.15) 0, transparent 50%),
+                radial-gradient(at 100% 0%, rgba(249, 115, 22, 0.1) 0, transparent 50%),
+                radial-gradient(at 50% 100%, rgba(34, 197, 94, 0.08) 0, transparent 50%),
+                radial-gradient(at 100% 100%, rgba(6, 182, 212, 0.1) 0, transparent 50%);
             background-size: 200% 200%;
-            animation: gradient-move 20s ease infinite;
+            animation: deep-space-pulse 25s ease infinite;
+            min-height: 100vh;
         }
 
-        @keyframes gradient-move {
-            0% {
+        @keyframes deep-space-pulse {
+
+            0%,
+            100% {
                 background-position: 0% 50%;
             }
 
             50% {
                 background-position: 100% 50%;
             }
-
-            100% {
-                background-position: 0% 50%;
-            }
         }
 
-        /* Glassmorphism v2 Card */
+        /* L2: Main Content Glass Card */
         .glass-panel {
-            background: var(--glass-bg);
-            /* The Core Effects */
+            background: var(--bg-card-l2);
             backdrop-filter: blur(16px) saturate(180%);
             -webkit-backdrop-filter: blur(16px) saturate(180%);
-            /* Multi-layered borders for v2 "depth" */
             border: 1px solid var(--glass-border);
-            /* V2 Multi-shadow for a tactile "lift" */
+            border-radius: 20px;
             box-shadow:
-                0 4px 6px rgba(0, 0, 0, 0.05),
-                0 10px 20px rgba(0, 0, 0, 0.1),
+                0 8px 32px rgba(0, 0, 0, 0.4),
                 inset 0 0 0 1px var(--glass-highlight);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        @media (prefers-reduced-transparency: reduce) {
-            .glass-panel {
-                background: rgba(255, 255, 255, 0.95);
-                backdrop-filter: none;
+        .glass-panel:hover {
+            transform: translateY(-4px) scale(1.01);
+            box-shadow:
+                0 12px 40px rgba(0, 0, 0, 0.5),
+                0 0 30px rgba(139, 92, 246, 0.1),
+                inset 0 0 0 1px var(--glass-highlight);
+        }
+
+        /* L3: Interactive Popup Layer */
+        .glass-popup {
+            background: var(--bg-card-l3);
+            backdrop-filter: blur(24px) saturate(200%);
+            -webkit-backdrop-filter: blur(24px) saturate(200%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow:
+                0 12px 48px rgba(0, 0, 0, 0.5),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                0 0 40px rgba(139, 92, 246, 0.2);
+        }
+
+        /* ===== TOEFL FEATURE 1: Logic Signposts with Neon Stroke ===== */
+        .logic-word {
+            display: inline-block;
+            padding: 2px 8px;
+            margin: 0 2px;
+            border-radius: 6px;
+            border: 1.5px solid var(--neon-orange);
+            background: rgba(249, 115, 22, 0.15);
+            color: var(--neon-orange);
+            font-weight: 500;
+            text-shadow: 0 0 8px rgba(249, 115, 22, 0.5);
+            animation: neon-pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes neon-pulse {
+
+            0%,
+            100% {
+                box-shadow: 0 0 5px rgba(249, 115, 22, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 15px rgba(249, 115, 22, 0.6), 0 0 30px rgba(249, 115, 22, 0.3);
             }
         }
 
+        /* ===== TOEFL FEATURE 2: Sentence Crusher - Frosted Isolation ===== */
         .sentence-span {
             cursor: pointer;
-            transition: all 0.2s ease;
-            padding: 2px 4px;
-            border-radius: 6px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            padding: 4px 8px;
+            margin: 2px 0;
+            border-radius: 8px;
             border: 1px solid transparent;
+            display: inline;
         }
 
         .sentence-span:hover {
-            background-color: rgba(0, 0, 0, 0.05);
-            border-color: rgba(0, 0, 0, 0.1);
+            background: rgba(139, 92, 246, 0.15);
+            border-color: rgba(139, 92, 246, 0.3);
         }
 
         .sentence-span.active {
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(4px);
-            border-color: rgba(255, 255, 255, 0.9);
-            color: #C0392B;
-            font-weight: 500;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(139, 92, 246, 0.1));
+            border: 2px solid var(--neon-purple);
+            box-shadow:
+                0 4px 20px rgba(139, 92, 246, 0.3),
+                0 0 40px rgba(139, 92, 246, 0.15),
+                inset 0 0 20px rgba(139, 92, 246, 0.1);
+            transform: scale(1.02);
+            z-index: 10;
+            position: relative;
         }
 
-        /* Scrollbar Hide */
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
+        /* Grammar Highlighting in Sentence Crusher */
+        .grammar-subject {
+            background: rgba(96, 165, 250, 0.25);
+            border-radius: 4px;
+            padding: 1px 4px;
+            border-bottom: 2px solid #60A5FA;
         }
 
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
+        .grammar-verb {
+            background: rgba(251, 191, 36, 0.25);
+            border-radius: 4px;
+            padding: 1px 4px;
+            border-bottom: 2px solid #FBBF24;
         }
 
-        .hero-text {
-            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        .grammar-object {
+            background: rgba(52, 211, 153, 0.25);
+            border-radius: 4px;
+            padding: 1px 4px;
+            border-bottom: 2px solid #34D399;
+        }
+
+        .grammar-clause {
+            border: 1px dashed rgba(255, 255, 255, 0.3);
+            border-radius: 4px;
+            padding: 2px 4px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* ===== TOEFL FEATURE 3: Vocab Hover Cards with Prism Border ===== */
+        .vocab-highlight {
+            display: inline-block;
+            background: var(--vocab-violet);
+            padding: 1px 6px;
+            border-radius: 4px;
+            cursor: help;
+            border-bottom: 2px dotted var(--neon-purple);
+            transition: all 0.2s ease;
+        }
+
+        .vocab-highlight:hover {
+            background: rgba(139, 92, 246, 0.5);
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.4);
+        }
+
+        .vocab-card {
+            position: absolute;
+            z-index: 100;
+            min-width: 280px;
+            padding: 16px;
+            border-radius: 16px;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(20px);
+            border: 2px solid transparent;
+            background-clip: padding-box;
+            box-shadow:
+                0 20px 40px rgba(0, 0, 0, 0.5),
+                0 0 0 2px transparent;
+            /* Prism Border Effect */
+            background-image:
+                linear-gradient(rgba(15, 23, 42, 0.95), rgba(15, 23, 42, 0.95)),
+                linear-gradient(135deg, #8B5CF6, #06B6D4, #22C55E, #F59E0B, #EF4444);
+            background-origin: padding-box, border-box;
+            background-clip: padding-box, border-box;
+            animation: prism-shimmer 3s ease infinite;
+        }
+
+        @keyframes prism-shimmer {
+
+            0%,
+            100% {
+                filter: hue-rotate(0deg);
+            }
+
+            50% {
+                filter: hue-rotate(30deg);
+            }
+        }
+
+        /* ===== TOEFL FEATURE 4: Reading Progress HUD ===== */
+        .reading-hud {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: rgba(11, 17, 32, 0.9);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 16px 20px;
+            min-width: 180px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        }
+
+        .progress-bar-container {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #22C55E, #FBBF24, #EF4444);
+            background-size: 200% 100%;
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        /* ===== TOEFL FEATURE 5: Summary Bento Grid ===== */
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .bento-item {
+            background: var(--bg-card-l2);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            padding: 16px;
+            cursor: grab;
+            transition: all 0.3s ease;
+        }
+
+        .bento-item:hover {
+            transform: scale(1.03);
+            border-color: var(--neon-purple);
+            box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+        }
+
+        .bento-item.selected {
+            border-color: var(--correct-emerald);
+            background: rgba(34, 197, 94, 0.15);
+            box-shadow: 0 0 25px rgba(34, 197, 94, 0.3);
+        }
+
+        /* ===== Enhanced Animations ===== */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes glow-breathe {
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        /* Image effects for dark theme */
+        .topic-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 16px;
+        }
+
+        .topic-image::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, var(--bg-canvas) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        /* Scrollbar for dark theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: rgba(139, 92, 246, 0.4);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: rgba(139, 92, 246, 0.6);
+        }
+
+        /* Text selection */
+        ::selection {
+            background: rgba(139, 92, 246, 0.4);
             color: white;
+        }
+
+        /* Header styling for dark theme */
+        .header-glass {
+            background: rgba(11, 17, 32, 0.8);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
     </style>
 </head>
 
-<body class="h-screen flex flex-col overflow-hidden text-news-dark">
+<body class="h-screen flex flex-col overflow-hidden">
+
+    <!-- Reading HUD (Fixed Top-Right) -->
+    <div class="reading-hud" id="reading-hud">
+        <div class="flex items-center justify-between mb-2">
+            <span class="text-xs font-medium text-slate-400 uppercase tracking-wider">Reading Progress</span>
+            <span class="text-xs text-violet-400 font-mono" id="wpm-display">0 WPM</span>
+        </div>
+        <div class="progress-bar-container">
+            <div class="progress-bar-fill" id="progress-fill" style="width: 0%"></div>
+        </div>
+        <div class="flex justify-between mt-2 text-xs text-slate-500">
+            <span id="time-elapsed">0:00</span>
+            <span id="sentences-read">0/36 sentences</span>
+        </div>
+    </div>
 
     <!-- Glass Header -->
     <header
-        class="h-16 flex items-center justify-between px-6 flex-shrink-0 z-30 relative glass-panel border-b-0 rounded-b-2xl mx-4 mt-4">
+        class="header-glass h-16 flex items-center justify-between px-6 flex-shrink-0 z-30 relative mx-4 mt-4 rounded-2xl">
         <div class="flex items-center gap-3">
             <div
-                class="bg-news-accent/90 text-white w-10 h-10 flex items-center justify-center font-bold text-xl rounded shadow-md">
+                class="bg-violet-600 text-white w-10 h-10 flex items-center justify-center font-bold text-xl rounded-xl shadow-lg shadow-violet-500/30">
                 T</div>
-            <h1 class="font-serif font-bold text-lg tracking-tight text-news-dark">TOEFL Reading Lab</h1>
+            <h1 class="font-serif font-bold text-lg tracking-tight text-slate-100">TOEFL Reading Lab</h1>
         </div>
-        <div class="text-sm font-sans text-news-dark/70 flex items-center gap-4">
-            <span class="bg-white/40 px-3 py-1 rounded-full border border-white/50 shadow-sm">📅 Jan 2026 Edition</span>
-            <a href="toefl_notes.html" class="flex items-center gap-1 hover:text-news-accent transition">
+        <div class="text-sm font-sans text-slate-400 flex items-center gap-4">
+            <span class="bg-white/5 px-3 py-1 rounded-full border border-white/10 shadow-sm">📅 Jan 2026 Edition</span>
+            <a href="toefl_notes.html" class="flex items-center gap-1 hover:text-violet-400 transition">
                 <span class="material-symbols-rounded text-lg">school</span> Back to Course
             </a>
         </div>
@@ -156,25 +421,42 @@
     <main class="flex-1 flex overflow-hidden pt-4 px-4 pb-4 gap-4">
 
         <!-- Left: Article Content (Scrollable Glass Card) -->
-        <div class="flex-1 overflow-y-auto p-0 scrollbar-hide glass-panel rounded-3xl relative">
+        <div class="flex-1 overflow-y-auto p-0 glass-panel rounded-3xl relative" id="article-scroll-container">
 
             <!-- Hero Image Background for Article Header -->
-            <div class="relative h-64 w-full">
-                <img src="images/header_news_2026.png" class="w-full h-full object-cover rounded-t-[23px] opacity-90">
-                <div class="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent mix-blend-overlay"></div>
+            <div class="relative h-64 w-full topic-image">
+                <img src="images/header_news_2026.png" class="w-full h-full object-cover rounded-t-[23px]">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#0B1120] via-transparent to-transparent"></div>
                 <!-- Text Overlay -->
-                <div class="absolute bottom-6 left-8">
+                <div class="absolute bottom-6 left-8 right-8">
                     <span
-                        class="bg-news-accent text-white font-sans font-bold text-xs uppercase tracking-widest mb-2 inline-block px-2 py-1 rounded shadow-lg">The
-                        World This Week</span>
-                    <h1 class="text-4xl md:text-5xl font-bold text-white hero-text font-serif">Global Outlook 2026</h1>
+                        class="bg-violet-600 text-white font-sans font-bold text-xs uppercase tracking-widest mb-2 inline-block px-3 py-1 rounded-lg shadow-lg shadow-violet-500/30">The
+                        Economist</span>
+                    <h1 class="text-4xl md:text-5xl font-bold text-white font-serif drop-shadow-lg">The world in brief
+                    </h1>
+                    <p class="text-slate-300 mt-2 text-sm">Catch up quickly on the global stories that matter</p>
+                    <div class="flex gap-4 mt-3 text-xs text-slate-400">
+                        <span>📝 Articles updated less than 1 hour ago</span>
+                        <span>🎧 Audio recorded 8 hours ago</span>
+                    </div>
                 </div>
             </div>
 
-            <article class="prose prose-lg prose-slate max-w-none font-serif leading-loose text-news-dark p-8 md:p-12">
-                <p class="font-sans text-news-dark/60 italic text-base border-l-4 border-news-accent pl-4 mb-8">
-                    Interactive Reading Module: Click any sentence to analyze structure and key vocabulary.
+            <article class="prose prose-lg prose-invert max-w-none font-serif leading-loose text-slate-200 p-8 md:p-12">
+                <p
+                    class="font-sans text-violet-300/80 italic text-base border-l-4 border-violet-500 pl-4 mb-8 bg-violet-500/10 py-3 rounded-r-lg">
+                    🎯 Interactive Reading Module: Click any sentence to analyze structure and key vocabulary.
                 </p>
+
+                <!-- Floating Logic Signpost Legend -->
+                <div class="glass-popup rounded-xl p-4 mb-8 flex flex-wrap gap-4 text-sm">
+                    <span class="text-slate-400">Legend:</span>
+                    <span class="logic-word text-xs">Transition Words</span>
+                    <span class="vocab-highlight text-xs">Vocabulary</span>
+                    <span class="grammar-subject text-xs">Subject</span>
+                    <span class="grammar-verb text-xs">Verb</span>
+                    <span class="grammar-object text-xs">Object</span>
+                </div>
 
                 <!-- Sections Container -->
                 <div id="article-container">
@@ -187,61 +469,64 @@
 
         <!-- Right: Analysis Panel (Glass Card) -->
         <div
-            class="w-full md:w-[450px] glass-panel rounded-3xl flex flex-col z-20 transition-transform duration-300 transform translate-x-full md:translate-x-0 group overflow-hidden">
+            class="w-full md:w-[450px] glass-panel rounded-3xl flex flex-col z-20 transition-transform duration-300 overflow-hidden">
 
             <!-- Empty State -->
-            <div id="empty-state"
-                class="flex-1 flex flex-col items-center justify-center p-8 text-center text-news-dark/50">
+            <div id="empty-state" class="flex-1 flex flex-col items-center justify-center p-8 text-center">
                 <div
-                    class="w-20 h-20 bg-black/5 rounded-full flex items-center justify-center mb-6 border border-black/5">
-                    <span class="material-symbols-rounded text-4xl text-news-dark/30">touch_app</span>
+                    class="w-20 h-20 bg-violet-500/10 rounded-full flex items-center justify-center mb-6 border border-violet-500/20">
+                    <span class="material-symbols-rounded text-4xl text-violet-400">touch_app</span>
                 </div>
-                <p class="text-lg text-news-dark/70">Select a sentence<br>to begin analysis.</p>
+                <p class="text-lg text-slate-400">Select a sentence<br>to begin analysis.</p>
+                <p class="text-sm text-slate-500 mt-4">Grammar • Vocabulary • Translation</p>
             </div>
 
             <!-- Analysis Content -->
-            <div id="analysis-content" class="hidden flex-col h-full overflow-y-auto scrollbar-hide">
+            <div id="analysis-content" class="hidden flex-col h-full overflow-y-auto">
 
                 <!-- 1. Translation Card -->
-                <div class="p-6 border-b border-black/5 bg-white/40">
+                <div class="p-6 border-b border-white/10 bg-white/5">
                     <h3
-                        class="text-xs font-bold text-news-dark/50 uppercase tracking-widest mb-3 flex items-center gap-2">
+                        class="text-xs font-bold text-violet-400 uppercase tracking-widest mb-3 flex items-center gap-2">
                         <span class="material-symbols-rounded text-sm">translate</span> Translation
                     </h3>
-                    <p id="analysis-cn" class="text-lg font-sans text-news-dark font-medium leading-relaxed"></p>
+                    <p id="analysis-cn" class="text-lg font-sans text-slate-200 font-medium leading-relaxed"></p>
                 </div>
 
-                <!-- 2. Grammar Breakdown -->
-                <div class="p-6 border-b border-black/5">
-                    <h3 class="text-xs font-bold text-blue-600 uppercase tracking-widest mb-4 flex items-center gap-2">
-                        <span class="material-symbols-rounded text-sm">account_tree</span> Grammar Structure
+                <!-- 2. Grammar Breakdown (Sentence Crusher) -->
+                <div class="p-6 border-b border-white/10 bg-gradient-to-br from-blue-500/5 to-transparent">
+                    <h3 class="text-xs font-bold text-blue-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                        <span class="material-symbols-rounded text-sm">account_tree</span> Grammar Structure (Sentence
+                        Crusher)
                     </h3>
-                    <div id="analysis-grammar" class="space-y-3 font-mono text-sm text-news-dark/80">
+                    <div id="analysis-grammar" class="space-y-3 font-mono text-sm text-slate-300">
                         <!-- Populated by JS -->
                     </div>
                 </div>
 
-                <!-- 3. Key Vocabulary -->
-                <div class="p-6 flex-1 bg-amber-50/50">
-                    <h3 class="text-xs font-bold text-amber-600 uppercase tracking-widest mb-4 flex items-center gap-2">
-                        <span class="material-symbols-rounded text-sm">menu_book</span> Key Vocabulary
+                <!-- 3. Key Vocabulary (TOEFL Synonyms) -->
+                <div class="p-6 flex-1 bg-gradient-to-br from-violet-500/10 to-transparent">
+                    <h3
+                        class="text-xs font-bold text-violet-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                        <span class="material-symbols-rounded text-sm">menu_book</span> TOEFL Vocabulary
                     </h3>
-                    <div id="analysis-vocab" class="space-y-4 text-news-dark">
+                    <div id="analysis-vocab" class="space-y-4 text-slate-200">
                         <!-- Populated by JS -->
                     </div>
                 </div>
 
                 <!-- Audio Bar -->
                 <div
-                    class="p-4 bg-white/60 backdrop-blur-md border-t border-white/40 flex items-center gap-4 sticky bottom-0 shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
+                    class="p-4 bg-[#0B1120]/80 backdrop-blur-md border-t border-white/10 flex items-center gap-4 sticky bottom-0">
                     <button id="main-audio-btn"
-                        class="w-12 h-12 rounded-full bg-news-dark text-white flex items-center justify-center shadow-lg hover:scale-105 transition hover:bg-gray-800">
+                        class="w-12 h-12 rounded-full bg-violet-600 text-white flex items-center justify-center shadow-lg shadow-violet-500/30 hover:scale-105 transition hover:bg-violet-500">
                         <span class="material-symbols-rounded text-2xl">play_arrow</span>
                     </button>
                     <div class="flex-1">
-                        <div class="text-xs text-news-dark/50 font-bold uppercase mb-1">Native Audio</div>
-                        <div class="h-1 bg-black/10 rounded-full w-full overflow-hidden">
-                            <div class="h-full bg-news-dark w-0 transition-all duration-300" id="audio-progress"></div>
+                        <div class="text-xs text-slate-500 font-bold uppercase mb-1">Native Audio</div>
+                        <div class="h-2 bg-white/10 rounded-full w-full overflow-hidden">
+                            <div class="h-full bg-gradient-to-r from-violet-500 to-violet-400 w-0 transition-all duration-300"
+                                id="audio-progress"></div>
                         </div>
                     </div>
                 </div>
@@ -1145,23 +1430,65 @@
         let currentAudio = null;
         const audioPrefixes = ['china', 'warner', 'iran', 'un', 'guinea', 'india', 'buffett', 'figure', 'dems', 'deport', 'court', 'bday'];
 
+        // Topic Images Mapping
+        const topicImages = {
+            0: { src: 'images/china_growth.png', alt: 'China Shanghai skyline with 5% GDP growth' },
+            2: { src: 'images/iran_currency.jpg', alt: 'Iran currency crisis illustration' },
+            3: { src: 'images/un_building.png', alt: 'UN Headquarters with budget visualization' },
+            4: { src: 'images/guinea_election.jpg', alt: 'Guinea military election artwork' },
+            5: { src: 'images/steel_india.jpg', alt: 'Molten steel production' },
+            6: { src: 'images/buffett.png', alt: 'Warren Buffett portrait' },
+            8: { src: 'images/politics_wave.jpg', alt: 'Political wave visualization' },
+            10: { src: 'images/politics_chess.jpg', alt: 'Democrat vs Republican political chess' },
+            11: { src: 'images/america_250.jpg', alt: 'America 250th anniversary celebration' }
+        };
+
         function renderArticle() {
+            const container = document.getElementById('article-container');
+            container.innerHTML = ''; // Clear previous content
+
+            // 1. Render Sections
             articleSections.forEach((section, sectionIdx) => {
+                // Create Wrapper for Topic
+                const sectionDiv = document.createElement('div');
+                sectionDiv.id = `topic-${sectionIdx}`;
+                sectionDiv.className = 'topic-section mb-16 relative group/section transform transition-all duration-500 hover:translate-x-1';
+
+                // Topic Image (if available)
+                if (topicImages[sectionIdx]) {
+                    const imgWrapper = document.createElement('div');
+                    imgWrapper.className = 'relative mb-6 rounded-2xl overflow-hidden shadow-lg group/img cursor-pointer';
+                    imgWrapper.innerHTML = `
+                        <img src="${topicImages[sectionIdx].src}" alt="${topicImages[sectionIdx].alt}" 
+                             class="w-full h-48 md:h-64 object-cover transition-transform duration-700 group-hover/img:scale-110">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 group-hover/img:opacity-100 transition-opacity duration-300"></div>
+                        <div class="absolute bottom-4 left-4 text-white opacity-0 group-hover/img:opacity-100 transition-all duration-300 transform translate-y-2 group-hover/img:translate-y-0">
+                            <span class="text-xs bg-white/20 backdrop-blur-sm px-3 py-1 rounded-full">📷 Visual Context</span>
+                        </div>
+                    `;
+                    imgWrapper.onclick = () => {
+                        imgWrapper.querySelector('img').classList.toggle('scale-150');
+                    };
+                    sectionDiv.appendChild(imgWrapper);
+                }
+
                 // Section Header
                 if (section.topic) {
                     const h2 = document.createElement('h2');
-                    h2.className = 'text-2xl font-sans font-bold text-news-dark mt-10 mb-6 border-l-4 border-news-accent pl-4 drop-shadow-sm';
-                    h2.innerText = section.topic;
-                    container.appendChild(h2);
+                    h2.className = 'text-2xl font-sans font-bold text-slate-100 mb-6 border-l-4 border-violet-500 pl-4 drop-shadow-sm sticky top-0 bg-[#0B1120]/90 backdrop-blur-md py-4 z-10 rounded-r-xl transition-all duration-300 hover:border-l-8 hover:pl-6 hover:border-violet-400';
+                    h2.innerHTML = `<span class="inline-flex items-center gap-2">${section.topic} <span class="text-sm font-normal text-violet-400 opacity-0 group-hover/section:opacity-100 transition-opacity">▶</span></span>`;
+                    sectionDiv.appendChild(h2);
                 }
 
+                // Paragraph Text
                 const p = document.createElement('p');
-                p.className = 'mb-6 text-lg text-news-dark/90 leading-loose';
+                p.className = 'mb-8 text-lg text-slate-300 leading-loose';
 
                 section.sentences.forEach((sent, sIdx) => {
                     const span = document.createElement('span');
-                    span.className = 'sentence-span';
+                    span.className = 'sentence-span cursor-pointer hover:bg-gradient-to-r hover:from-news-accent/10 hover:to-transparent transition-all duration-300 rounded-lg px-2 py-1 -mx-1 hover:shadow-sm border-b-2 border-transparent hover:border-news-accent/30';
                     span.innerText = sent.en + ' ';
+                    span.setAttribute('data-sentence-idx', `${sectionIdx}-${sIdx}`);
 
                     // Construct Audio ID
                     const audioId = `${audioPrefixes[sectionIdx]}_${sectionIdx}_${sIdx}`;
@@ -1170,7 +1497,34 @@
 
                     p.appendChild(span);
                 });
-                container.appendChild(p);
+                sectionDiv.appendChild(p);
+
+                // Inline Widget Container (Grid)
+                const widgetContainer = document.createElement('div');
+                widgetContainer.id = `widgets-${sectionIdx}`;
+                widgetContainer.className = 'grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 pl-4 border-l-2 border-dashed border-violet-500/20 transition-all duration-500';
+                sectionDiv.appendChild(widgetContainer);
+
+                container.appendChild(sectionDiv);
+            });
+
+            // Add scroll reveal animation
+            const sections = document.querySelectorAll('.topic-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-fadeInUp');
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(20px)';
+                section.style.transition = 'all 0.6s ease-out';
+                observer.observe(section);
             });
         }
 
@@ -1191,8 +1545,8 @@
             if (data.grammar && data.grammar.length > 0) {
                 data.grammar.forEach(g => {
                     const div = document.createElement('div');
-                    div.className = 'bg-white/60 p-3 rounded border border-white/50 hover:bg-white/80 transition shadow-sm';
-                    div.innerHTML = `<span class="text-xs font-bold text-blue-600 uppercase tracking-wide mr-2 bg-blue-100 px-2 py-0.5 rounded">${g.type}</span> <span class="text-news-dark/80 font-medium">${g.text}</span>`;
+                    div.className = 'bg-blue-500/10 p-3 rounded-lg border border-blue-500/20 hover:border-blue-400/40 transition shadow-sm';
+                    div.innerHTML = `<span class="text-xs font-bold text-blue-400 uppercase tracking-wide mr-2 bg-blue-500/20 px-2 py-0.5 rounded">${g.type}</span> <span class="text-slate-200 font-medium">${g.text}</span>`;
                     analysisGrammar.appendChild(div);
                 });
             } else {
@@ -1206,10 +1560,10 @@
                     const div = document.createElement('div');
                     div.className = 'flex items-start gap-3 group';
                     div.innerHTML = `
-                        <div class="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 flex-shrink-0 shadow-[0_0_8px_rgba(245,158,11,0.4)]"></div>
+                        <div class="w-1.5 h-1.5 rounded-full bg-violet-500 mt-2 flex-shrink-0 shadow-[0_0_8px_rgba(139,92,246,0.4)]"></div>
                         <div>
-                            <p class="font-bold text-news-dark border-b border-black/10 inline-block mb-1 group-hover:border-amber-400 transition">${v.w}</p>
-                            <p class="text-sm text-news-dark/70">${v.m}</p>
+                            <p class="font-bold text-slate-100 border-b border-violet-500/30 inline-block mb-1 group-hover:border-violet-400 transition">${v.w}</p>
+                            <p class="text-sm text-slate-400">${v.m}</p>
                         </div>
                     `;
                     analysisVocab.appendChild(div);
@@ -1261,25 +1615,25 @@
 
         // --- Data Visualization Logic ---
 
-        function renderDataDashboard() {
-            const dashboard = document.getElementById('data-dashboard');
-            dashboard.innerHTML = ''; // Clear previous
+        function renderInlineWidgets() {
 
-            // --- 22 VISUALIZATION DATA POINTS ---
+            // --- 22 VISUALIZATION DATA POINTS (Mapped to Topics) ---
             const dataWidgets = [
-                // === 1. MACRO ECONOMICS ===
+                // Topic 0: China's Economy
                 {
-                    type: 'gauge', label: "China 2025 GDP Target", value: 5.0, max: 8, unit: '%',
+                    topicIdx: 0, type: 'gauge', label: "China 2025 GDP Target", value: 5.0, max: 8, unit: '%',
                     desc: "Growth Target Met: Yes", color: '#27ae60'
                 },
                 {
-                    type: 'chart-line-area', id: 'pmiChart', title: "China PMI Inflection Point",
+                    topicIdx: 0, type: 'chart-line-area', id: 'pmiChart', title: "China PMI Inflection Point",
                     labels: ['May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-                    data: [49.5, 49.0, 49.3, 49.1, 49.8, 49.5, 49.4, 50.2], // Example synthetic data ending >50
+                    data: [49.5, 49.0, 49.3, 49.1, 49.8, 49.5, 49.4, 50.2],
                     color: '#e67e22', desc: "Dec broke 8-month contraction (>50)"
                 },
+
+                // Topic 1: Warner Bros vs Paramount
                 {
-                    type: 'chart-bar-grouped', id: 'warnerBids', title: "Hollywood Bidding War ($bn)",
+                    topicIdx: 1, type: 'chart-bar-grouped', id: 'warnerBids', title: "Hollywood Bidding War ($bn)",
                     labels: ['Valuation'],
                     datasets: [
                         { label: 'Netflix Offer', data: [83], backgroundColor: '#e74c3c' },
@@ -1288,31 +1642,55 @@
                     desc: "Board favors Netflix despite lower bid"
                 },
                 {
-                    type: 'timeline-milestone', title: "Warner/Netflix/Paramount Timeline",
+                    topicIdx: 1, type: 'timeline-milestone', title: "Warner/Netflix/Paramount Timeline",
                     events: [
                         { date: 'Day 0', text: 'Nintendo Deal Announced' },
                         { date: 'Day +3', text: 'Paramount Swoops In ($108bn)' },
                         { date: 'Next Week', text: 'Board Final Decision' }
                     ]
                 },
+
+                // Topic 2: Iran Protests
                 {
-                    type: 'chart-line', id: 'rialChart', title: "Iran Rial vs USD (Plunge)",
+                    topicIdx: 2, type: 'chart-line', id: 'rialChart', title: "Iran Rial vs USD (Plunge)",
                     labels: ['2023', '2024', '2025', 'Jan 2026'],
-                    data: [42000, 50000, 65000, 95000], // Illustrative plunge
+                    data: [42000, 50000, 65000, 95000],
                     color: '#c0392b', desc: "Currency at historic low"
                 },
                 {
-                    type: 'thermometer', label: "Iran Inflation", value: 42, max: 60, unit: '%',
+                    topicIdx: 2, type: 'thermometer', label: "Iran Inflation", value: 42, max: 60, unit: '%',
                     color: '#e74c3c', desc: "Hyper-inflation pressure"
                 },
+
+                // Topic 3: UN Budget Crisis
                 {
-                    type: 'chart-step', id: 'steelTariff', title: "India Steel Tariff Step-Down",
+                    topicIdx: 3, type: 'chart-doughnut', id: 'unBudget', title: "UN 2026 Budget Distribution",
+                    labels: ['Approved ($3.45bn)', 'Cut (7%)'],
+                    data: [93, 7],
+                    colors: ['#3498db', '#bdc3c7'], desc: "Total slashed by $260m"
+                },
+                {
+                    topicIdx: 3, type: 'chart-bar-horizontal', id: 'unArrears', title: "UN Funding Shortfall Contribution",
+                    labels: ['USA Arrears', 'Rest of World'],
+                    data: [1.4, 0.2],
+                    colors: ['#c0392b', '#95a5a6'], desc: "US owes 87% of deficit"
+                },
+
+                // Topic 4: Guinea Election
+                {
+                    topicIdx: 4, type: 'progress-circle', label: "Guinea Election share", value: 86,
+                    color: '#27ae60', desc: "Gen. Doumbouya's disputed win"
+                },
+
+                // Topic 5: India Steel Tariffs
+                {
+                    topicIdx: 5, type: 'chart-step', id: 'steelTariff', title: "India Steel Tariff Step-Down",
                     labels: ['Year 1', 'Year 2', 'Year 3'],
                     data: [12, 11.5, 11],
                     color: '#f39c12', desc: "Excludes Stainless Steel"
                 },
                 {
-                    type: 'treemap-simple', title: "Steel Stocks Reaction",
+                    topicIdx: 5, type: 'treemap-simple', title: "Steel Stocks Reaction",
                     items: [
                         { label: 'Tata Steel', change: '+5.2%', color: '#2ecc71' },
                         { label: 'JSW Steel', change: '+4.8%', color: '#2ecc71' },
@@ -1320,81 +1698,71 @@
                     ]
                 },
 
-                // === 2. POLITICS & ELECTIONS ===
+                // Topic 6: Warren Buffett Steps Down
                 {
-                    type: 'chart-doughnut', id: 'unBudget', title: "UN 2026 Budget Distribution",
-                    labels: ['Approved ($3.45bn)', 'Cut (7%)'],
-                    data: [93, 7],
-                    colors: ['#3498db', '#bdc3c7'], desc: "Total slashed by $260m"
+                    topicIdx: 6, type: 'timeline-long', title: "Buffett's 60-Year Reign",
+                    start: '1965 (Textile Mill)', end: '2026 (Global Titan)',
+                    desc: "longest tenure of S&P 500 CEO"
                 },
                 {
-                    type: 'chart-bar-horizontal', id: 'unArrears', title: "UN Funding Shortfall Contribution",
-                    labels: ['USA Arrears', 'Rest of World'],
-                    data: [1.4, 0.2], // 1.6 total
-                    colors: ['#c0392b', '#95a5a6'], desc: "US owes 87% of deficit"
-                },
-                {
-                    type: 'progress-circle', label: "Guinea Election share", value: 86,
-                    color: '#27ae60', desc: "Gen. Doumbouya's disputed win"
-                },
-                {
-                    type: 'parliament-sim', title: "2026 House Prediction",
-                    dems: 220, reps: 215, desc: "Dems likely to retake majority"
-                },
-                {
-                    type: 'card-vs', title: "2028 Dem Frontrunners",
-                    left: { name: 'J.B. Pritzker', role: 'IL Governor', tag: 'Wealth/Establishment' },
-                    right: { name: 'Gavin Newsom', role: 'CA Governor', tag: 'Media/Policy' }
-                },
-                {
-                    type: 'venn-text', title: "America 250 Celebrations",
-                    left: "Nonparisan Commission", right: "Trump's Task Force", center: "Conflict",
-                    desc: "Battle over historical narrative"
+                    topicIdx: 6, type: 'org-chart', title: "Berkshire Succession",
+                    top: "Warren Buffett (Chairman)",
+                    child: "Greg Abel (CEO)",
+                    desc: "Effective Jan 1st"
                 },
 
-                // === 3. LEGAL & SOCIAL ===
+                // Topic 7: Figure of the Day
                 {
-                    type: 'scoreboard', title: "SCOTUS 2026 Scorecard",
-                    wins: ['Trans Ban', 'Dept of Ed Gutting', 'Official Firings'],
-                    losses: ['Birthright Citizenship', 'Tariff Legality'],
-                    desc: "Trump Agenda: Mixed Bag"
-                },
-                {
-                    type: 'funnel-text', title: "Judicial Process",
-                    stages: ['Shadow Docket (Emergency)', 'Oral Arguments', 'Merits Ruling (Final)'],
-                    desc: "Major cases moving to final stage"
-                },
-                {
-                    type: 'heatmap-lite', title: "LA Fire Damage Density",
+                    topicIdx: 7, type: 'heatmap-lite', title: "LA Fire Damage Density",
                     value: "High", location: "Los Angeles County", count: "16,000 Buildings",
                     color: '#e74c3c'
                 },
+
+                // Topic 8: Politics: Democrats Step Up
                 {
-                    type: 'fishbone-text', title: "Deportation Drivers",
+                    topicIdx: 8, type: 'parliament-sim', title: "2026 House Prediction",
+                    dems: 220, reps: 215, desc: "Dems likely to retake majority"
+                },
+                {
+                    topicIdx: 8, type: 'card-vs', title: "2028 Dem Frontrunners",
+                    left: { name: 'J.B. Pritzker', role: 'IL Governor', tag: 'Wealth/Establishment' },
+                    right: { name: 'Gavin Newsom', role: 'CA Governor', tag: 'Media/Policy' }
+                },
+
+                // Topic 9: Mass Deportation Campaign
+                {
+                    topicIdx: 9, type: 'fishbone-text', title: "Deportation Drivers",
                     head: "Mass Deportation",
                     bones: ['Funding (Bill Act)', 'Labor Shortage Fear', 'Public Opinion Drop'],
                 },
                 {
-                    type: 'chart-line', id: 'trumpApproval', title: "Immigration Approval Rating",
+                    topicIdx: 9, type: 'chart-line', id: 'trumpApproval', title: "Immigration Approval Rating",
                     labels: ['Inauguration', 'Year 1', 'Year 2'],
                     data: [48, 42, 35],
                     color: '#e74c3c', desc: "Steady decline since taking office"
                 },
 
-                // === 4. LEADERSHIP ===
+                // Topic 10: President & Supreme Court
                 {
-                    type: 'timeline-long', title: "Buffett's 60-Year Reign",
-                    start: '1965 (Textile Mill)', end: '2026 (Global Titan)',
-                    desc: "longest tenure of S&P 500 CEO"
+                    topicIdx: 10, type: 'scoreboard', title: "SCOTUS 2026 Scorecard",
+                    wins: ['Trans Ban', 'Dept of Ed Gutting', 'Official Firings'],
+                    losses: ['Birthright Citizenship', 'Tariff Legality'],
+                    desc: "Trump Agenda: Mixed Bag"
                 },
                 {
-                    type: 'org-chart', title: "Berkshire Succession",
-                    top: "Warren Buffett (Chairman)",
-                    child: "Greg Abel (CEO)",
-                    desc: "Effective Jan 1st"
+                    topicIdx: 10, type: 'funnel-text', title: "Judicial Process",
+                    stages: ['Shadow Docket (Emergency)', 'Oral Arguments', 'Merits Ruling (Final)'],
+                    desc: "Major cases moving to final stage"
+                },
+
+                // Topic 11: America's Big Birthday
+                {
+                    topicIdx: 11, type: 'venn-text', title: "America 250 Celebrations",
+                    left: "Nonparisan Commission", right: "Trump's Task Force", center: "Conflict",
+                    desc: "Battle over historical narrative"
                 },
                 {
-                    type: 'map-text', title: "Global Hotspots",
+                    topicIdx: 11, type: 'map-text', title: "Global Hotspots",
                     points: ['Beijing', 'Tehran', 'Washington', 'Conakry', 'Mumbai'],
                     desc: "Key locations in this report"
                 }
@@ -1402,6 +1770,10 @@
 
             // --- RENDER LOOP ---
             dataWidgets.forEach((item, idx) => {
+                // Find Inline Container
+                const container = document.getElementById(`widgets-${item.topicIdx}`);
+                if (!container) return;
+
                 const card = document.createElement('div');
                 card.className = 'glass-panel p-6 rounded-2xl flex flex-col justify-between hover:scale-[1.02] transition duration-300 border border-white/30 bg-white/40 shadow-sm group min-h-[220px]';
 
@@ -1599,13 +1971,13 @@
                 }
 
                 card.innerHTML = headerHtml + uniqueContent + (item.desc ? `<div class="text-[10px] text-news-dark/50 font-medium border-t border-black/5 pt-2 mt-auto w-full text-right italic">${item.desc}</div>` : '');
-                dashboard.appendChild(card);
+                container.appendChild(card);
             });
         }
 
         // Init
         renderArticle();
-        renderDataDashboard();
+        renderInlineWidgets();
 
     </script>
 </body>
