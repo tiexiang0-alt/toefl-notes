@@ -630,21 +630,23 @@
         <!-- Backdrop -->
         <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeMobileModal()"></div>
 
-        <!-- Modal Content -->
+        <!-- Modal Content - Locked Horizontal Scroll -->
         <div
-            class="absolute bottom-0 left-0 right-0 bg-[#0B1120] rounded-t-3xl max-h-[70vh] overflow-y-auto animate-slideUp">
-            <!-- Header with audio and close button -->
-            <div class="sticky top-0 bg-[#0B1120] border-b border-white/10 px-4 py-3 flex items-center justify-between">
-                <div class="flex items-center gap-3">
+            class="absolute bottom-0 left-0 right-0 bg-[#0B1120] rounded-t-3xl max-h-[70vh] overflow-y-auto overflow-x-hidden animate-slideUp w-full">
+            <!-- Header with audio and close button - Fixed Height & Alignment -->
+            <div
+                class="sticky top-0 bg-[#0B1120]/95 backdrop-blur-md border-b border-white/10 px-4 h-16 flex items-center justify-between z-10 w-full">
+                <div class="flex items-center gap-3 overflow-hidden">
                     <button id="mobile-sentence-audio-btn" onclick="playMobileSentenceAudio()"
-                        class="w-10 h-10 rounded-full bg-violet-600 flex items-center justify-center active:scale-95 transition">
+                        class="w-10 h-10 rounded-full bg-violet-600 flex items-center justify-center active:scale-95 transition-transform flex-shrink-0 shadow-lg shadow-violet-500/20">
                         <span class="material-symbols-rounded text-white text-xl"
                             id="mobile-audio-icon">play_arrow</span>
                     </button>
-                    <span class="text-violet-400 font-bold text-sm uppercase tracking-wider">Sentence Analysis</span>
+                    <span class="text-violet-400 font-bold text-sm uppercase tracking-wider truncate">Sentence
+                        Analysis</span>
                 </div>
                 <button onclick="closeMobileModal()"
-                    class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                    class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center flex-shrink-0 active:bg-white/10 transition-colors">
                     <span class="material-symbols-rounded text-slate-400">close</span>
                 </button>
             </div>
