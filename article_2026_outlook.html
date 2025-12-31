@@ -7,7 +7,7 @@
     <title>TOEFL Reading: The World in 2026</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link
-        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0"
         rel="stylesheet">
@@ -17,16 +17,14 @@
             theme: {
                 extend: {
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Merriweather', 'serif'],
-                        mono: ['JetBrains Mono', 'monospace'],
+                        sans: ['Outfit', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
                     },
                     colors: {
                         news: {
-                            paper: '#F9F7F1',
-                            dark: '#1A1A1A',
-                            accent: '#C0392B', // Economist Red
-                            blue: '#2980B9'
+                            paper: '#F3F1E9',
+                            dark: '#2D2D2D',
+                            accent: '#C0392B',
                         }
                     }
                 }
@@ -35,77 +33,123 @@
     </script>
 
     <style>
+        /* Mesh Gradient Background */
         body {
-            background-color: #F9F7F1;
-            color: #1A1A1A;
+            font-family: 'Outfit', sans-serif;
+            background-color: #F3F1E9;
+            color: #2D2D2D;
+            background-image:
+                radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
+                radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 1) 0, transparent 50%);
+            background-size: 200% 200%;
+            animation: gradient-move 15s ease infinite;
+        }
+
+        @keyframes gradient-move {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* Glassmorphism Cards */
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
         }
 
         .sentence-span {
             cursor: pointer;
-            transition: all 0.2s;
-            padding: 2px 0;
-            border-radius: 4px;
+            transition: all 0.3s ease;
+            padding: 2px 4px;
+            border-radius: 6px;
+            border: 1px solid transparent;
         }
 
         .sentence-span:hover {
-            background-color: rgba(41, 128, 185, 0.1);
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.2);
         }
 
         .sentence-span.active {
-            background-color: #FDE68A;
-            /* highlight color */
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(4px);
+            border-color: rgba(255, 255, 255, 0.4);
+            color: white;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
         }
 
-        .vocab-highlight {
-            border-bottom: 2px solid #C0392B;
-            font-weight: 600;
+        /* Scrollbar Hide */
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
         }
 
-        .grammar-tag {
-            font-size: 0.75rem;
-            padding: 2px 6px;
-            border-radius: 4px;
-            font-family: 'Inter', sans-serif;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .hero-text {
+            text-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            color: white;
         }
     </style>
 </head>
 
-<body class="h-screen flex flex-col overflow-hidden">
+<body class="h-screen flex flex-col overflow-hidden text-gray-100">
 
-    <!-- Top Navigation -->
+    <!-- Glass Header -->
     <header
-        class="bg-white border-b border-gray-200 h-16 flex items-center justify-between px-6 flex-shrink-0 z-20 shadow-sm relative">
+        class="h-16 flex items-center justify-between px-6 flex-shrink-0 z-30 relative glass-panel border-b-0 rounded-b-2xl mx-4 mt-4">
         <div class="flex items-center gap-3">
-            <div class="bg-news-accent text-white w-10 h-10 flex items-center justify-center font-bold text-xl rounded">
+            <div
+                class="bg-white/20 text-white w-10 h-10 flex items-center justify-center font-bold text-xl rounded backdrop-blur-md border border-white/30">
                 T</div>
-            <h1 class="font-serif font-bold text-lg tracking-tight">TOEFL Reading Lab</h1>
+            <h1 class="font-serif font-bold text-lg tracking-tight text-white drop-shadow-md">TOEFL Reading Lab</h1>
         </div>
-        <div class="text-sm font-sans text-gray-500 flex items-center gap-4">
-            <span>📅 Jan 2026 Edition</span>
-            <a href="toefl_notes.html" class="flex items-center gap-1 hover:text-news-accent transition">
+        <div class="text-sm font-sans text-gray-200 flex items-center gap-4">
+            <span class="bg-white/10 px-3 py-1 rounded-full border border-white/20">📅 Jan 2026 Edition</span>
+            <a href="toefl_notes.html"
+                class="flex items-center gap-1 hover:text-white transition opacity-80 hover:opacity-100">
                 <span class="material-symbols-rounded text-lg">school</span> Back to Course
             </a>
         </div>
     </header>
 
     <!-- Main Content Area -->
-    <main class="flex-1 flex overflow-hidden">
+    <main class="flex-1 flex overflow-hidden pt-4 px-4 pb-4 gap-4">
 
-        <!-- Left: Article Content (Scrollable) -->
-        <div class="flex-1 overflow-y-auto p-8 md:p-12 max-w-3xl mx-auto scrollbar-hide">
-            <article class="prose prose-lg prose-slate max-w-none font-serif leading-loose text-gray-800">
-                <div class="mb-8 border-b border-gray-200 pb-8">
-                    <span class="text-news-accent font-sans font-bold text-xs uppercase tracking-widest mb-2 block">The
+        <!-- Left: Article Content (Scrollable Glass Card) -->
+        <div class="flex-1 overflow-y-auto p-0 scrollbar-hide glass-panel rounded-3xl relative">
+
+            <!-- Hero Image Background for Article Header -->
+            <div class="relative h-64 w-full">
+                <img src="images/header_news_2026.png" class="w-full h-full object-cover rounded-t-3xl opacity-90">
+                <div class="absolute inset-0 bg-gradient-to-t from-[#1e1e2e]/90 to-transparent"></div>
+                <div class="absolute bottom-6 left-8">
+                    <span
+                        class="bg-red-500/80 text-white font-sans font-bold text-xs uppercase tracking-widest mb-2 inline-block px-2 py-1 rounded backdrop-blur-sm">The
                         World This Week</span>
-                    <h1 class="text-4xl font-bold mb-4 text-news-dark mt-2">Global Outlook: China, Business, and
-                        Politics</h1>
-                    <p class="font-sans text-gray-500 italic text-base">Interactive Reading Module: Click any sentence
-                        to analyze structure and vocabulary.</p>
+                    <h1 class="text-4xl md:text-5xl font-bold text-white hero-text font-serif">Global Outlook 2026</h1>
                 </div>
+            </div>
+
+            <article class="prose prose-lg prose-invert max-w-none font-serif leading-loose text-gray-200 p-8 md:p-12">
+                <p class="font-sans text-gray-400 italic text-base border-l-4 border-red-500 pl-4 mb-8">
+                    Interactive Reading Module: Click any sentence to analyze structure and key vocabulary.
+                </p>
 
                 <!-- Sections Container -->
                 <div id="article-container">
@@ -116,57 +160,63 @@
             </article>
         </div>
 
-        <!-- Right: Analysis Panel (Sticky/Fixed) -->
+        <!-- Right: Analysis Panel (Glass Card) -->
         <div
-            class="w-full md:w-[450px] bg-white border-l border-gray-200 shadow-xl flex flex-col z-10 transition-transform duration-300 transform translate-x-full md:translate-x-0 group">
+            class="w-full md:w-[450px] glass-panel rounded-3xl flex flex-col z-20 transition-transform duration-300 transform translate-x-full md:translate-x-0 group overflow-hidden">
 
             <!-- Empty State -->
             <div id="empty-state"
                 class="flex-1 flex flex-col items-center justify-center p-8 text-center text-gray-400">
-                <span class="material-symbols-rounded text-6xl mb-4 text-gray-200">touch_app</span>
-                <p>Click on any sentence in the article<br>to see the detailed breakdown.</p>
+                <div
+                    class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mb-6 border border-white/10 backdrop-blur-sm">
+                    <span class="material-symbols-rounded text-4xl text-gray-300">touch_app</span>
+                </div>
+                <p class="text-lg text-gray-300">Select a sentence<br>to begin analysis.</p>
             </div>
 
             <!-- Analysis Content -->
-            <div id="analysis-content" class="hidden flex-col h-full overflow-y-auto">
+            <div id="analysis-content" class="hidden flex-col h-full overflow-y-auto scrollbar-hide">
 
                 <!-- 1. Translation Card -->
-                <div class="p-6 bg-slate-50 border-b border-slate-100">
-                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Translation</h3>
-                    <p id="analysis-cn" class="text-lg font-sans text-slate-800 font-medium leading-relaxed"></p>
+                <div class="p-6 border-b border-white/10 bg-white/5">
+                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+                        <span class="material-symbols-rounded text-sm">translate</span> Translation
+                    </h3>
+                    <p id="analysis-cn" class="text-lg font-sans text-white font-medium leading-relaxed drop-shadow-sm">
+                    </p>
                 </div>
 
                 <!-- 2. Grammar Breakdown -->
-                <div class="p-6 border-b border-slate-100">
-                    <h3
-                        class="text-xs font-bold text-indigo-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                <div class="p-6 border-b border-white/10">
+                    <h3 class="text-xs font-bold text-blue-300 uppercase tracking-widest mb-4 flex items-center gap-2">
                         <span class="material-symbols-rounded text-sm">account_tree</span> Grammar Structure
                     </h3>
-                    <div id="analysis-grammar" class="space-y-3 font-mono text-sm">
+                    <div id="analysis-grammar" class="space-y-3 font-mono text-sm text-gray-300">
                         <!-- Populated by JS -->
                     </div>
                 </div>
 
                 <!-- 3. Key Vocabulary -->
-                <div class="p-6 flex-1 bg-amber-50/30">
-                    <h3 class="text-xs font-bold text-amber-500 uppercase tracking-widest mb-4 flex items-center gap-2">
+                <div class="p-6 flex-1 bg-amber-900/10">
+                    <h3 class="text-xs font-bold text-amber-300 uppercase tracking-widest mb-4 flex items-center gap-2">
                         <span class="material-symbols-rounded text-sm">menu_book</span> Key Vocabulary
                     </h3>
-                    <div id="analysis-vocab" class="space-y-4">
+                    <div id="analysis-vocab" class="space-y-4 text-gray-200">
                         <!-- Populated by JS -->
                     </div>
                 </div>
 
                 <!-- Audio Bar -->
-                <div class="p-4 bg-white border-t border-gray-200 flex items-center gap-4 sticky bottom-0">
-                    <button
-                        class="w-12 h-12 rounded-full bg-news-accent text-white flex items-center justify-center shadow-lg hover:scale-105 transition">
+                <div
+                    class="p-4 bg-black/20 backdrop-blur-md border-t border-white/10 flex items-center gap-4 sticky bottom-0">
+                    <button id="main-audio-btn"
+                        class="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:scale-105 transition hover:bg-gray-200">
                         <span class="material-symbols-rounded text-2xl">play_arrow</span>
                     </button>
                     <div class="flex-1">
-                        <div class="text-xs text-gray-400 font-bold uppercase mb-1">Listen to Sentence</div>
-                        <div class="h-1 bg-gray-200 rounded-full w-full overflow-hidden">
-                            <div class="h-full bg-news-accent w-0" id="audio-progress"></div>
+                        <div class="text-xs text-gray-400 font-bold uppercase mb-1">Native Audio</div>
+                        <div class="h-1 bg-white/20 rounded-full w-full overflow-hidden">
+                            <div class="h-full bg-white w-0 transition-all duration-300" id="audio-progress"></div>
                         </div>
                     </div>
                 </div>
