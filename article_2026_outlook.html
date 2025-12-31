@@ -423,31 +423,29 @@
             /* Full width article panel */
             main>div:first-child {
                 border-radius: 20px !important;
-                margin-bottom: 70px;
-                /* Space for audio bar */
+                padding-bottom: 150px !important;
+                /* Space for audio bar + panel peek */
             }
 
             /* Analysis panel as bottom sheet - above audio bar */
             #analysis-panel {
                 position: fixed !important;
-                bottom: 80px !important;
-                /* Above the audio bar */
+                bottom: 75px !important;
+                /* Height of audio bar */
                 left: 0;
                 right: 0;
                 width: 100% !important;
-                max-height: 50vh;
+                max-height: 40vh;
+                /* Smaller to not cover too much */
                 border-radius: 20px 20px 0 0 !important;
-                z-index: 45;
+                z-index: 40;
+                /* Below audio bar (z-100) */
                 transform: translateY(100%);
                 transition: transform 0.3s ease;
+                overflow: hidden;
             }
 
             #analysis-panel.show-panel {
-                transform: translateY(0);
-            }
-
-            main>div:last-child:focus-within,
-            main>div:last-child.expanded {
                 transform: translateY(0);
             }
 
@@ -610,10 +608,10 @@
         </div>
     </div>
 
-    <!-- Floating Article Audio Player (Bottom) -->
+    <!-- Floating Article Audio Player (Bottom) - Always on top -->
     <div id="article-audio-bar"
-        class="fixed bottom-0 left-0 right-0 z-50 bg-[#0B1120]/95 backdrop-blur-xl border-t border-white/10 px-4 py-3 md:px-6 md:py-4 transition-transform duration-300"
-        style="transform: translateY(100%)">
+        class="fixed bottom-0 left-0 right-0 z-[100] bg-[#0B1120]/95 backdrop-blur-xl border-t border-white/10 px-4 py-3 md:px-6 md:py-4 transition-transform duration-300"
+        style="transform: translateY(100%); --audio-bar-height: 70px;">
         <div class="max-w-4xl mx-auto flex items-center gap-4">
             <!-- Play/Pause Button -->
             <button id="article-play-btn" onclick="toggleArticleAudio()"
@@ -2310,10 +2308,8 @@
             articlePlayIcon.textContent = 'play_arrow';
         });
 
-        // Auto-show audio bar on desktop
-        if (window.innerWidth >= 768) {
-            setTimeout(() => showAudioBar(), 2000);
-        }
+        // Auto-show audio bar on all devices after 1 second
+        setTimeout(() => showAudioBar(), 1000);
 
     </script>
 </body>
