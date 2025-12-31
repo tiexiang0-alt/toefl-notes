@@ -420,33 +420,24 @@
                 gap: 8px !important;
             }
 
-            /* Full width article panel */
+            /* Full width article panel - add space at bottom for audio button */
             main>div:first-child {
                 border-radius: 20px !important;
-                padding-bottom: 150px !important;
-                /* Space for audio bar + panel peek */
+                padding-bottom: 100px !important;
             }
 
-            /* Analysis panel as bottom sheet - above audio bar */
+            /* HIDE the analysis panel sidebar completely on mobile */
             #analysis-panel {
-                position: fixed !important;
-                bottom: 75px !important;
-                /* Height of audio bar */
-                left: 0;
-                right: 0;
-                width: 100% !important;
-                max-height: 40vh;
-                /* Smaller to not cover too much */
-                border-radius: 20px 20px 0 0 !important;
-                z-index: 40;
-                /* Below audio bar (z-100) */
-                transform: translateY(100%);
-                transition: transform 0.3s ease;
-                overflow: hidden;
+                display: none !important;
             }
 
-            #analysis-panel.show-panel {
-                transform: translateY(0);
+            /* Audio bar - simplified for mobile */
+            #article-audio-bar {
+                padding: 10px 12px !important;
+            }
+
+            #article-audio-bar .max-w-4xl {
+                gap: 10px !important;
             }
 
             /* Mobile drag handle for bottom sheet */
@@ -651,6 +642,59 @@
         class="md:hidden fixed bottom-4 right-4 z-40 w-14 h-14 rounded-full bg-violet-600 text-white flex items-center justify-center shadow-xl shadow-violet-500/40 active:scale-95 transition">
         <span class="material-symbols-rounded text-2xl">headphones</span>
     </button>
+
+    <!-- Mobile Analysis Modal (Shows on sentence click) -->
+    <div id="mobile-modal" class="md:hidden fixed inset-0 z-[90] hidden">
+        <!-- Backdrop -->
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeMobileModal()"></div>
+
+        <!-- Modal Content -->
+        <div
+            class="absolute bottom-0 left-0 right-0 bg-[#0B1120] rounded-t-3xl max-h-[70vh] overflow-y-auto animate-slideUp">
+            <!-- Header with close button -->
+            <div class="sticky top-0 bg-[#0B1120] border-b border-white/10 px-4 py-3 flex items-center justify-between">
+                <span class="text-violet-400 font-bold text-sm uppercase tracking-wider">📖 Sentence Analysis</span>
+                <button onclick="closeMobileModal()"
+                    class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
+                    <span class="material-symbols-rounded text-slate-400">close</span>
+                </button>
+            </div>
+
+            <!-- Translation -->
+            <div class="p-4 border-b border-white/10">
+                <div class="text-xs text-violet-400 font-bold uppercase mb-2">🌐 Translation</div>
+                <p id="mobile-translation" class="text-slate-200 text-base leading-relaxed"></p>
+            </div>
+
+            <!-- Grammar -->
+            <div class="p-4 border-b border-white/10">
+                <div class="text-xs text-blue-400 font-bold uppercase mb-2">📐 Grammar</div>
+                <div id="mobile-grammar" class="space-y-2"></div>
+            </div>
+
+            <!-- Vocabulary -->
+            <div class="p-4 pb-20">
+                <div class="text-xs text-emerald-400 font-bold uppercase mb-2">📚 Vocabulary</div>
+                <div id="mobile-vocab" class="space-y-2"></div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes slideUp {
+            from {
+                transform: translateY(100%);
+            }
+
+            to {
+                transform: translateY(0);
+            }
+        }
+
+        .animate-slideUp {
+            animation: slideUp 0.3s ease-out;
+        }
+    </style>
 
     <!-- Glass Header -->
     <header
@@ -1794,14 +1838,14 @@
             document.querySelectorAll('.sentence-span').forEach(el => el.classList.remove('active'));
             element.classList.add('active');
 
-            emptyState.classList.add('hidden');
-            analysisContent.classList.remove('hidden');
-            analysisContent.classList.add('flex');
-
-            // Show analysis panel on mobile
-            const analysisPanel = document.getElementById('analysis-panel');
-            if (analysisPanel && window.innerWidth < 768) {
-                analysisPanel.classList.add('show-panel');
+            // Desktop: show sidebar panel
+            if (window.innerWidth >= 768) {
+                emptyState.classList.add('hidden');
+                analysisContent.classList.remove('hidden');
+                analysisContent.classList.add('flex');
+            } else {
+                // Mobile: show modal popup
+                showMobileModal(data);
             }
 
             // Populate Content
@@ -2310,6 +2354,53 @@
 
         // Auto-show audio bar on all devices after 1 second
         setTimeout(() => showAudioBar(), 1000);
+
+        // === MOBILE MODAL FUNCTIONS ===
+        function showMobileModal(data) {
+            const modal = document.getElementById('mobile-modal');
+            const translation = document.getElementById('mobile-translation');
+            const grammar = document.getElementById('mobile-grammar');
+            const vocab = document.getElementById('mobile-vocab');
+
+            // Populate translation
+            translation.textContent = data.cn;
+
+            // Populate grammar
+            grammar.innerHTML = '';
+            if (data.grammar && data.grammar.length > 0) {
+                data.grammar.forEach(g => {
+                    grammar.innerHTML += `<div class="bg-blue-500/10 p-2 rounded-lg text-sm">
+                        <span class="text-blue-400 font-bold">${g.type}:</span>
+                        <span class="text-slate-300">${g.text}</span>
+                    </div>`;
+                });
+            } else {
+                grammar.innerHTML = '<span class="text-slate-500 text-sm">Simple structure</span>';
+            }
+
+            // Populate vocabulary
+            vocab.innerHTML = '';
+            if (data.vocab && data.vocab.length > 0) {
+                data.vocab.forEach(v => {
+                    vocab.innerHTML += `<div class="bg-emerald-500/10 p-2 rounded-lg text-sm">
+                        <span class="text-emerald-400 font-bold">${v.w}</span>
+                        <span class="text-slate-400"> — ${v.m}</span>
+                    </div>`;
+                });
+            } else {
+                vocab.innerHTML = '<span class="text-slate-500 text-sm">No vocabulary notes</span>';
+            }
+
+            // Show modal
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileModal() {
+            const modal = document.getElementById('mobile-modal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
 
     </script>
 </body>
