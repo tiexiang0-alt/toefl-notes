@@ -11,6 +11,7 @@
         rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0"
         rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
         tailwind.config = {
@@ -1256,8 +1257,133 @@
             }
         }
 
+        // --- Data Visualization Logic ---
+
+        function renderDataDashboard() {
+            const dashboard = document.getElementById('data-dashboard');
+
+            // 1. Definition of 20+ Data Points
+            const dataPoints = [
+                // Economics (China)
+                { type: 'stat', label: "China's GDP Target", value: '5%', trend: 'up', desc: 'Growth target for 2025' },
+                { type: 'stat', label: "China PMI Status", value: 'Expanding', trend: 'up', desc: 'Factory activity in Dec' },
+                { type: 'stat', label: "Consecutive Contraction", value: '8 Months', trend: 'down', desc: 'Ended in December' },
+
+                // Business (Warner/Paramount)
+                { type: 'chart-bar', id: 'warnerBid', title: 'Warner Bros Acquisition Bids ($bn)', labels: ['Netflix Offer', 'Paramount Bid'], data: [83, 108], colors: ['#C0392B', '#2980b9'] },
+                { type: 'stat', label: "Paramount Bid", value: '$108bn', trend: 'neutral', desc: 'Rejected by Warner' },
+
+                // Iran
+                { type: 'stat', label: "Iran Inflation", value: '>40%', trend: 'up', desc: 'Annual rate rises' },
+                { type: 'stat', label: "Currency Status", value: 'Record Low', trend: 'down', desc: 'Rial vs Dollar' },
+
+                // UN
+                { type: 'stat', label: "UN 2026 Budget", value: '$3.45bn', trend: 'down', desc: 'Slashed by 7%' },
+                { type: 'chart-doughnut', id: 'unJobs', title: 'UN Job Cuts', labels: ['Jobs Cut', 'Remaining'], data: [2900, 35000], colors: ['#e74c3c', '#2c3e50'] }, // Approx remaining
+                { type: 'stat', label: "Funding Shortfall", value: '$1.6bn', trend: 'down', desc: 'Total deficit' },
+                { type: 'stat', label: "US Arrears", value: '$1.4bn', trend: 'neutral', desc: 'Owed by America' },
+
+                // Politics (Guinea/India)
+                { type: 'progress', label: "Guinea Election Vote", value: 86, color: 'bg-green-500', desc: 'Gen. Doumbouya share' },
+                { type: 'stat', label: "Guinea Pres. Term", value: '7 Years', trend: 'neutral', desc: 'New mandate' },
+                { type: 'chart-line', id: 'indiaTariff', title: 'India Steel Tariff Trajectory', labels: ['Year 1', 'Year 2', 'Year 3'], data: [12, 11.5, 11], colors: '#f39c12' },
+
+                // People
+                { type: 'stat', label: "Buffett Tenure", value: '60 Years', trend: 'neutral', desc: 'At Berkshire Hathaway' },
+                { type: 'stat', label: "Buffett Age", value: '95', trend: 'neutral', desc: 'Retiring CEO' },
+
+                // Disasters / Events
+                { type: 'stat', label: "Buildings Destroyed", value: '16,000', trend: 'down', desc: 'LA Fires (1 yr ago)' },
+                { type: 'stat', label: "USA Birthday", value: '250th', trend: 'up', desc: 'Semiquincentennial' },
+
+                // US Politics
+                { type: 'progress', label: "Trump Immigration Approval", value: 35, color: 'bg-red-500', desc: 'Plunged since office' },
+                { type: 'stat', label: "Midterm Prediction", value: 'House Flip', trend: 'neutral', desc: 'Dems likely to retake' },
+                { type: 'stat', label: "Protected Rights", value: '14th Amend', trend: 'up', desc: 'Citizenship upheld' }
+            ];
+
+            // 2. Render Loop
+            dataPoints.forEach((item, idx) => {
+                const card = document.createElement('div');
+                card.className = 'glass-panel p-6 rounded-2xl flex flex-col justify-between hover:scale-[1.02] transition duration-300 border border-white/30 bg-white/40 shadow-sm group';
+
+                // STYLE 1: Simple Stat
+                if (item.type === 'stat') {
+                    const trendIcon = item.trend === 'up' ? 'trending_up' : (item.trend === 'down' ? 'trending_down' : 'remove');
+                    const trendColor = item.trend === 'up' ? 'text-green-600' : (item.trend === 'down' ? 'text-red-600' : 'text-gray-500');
+
+                    card.innerHTML = `
+                        <div class="flex justify-between items-start mb-2">
+                            <span class="text-xs font-bold uppercase tracking-wider text-news-dark/50">${item.label}</span>
+                            <span class="material-symbols-rounded ${trendColor} bg-white/50 rounded-full p-1">${trendIcon}</span>
+                        </div>
+                        <div class="text-3xl font-serif font-bold text-news-dark my-1 group-hover:text-news-accent transition">${item.value}</div>
+                        <div class="text-xs text-news-dark/60 font-medium border-t border-news-dark/5 pt-2 mt-auto w-full">${item.desc}</div>
+                    `;
+                }
+
+                // STYLE 2: Progress Bar
+                else if (item.type === 'progress') {
+                    card.innerHTML = `
+                        <div class="flex justify-between items-end mb-4">
+                            <span class="text-xs font-bold uppercase tracking-wider text-news-dark/50">${item.label}</span>
+                            <span class="text-2xl font-serif font-bold text-news-dark">${item.value}%</span>
+                        </div>
+                        <div class="w-full bg-black/10 rounded-full h-3 overflow-hidden">
+                            <div class="${item.color} h-full rounded-full" style="width: ${item.value}%"></div>
+                        </div>
+                        <div class="text-xs text-news-dark/60 font-medium mt-3">${item.desc}</div>
+                    `;
+                }
+
+                // STYLE 3: Chart
+                else if (item.type.startsWith('chart')) {
+                    const canvasId = `chart-${idx}`;
+                    card.innerHTML = `
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-news-dark/50 mb-4">${item.title}</h4>
+                        <div class="relative h-40 w-full">
+                            <canvas id="${canvasId}"></canvas>
+                        </div>
+                    `;
+                    dashboard.appendChild(card); // Append first to ensure canvas is in DOM
+
+                    // Init Chart.js
+                    setTimeout(() => {
+                        const ctx = document.getElementById(canvasId).getContext('2d');
+                        new Chart(ctx, {
+                            type: item.type.split('-')[1], // bar, line, doughnut
+                            data: {
+                                labels: item.labels,
+                                datasets: [{
+                                    label: item.title,
+                                    data: item.data,
+                                    backgroundColor: Array.isArray(item.colors) ? item.colors.map(c => c + 'CC') : item.colors, // Add transparency
+                                    borderColor: item.colors,
+                                    borderWidth: 1,
+                                    tension: 0.4
+                                }]
+                            },
+                            options: {
+                                responsive: true,
+                                maintainAspectRatio: false,
+                                plugins: { legend: { display: false } }, // Hide legend for clean look
+                                scales: item.type === 'chart-doughnut' ? {} : {
+                                    y: { beginAtZero: false, grid: { display: false } },
+                                    x: { grid: { display: false } }
+                                }
+                            }
+                        });
+                    }, 50);
+                    return; // Already appended
+                }
+
+                dashboard.appendChild(card);
+            });
+        }
+
         // Init
         renderArticle();
+        renderDataDashboard();
 
     </script>
 </body>
