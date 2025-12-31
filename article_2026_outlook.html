@@ -23,7 +23,7 @@
                     colors: {
                         news: {
                             paper: '#F3F1E9',
-                            dark: '#2D2D2D',
+                            dark: '#1a1a1a',
                             accent: '#C0392B',
                         }
                     }
@@ -33,17 +33,27 @@
     </script>
 
     <style>
-        /* Mesh Gradient Background */
+        :root {
+            /* Warm Minimalism / Cloud Dancer Palette */
+            --bg-gradient: linear-gradient(135deg, #e0eafc 0%, #cfdef3 100%);
+            --glass-bg: rgba(255, 255, 255, 0.45);
+            --glass-border: rgba(255, 255, 255, 0.6);
+            --glass-highlight: rgba(255, 255, 255, 0.8);
+            --text-color: #1a1a1a;
+        }
+
+        /* Animated Warm Mesh Gradient */
         body {
             font-family: 'Outfit', sans-serif;
-            background-color: #F3F1E9;
-            color: #2D2D2D;
+            background-color: #e0eafc;
+            color: var(--text-color);
             background-image:
-                radial-gradient(at 0% 0%, hsla(253, 16%, 7%, 1) 0, transparent 50%),
-                radial-gradient(at 50% 0%, hsla(225, 39%, 30%, 1) 0, transparent 50%),
-                radial-gradient(at 100% 0%, hsla(339, 49%, 30%, 1) 0, transparent 50%);
+                radial-gradient(at 0% 0%, hsla(210, 40%, 90%, 1) 0, transparent 50%),
+                radial-gradient(at 100% 0%, hsla(280, 20%, 90%, 1) 0, transparent 50%),
+                radial-gradient(at 100% 100%, hsla(200, 30%, 85%, 1) 0, transparent 50%),
+                radial-gradient(at 0% 100%, hsla(240, 30%, 95%, 1) 0, transparent 50%);
             background-size: 200% 200%;
-            animation: gradient-move 15s ease infinite;
+            animation: gradient-move 20s ease infinite;
         }
 
         @keyframes gradient-move {
@@ -60,35 +70,49 @@
             }
         }
 
-        /* Glassmorphism Cards */
+        /* Glassmorphism v2 Card */
         .glass-panel {
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--glass-bg);
+            /* The Core Effects */
             backdrop-filter: blur(16px) saturate(180%);
             -webkit-backdrop-filter: blur(16px) saturate(180%);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            /* Multi-layered borders for v2 "depth" */
+            border: 1px solid var(--glass-border);
+            /* V2 Multi-shadow for a tactile "lift" */
+            box-shadow:
+                0 4px 6px rgba(0, 0, 0, 0.05),
+                0 10px 20px rgba(0, 0, 0, 0.1),
+                inset 0 0 0 1px var(--glass-highlight);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        @media (prefers-reduced-transparency: reduce) {
+            .glass-panel {
+                background: rgba(255, 255, 255, 0.95);
+                backdrop-filter: none;
+            }
         }
 
         .sentence-span {
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: all 0.2s ease;
             padding: 2px 4px;
             border-radius: 6px;
             border: 1px solid transparent;
         }
 
         .sentence-span:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            border-color: rgba(255, 255, 255, 0.2);
+            background-color: rgba(0, 0, 0, 0.05);
+            border-color: rgba(0, 0, 0, 0.1);
         }
 
         .sentence-span.active {
-            background: rgba(255, 255, 255, 0.25);
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(4px);
-            border-color: rgba(255, 255, 255, 0.4);
-            color: white;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border-color: rgba(255, 255, 255, 0.9);
+            color: #C0392B;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
         }
 
         /* Scrollbar Hide */
@@ -108,21 +132,20 @@
     </style>
 </head>
 
-<body class="h-screen flex flex-col overflow-hidden text-gray-100">
+<body class="h-screen flex flex-col overflow-hidden text-news-dark">
 
     <!-- Glass Header -->
     <header
         class="h-16 flex items-center justify-between px-6 flex-shrink-0 z-30 relative glass-panel border-b-0 rounded-b-2xl mx-4 mt-4">
         <div class="flex items-center gap-3">
             <div
-                class="bg-white/20 text-white w-10 h-10 flex items-center justify-center font-bold text-xl rounded backdrop-blur-md border border-white/30">
+                class="bg-news-accent/90 text-white w-10 h-10 flex items-center justify-center font-bold text-xl rounded shadow-md">
                 T</div>
-            <h1 class="font-serif font-bold text-lg tracking-tight text-white drop-shadow-md">TOEFL Reading Lab</h1>
+            <h1 class="font-serif font-bold text-lg tracking-tight text-news-dark">TOEFL Reading Lab</h1>
         </div>
-        <div class="text-sm font-sans text-gray-200 flex items-center gap-4">
-            <span class="bg-white/10 px-3 py-1 rounded-full border border-white/20">📅 Jan 2026 Edition</span>
-            <a href="toefl_notes.html"
-                class="flex items-center gap-1 hover:text-white transition opacity-80 hover:opacity-100">
+        <div class="text-sm font-sans text-news-dark/70 flex items-center gap-4">
+            <span class="bg-white/40 px-3 py-1 rounded-full border border-white/50 shadow-sm">📅 Jan 2026 Edition</span>
+            <a href="toefl_notes.html" class="flex items-center gap-1 hover:text-news-accent transition">
                 <span class="material-symbols-rounded text-lg">school</span> Back to Course
             </a>
         </div>
@@ -136,18 +159,19 @@
 
             <!-- Hero Image Background for Article Header -->
             <div class="relative h-64 w-full">
-                <img src="images/header_news_2026.png" class="w-full h-full object-cover rounded-t-3xl opacity-90">
-                <div class="absolute inset-0 bg-gradient-to-t from-[#1e1e2e]/90 to-transparent"></div>
+                <img src="images/header_news_2026.png" class="w-full h-full object-cover rounded-t-[23px] opacity-90">
+                <div class="absolute inset-0 bg-gradient-to-t from-white/20 to-transparent mix-blend-overlay"></div>
+                <!-- Text Overlay -->
                 <div class="absolute bottom-6 left-8">
                     <span
-                        class="bg-red-500/80 text-white font-sans font-bold text-xs uppercase tracking-widest mb-2 inline-block px-2 py-1 rounded backdrop-blur-sm">The
+                        class="bg-news-accent text-white font-sans font-bold text-xs uppercase tracking-widest mb-2 inline-block px-2 py-1 rounded shadow-lg">The
                         World This Week</span>
                     <h1 class="text-4xl md:text-5xl font-bold text-white hero-text font-serif">Global Outlook 2026</h1>
                 </div>
             </div>
 
-            <article class="prose prose-lg prose-invert max-w-none font-serif leading-loose text-gray-200 p-8 md:p-12">
-                <p class="font-sans text-gray-400 italic text-base border-l-4 border-red-500 pl-4 mb-8">
+            <article class="prose prose-lg prose-slate max-w-none font-serif leading-loose text-news-dark p-8 md:p-12">
+                <p class="font-sans text-news-dark/60 italic text-base border-l-4 border-news-accent pl-4 mb-8">
                     Interactive Reading Module: Click any sentence to analyze structure and key vocabulary.
                 </p>
 
@@ -166,57 +190,57 @@
 
             <!-- Empty State -->
             <div id="empty-state"
-                class="flex-1 flex flex-col items-center justify-center p-8 text-center text-gray-400">
+                class="flex-1 flex flex-col items-center justify-center p-8 text-center text-news-dark/50">
                 <div
-                    class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center mb-6 border border-white/10 backdrop-blur-sm">
-                    <span class="material-symbols-rounded text-4xl text-gray-300">touch_app</span>
+                    class="w-20 h-20 bg-black/5 rounded-full flex items-center justify-center mb-6 border border-black/5">
+                    <span class="material-symbols-rounded text-4xl text-news-dark/30">touch_app</span>
                 </div>
-                <p class="text-lg text-gray-300">Select a sentence<br>to begin analysis.</p>
+                <p class="text-lg text-news-dark/70">Select a sentence<br>to begin analysis.</p>
             </div>
 
             <!-- Analysis Content -->
             <div id="analysis-content" class="hidden flex-col h-full overflow-y-auto scrollbar-hide">
 
                 <!-- 1. Translation Card -->
-                <div class="p-6 border-b border-white/10 bg-white/5">
-                    <h3 class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-3 flex items-center gap-2">
+                <div class="p-6 border-b border-black/5 bg-white/40">
+                    <h3
+                        class="text-xs font-bold text-news-dark/50 uppercase tracking-widest mb-3 flex items-center gap-2">
                         <span class="material-symbols-rounded text-sm">translate</span> Translation
                     </h3>
-                    <p id="analysis-cn" class="text-lg font-sans text-white font-medium leading-relaxed drop-shadow-sm">
-                    </p>
+                    <p id="analysis-cn" class="text-lg font-sans text-news-dark font-medium leading-relaxed"></p>
                 </div>
 
                 <!-- 2. Grammar Breakdown -->
-                <div class="p-6 border-b border-white/10">
-                    <h3 class="text-xs font-bold text-blue-300 uppercase tracking-widest mb-4 flex items-center gap-2">
+                <div class="p-6 border-b border-black/5">
+                    <h3 class="text-xs font-bold text-blue-600 uppercase tracking-widest mb-4 flex items-center gap-2">
                         <span class="material-symbols-rounded text-sm">account_tree</span> Grammar Structure
                     </h3>
-                    <div id="analysis-grammar" class="space-y-3 font-mono text-sm text-gray-300">
+                    <div id="analysis-grammar" class="space-y-3 font-mono text-sm text-news-dark/80">
                         <!-- Populated by JS -->
                     </div>
                 </div>
 
                 <!-- 3. Key Vocabulary -->
-                <div class="p-6 flex-1 bg-amber-900/10">
-                    <h3 class="text-xs font-bold text-amber-300 uppercase tracking-widest mb-4 flex items-center gap-2">
+                <div class="p-6 flex-1 bg-amber-50/50">
+                    <h3 class="text-xs font-bold text-amber-600 uppercase tracking-widest mb-4 flex items-center gap-2">
                         <span class="material-symbols-rounded text-sm">menu_book</span> Key Vocabulary
                     </h3>
-                    <div id="analysis-vocab" class="space-y-4 text-gray-200">
+                    <div id="analysis-vocab" class="space-y-4 text-news-dark">
                         <!-- Populated by JS -->
                     </div>
                 </div>
 
                 <!-- Audio Bar -->
                 <div
-                    class="p-4 bg-black/20 backdrop-blur-md border-t border-white/10 flex items-center gap-4 sticky bottom-0">
+                    class="p-4 bg-white/60 backdrop-blur-md border-t border-white/40 flex items-center gap-4 sticky bottom-0 shadow-[0_-5px_15px_rgba(0,0,0,0.05)]">
                     <button id="main-audio-btn"
-                        class="w-12 h-12 rounded-full bg-white text-black flex items-center justify-center shadow-lg hover:scale-105 transition hover:bg-gray-200">
+                        class="w-12 h-12 rounded-full bg-news-dark text-white flex items-center justify-center shadow-lg hover:scale-105 transition hover:bg-gray-800">
                         <span class="material-symbols-rounded text-2xl">play_arrow</span>
                     </button>
                     <div class="flex-1">
-                        <div class="text-xs text-gray-400 font-bold uppercase mb-1">Native Audio</div>
-                        <div class="h-1 bg-white/20 rounded-full w-full overflow-hidden">
-                            <div class="h-full bg-white w-0 transition-all duration-300" id="audio-progress"></div>
+                        <div class="text-xs text-news-dark/50 font-bold uppercase mb-1">Native Audio</div>
+                        <div class="h-1 bg-black/10 rounded-full w-full overflow-hidden">
+                            <div class="h-full bg-news-dark w-0 transition-all duration-300" id="audio-progress"></div>
                         </div>
                     </div>
                 </div>
@@ -1114,31 +1138,34 @@
         const analysisGrammar = document.getElementById('analysis-grammar');
         const analysisVocab = document.getElementById('analysis-vocab');
 
-        let allSentences = []; // Flattens array for easier mapping
+        const audioProgress = document.getElementById('audio-progress');
+        const mainAudioBtn = document.getElementById('main-audio-btn');
+
+        let currentAudio = null;
+        const audioPrefixes = ['china', 'warner', 'iran', 'un', 'guinea', 'india', 'buffett', 'figure', 'dems', 'deport', 'court', 'bday'];
 
         function renderArticle() {
             articleSections.forEach((section, sectionIdx) => {
                 // Section Header
                 if (section.topic) {
                     const h2 = document.createElement('h2');
-                    h2.className = 'text-2xl font-sans font-bold text-gray-900 mt-8 mb-4 border-l-4 border-news-accent pl-3';
+                    h2.className = 'text-2xl font-sans font-bold text-news-dark mt-10 mb-6 border-l-4 border-news-accent pl-4 drop-shadow-sm';
                     h2.innerText = section.topic;
                     container.appendChild(h2);
                 }
 
                 const p = document.createElement('p');
-                p.className = 'mb-6 text-lg text-gray-800 leading-loose';
+                p.className = 'mb-6 text-lg text-news-dark/90 leading-loose';
 
                 section.sentences.forEach((sent, sIdx) => {
                     const span = document.createElement('span');
                     span.className = 'sentence-span';
-                    span.innerText = sent.en + ' '; // Add space
+                    span.innerText = sent.en + ' ';
 
-                    // Store data reference
-                    const globalIdx = allSentences.length;
-                    allSentences.push(sent);
+                    // Construct Audio ID
+                    const audioId = `${audioPrefixes[sectionIdx]}_${sectionIdx}_${sIdx}`;
 
-                    span.onclick = () => activateSentence(span, sent);
+                    span.onclick = () => activateSentence(span, sent, audioId);
 
                     p.appendChild(span);
                 });
@@ -1146,7 +1173,7 @@
             });
         }
 
-        function activateSentence(element, data) {
+        function activateSentence(element, data, audioId) {
             // UI State
             document.querySelectorAll('.sentence-span').forEach(el => el.classList.remove('active'));
             element.classList.add('active');
@@ -1163,8 +1190,8 @@
             if (data.grammar && data.grammar.length > 0) {
                 data.grammar.forEach(g => {
                     const div = document.createElement('div');
-                    div.className = 'bg-slate-50 p-3 rounded border border-slate-200';
-                    div.innerHTML = `<span class="grammar-tag bg-indigo-100 text-indigo-700 mr-2">${g.type}</span> <span class="text-slate-700">${g.text}</span>`;
+                    div.className = 'bg-white/60 p-3 rounded border border-white/50 hover:bg-white/80 transition shadow-sm';
+                    div.innerHTML = `<span class="text-xs font-bold text-blue-600 uppercase tracking-wide mr-2 bg-blue-100 px-2 py-0.5 rounded">${g.type}</span> <span class="text-news-dark/80 font-medium">${g.text}</span>`;
                     analysisGrammar.appendChild(div);
                 });
             } else {
@@ -1176,18 +1203,56 @@
             if (data.vocab && data.vocab.length > 0) {
                 data.vocab.forEach(v => {
                     const div = document.createElement('div');
-                    div.className = 'flex items-start gap-3';
+                    div.className = 'flex items-start gap-3 group';
                     div.innerHTML = `
-                        <div class="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 flex-shrink-0"></div>
+                        <div class="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 flex-shrink-0 shadow-[0_0_8px_rgba(245,158,11,0.4)]"></div>
                         <div>
-                            <p class="font-bold text-slate-800 border-b border-amber-200 inline-block mb-1">${v.w}</p>
-                            <p class="text-sm text-slate-600">${v.m}</p>
+                            <p class="font-bold text-news-dark border-b border-black/10 inline-block mb-1 group-hover:border-amber-400 transition">${v.w}</p>
+                            <p class="text-sm text-news-dark/70">${v.m}</p>
                         </div>
                     `;
                     analysisVocab.appendChild(div);
                 });
             } else {
                 analysisVocab.innerHTML = '<span class="text-gray-400 italic text-sm">No advanced vocabulary.</span>';
+            }
+
+            // Audio Setup
+            setupAudio(audioId);
+        }
+
+        function setupAudio(audioId) {
+            if (currentAudio) {
+                currentAudio.pause();
+                currentAudio = null;
+            }
+
+            const audioPath = `audio/news_2026/${audioId}.mp3`;
+            const audio = new Audio(audioPath);
+            currentAudio = audio;
+
+            // Reset UI
+            mainAudioBtn.innerHTML = '<span class="material-symbols-rounded text-2xl">play_arrow</span>';
+            audioProgress.style.width = '0%';
+            mainAudioBtn.onclick = () => toggleAudio(audio);
+
+            audio.ontimeupdate = () => {
+                const percent = (audio.currentTime / audio.duration) * 100;
+                audioProgress.style.width = `${percent}%`;
+            };
+
+            audio.onended = () => {
+                mainAudioBtn.innerHTML = '<span class="material-symbols-rounded text-2xl">play_arrow</span>';
+            };
+        }
+
+        function toggleAudio(audio) {
+            if (audio.paused) {
+                audio.play();
+                mainAudioBtn.innerHTML = '<span class="material-symbols-rounded text-2xl">pause</span>';
+            } else {
+                audio.pause();
+                mainAudioBtn.innerHTML = '<span class="material-symbols-rounded text-2xl">play_arrow</span>';
             }
         }
 
