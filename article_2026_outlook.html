@@ -378,7 +378,210 @@
         .header-glass {
             background: rgba(11, 17, 32, 0.8);
             backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* ===== MOBILE RESPONSIVE STYLES ===== */
+        @media (max-width: 768px) {
+
+            /* Hide Reading HUD on mobile - show simplified version */
+            .reading-hud {
+                top: auto;
+                bottom: 70px;
+                right: 10px;
+                left: 10px;
+                min-width: auto;
+                padding: 10px 14px;
+                border-radius: 12px;
+            }
+
+            /* Simplified header for mobile */
+            .header-glass {
+                height: 56px;
+                margin: 8px;
+                padding: 0 12px;
+                border-radius: 16px;
+            }
+
+            .header-glass h1 {
+                font-size: 14px;
+            }
+
+            /* Hide secondary nav items on mobile */
+            .header-glass .hidden-mobile {
+                display: none;
+            }
+
+            /* Stack main content vertically */
+            main {
+                flex-direction: column !important;
+                padding: 8px !important;
+                gap: 8px !important;
+            }
+
+            /* Full width article panel */
+            main>div:first-child {
+                border-radius: 20px !important;
+            }
+
+            /* Analysis panel as bottom sheet */
+            main>div:last-child {
+                position: fixed !important;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                width: 100% !important;
+                max-height: 60vh;
+                border-radius: 20px 20px 0 0 !important;
+                z-index: 50;
+                transform: translateY(calc(100% - 60px));
+                transition: transform 0.3s ease;
+            }
+
+            main>div:last-child:focus-within,
+            main>div:last-child.expanded {
+                transform: translateY(0);
+            }
+
+            /* Mobile drag handle for bottom sheet */
+            .mobile-drag-handle {
+                display: block;
+                width: 40px;
+                height: 4px;
+                background: rgba(255, 255, 255, 0.3);
+                border-radius: 2px;
+                margin: 12px auto;
+            }
+
+            /* Hero section adjustments */
+            .topic-image {
+                height: 180px !important;
+            }
+
+            .topic-image h1 {
+                font-size: 1.75rem !important;
+            }
+
+            /* Smaller article padding */
+            article {
+                padding: 16px !important;
+            }
+
+            /* Legend - horizontal scroll on mobile */
+            .glass-popup {
+                overflow-x: auto;
+                flex-wrap: nowrap !important;
+                padding: 12px !important;
+                gap: 8px !important;
+            }
+
+            /* Sentence spans - larger touch targets */
+            .sentence-span {
+                padding: 8px 10px;
+                margin: 4px 0;
+                line-height: 1.8;
+            }
+
+            /* Section headers - not sticky on mobile */
+            .topic-section h2 {
+                position: relative !important;
+                font-size: 1.25rem !important;
+            }
+
+            /* Topic images smaller on mobile */
+            .topic-section img {
+                height: 160px !important;
+            }
+
+            /* Widget grid - single column */
+            [id^="widgets-"] {
+                grid-template-columns: 1fr !important;
+            }
+
+            /* Glass panels - less hover effect on touch */
+            .glass-panel:hover {
+                transform: none;
+            }
+
+            /* Typography adjustments */
+            p {
+                font-size: 1rem !important;
+                line-height: 1.75 !important;
+            }
+
+            /* Analysis panel cards - compact */
+            #analysis-content>div {
+                padding: 12px !important;
+            }
+
+            /* Audio bar - fixed at bottom */
+            #analysis-content>div:last-child {
+                position: sticky;
+                bottom: 0;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 480px) {
+            .reading-hud {
+                display: none;
+            }
+
+            .header-glass h1 {
+                font-size: 12px;
+            }
+
+            .header-glass>div:last-child {
+                display: none;
+            }
+
+            article {
+                padding: 12px !important;
+            }
+
+            .sentence-span {
+                font-size: 15px;
+            }
+        }
+
+        /* Tablet landscape */
+        @media (min-width: 769px) and (max-width: 1024px) {
+            main>div:last-child {
+                width: 320px !important;
+            }
+        }
+
+        /* Touch device optimizations */
+        @media (hover: none) and (pointer: coarse) {
+            .glass-panel:hover {
+                transform: none;
+                box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 0 0 1px var(--glass-highlight);
+            }
+
+            .sentence-span:hover {
+                background: transparent;
+                border-color: transparent;
+            }
+
+            .sentence-span.active {
+                background: linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(139, 92, 246, 0.1));
+            }
+        }
+
+        /* Desktop hidden class */
+        .mobile-only {
+            display: none;
+        }
+
+        @media (max-width: 768px) {
+            .mobile-only {
+                display: block;
+            }
+
+            .desktop-only {
+                display: none;
+            }
         }
     </style>
 </head>
@@ -468,8 +671,12 @@
         </div>
 
         <!-- Right: Analysis Panel (Glass Card) -->
-        <div
+        <div id="analysis-panel"
             class="w-full md:w-[450px] glass-panel rounded-3xl flex flex-col z-20 transition-transform duration-300 overflow-hidden">
+
+            <!-- Mobile Drag Handle -->
+            <div class="mobile-only mobile-drag-handle"
+                onclick="document.getElementById('analysis-panel').classList.toggle('expanded')"></div>
 
             <!-- Empty State -->
             <div id="empty-state" class="flex-1 flex flex-col items-center justify-center p-8 text-center">
