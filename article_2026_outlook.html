@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TOEFL Reading: The World in 2026</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;1,400&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@48,400,1,0"
+        rel="stylesheet">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        news: {
+                            paper: '#F9F7F1',
+                            dark: '#1A1A1A',
+                            accent: '#C0392B', // Economist Red
+                            blue: '#2980B9'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #F9F7F1;
+            color: #1A1A1A;
+        }
+
+        .sentence-span {
+            cursor: pointer;
+            transition: all 0.2s;
+            padding: 2px 0;
+            border-radius: 4px;
+        }
+
+        .sentence-span:hover {
+            background-color: rgba(41, 128, 185, 0.1);
+        }
+
+        .sentence-span.active {
+            background-color: #FDE68A;
+            /* highlight color */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .vocab-highlight {
+            border-bottom: 2px solid #C0392B;
+            font-weight: 600;
+        }
+
+        .grammar-tag {
+            font-size: 0.75rem;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+    </style>
+</head>
+
+<body class="h-screen flex flex-col overflow-hidden">
+
+    <!-- Top Navigation -->
+    <header
+        class="bg-white border-b border-gray-200 h-16 flex items-center justify-between px-6 flex-shrink-0 z-20 shadow-sm relative">
+        <div class="flex items-center gap-3">
+            <div class="bg-news-accent text-white w-10 h-10 flex items-center justify-center font-bold text-xl rounded">
+                T</div>
+            <h1 class="font-serif font-bold text-lg tracking-tight">TOEFL Reading Lab</h1>
+        </div>
+        <div class="text-sm font-sans text-gray-500 flex items-center gap-4">
+            <span>📅 Jan 2026 Edition</span>
+            <a href="toefl_notes.html" class="flex items-center gap-1 hover:text-news-accent transition">
+                <span class="material-symbols-rounded text-lg">school</span> Back to Course
+            </a>
+        </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="flex-1 flex overflow-hidden">
+
+        <!-- Left: Article Content (Scrollable) -->
+        <div class="flex-1 overflow-y-auto p-8 md:p-12 max-w-3xl mx-auto scrollbar-hide">
+            <article class="prose prose-lg prose-slate max-w-none font-serif leading-loose text-gray-800">
+                <div class="mb-8 border-b border-gray-200 pb-8">
+                    <span class="text-news-accent font-sans font-bold text-xs uppercase tracking-widest mb-2 block">The
+                        World This Week</span>
+                    <h1 class="text-4xl font-bold mb-4 text-news-dark mt-2">Global Outlook: China, Business, and
+                        Politics</h1>
+                    <p class="font-sans text-gray-500 italic text-base">Interactive Reading Module: Click any sentence
+                        to analyze structure and vocabulary.</p>
+                </div>
+
+                <!-- Sections Container -->
+                <div id="article-container">
+                    <!-- JS will populate sentences here -->
+                </div>
+
+                <div class="h-32"></div> <!-- Spacer -->
+            </article>
+        </div>
+
+        <!-- Right: Analysis Panel (Sticky/Fixed) -->
+        <div
+            class="w-full md:w-[450px] bg-white border-l border-gray-200 shadow-xl flex flex-col z-10 transition-transform duration-300 transform translate-x-full md:translate-x-0 group">
+
+            <!-- Empty State -->
+            <div id="empty-state"
+                class="flex-1 flex flex-col items-center justify-center p-8 text-center text-gray-400">
+                <span class="material-symbols-rounded text-6xl mb-4 text-gray-200">touch_app</span>
+                <p>Click on any sentence in the article<br>to see the detailed breakdown.</p>
+            </div>
+
+            <!-- Analysis Content -->
+            <div id="analysis-content" class="hidden flex-col h-full overflow-y-auto">
+
+                <!-- 1. Translation Card -->
+                <div class="p-6 bg-slate-50 border-b border-slate-100">
+                    <h3 class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-3">Translation</h3>
+                    <p id="analysis-cn" class="text-lg font-sans text-slate-800 font-medium leading-relaxed"></p>
+                </div>
+
+                <!-- 2. Grammar Breakdown -->
+                <div class="p-6 border-b border-slate-100">
+                    <h3
+                        class="text-xs font-bold text-indigo-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                        <span class="material-symbols-rounded text-sm">account_tree</span> Grammar Structure
+                    </h3>
+                    <div id="analysis-grammar" class="space-y-3 font-mono text-sm">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- 3. Key Vocabulary -->
+                <div class="p-6 flex-1 bg-amber-50/30">
+                    <h3 class="text-xs font-bold text-amber-500 uppercase tracking-widest mb-4 flex items-center gap-2">
+                        <span class="material-symbols-rounded text-sm">menu_book</span> Key Vocabulary
+                    </h3>
+                    <div id="analysis-vocab" class="space-y-4">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+
+                <!-- Audio Bar -->
+                <div class="p-4 bg-white border-t border-gray-200 flex items-center gap-4 sticky bottom-0">
+                    <button
+                        class="w-12 h-12 rounded-full bg-news-accent text-white flex items-center justify-center shadow-lg hover:scale-105 transition">
+                        <span class="material-symbols-rounded text-2xl">play_arrow</span>
+                    </button>
+                    <div class="flex-1">
+                        <div class="text-xs text-gray-400 font-bold uppercase mb-1">Listen to Sentence</div>
+                        <div class="h-1 bg-gray-200 rounded-full w-full overflow-hidden">
+                            <div class="h-full bg-news-accent w-0" id="audio-progress"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Initial Data & Logic -->
+    <script>
+        // Article Data (Excerpt based on user input, structured for learning)
+        const articleSections = [
+            {
+                topic: "China's Economy",
+                sentences: [
+                    {
+                        en: "China’s leader, Xi Jinping, said the economy would meet its growth target in 2025, with GDP expanding by around 5%.",
+                        cn: "中国领导人习近平表示，2025年经济将达到增长目标，GDP将增长约5%。",
+                        grammar: [
+                            { type: "Subject", text: "China’s leader, Xi Jinping" },
+                            { type: "Verb", text: "said" },
+                            { type: "Object Clause", text: "the economy would meet its growth target..." },
+                            { type: "Modifier", text: "with GDP expanding by around 5% (伴随状语)" }
+                        ],
+                        vocab: [
+                            { w: "meet (target)", m: "v. 达到（目标）" },
+                            { w: "expand", m: "v. 扩张，增长" }
+                        ]
+                    },
+                    {
+                        en: "Growth in exports buoyed the economy this year, though slowing investment and a property crisis dampened sentiment.",
+                        cn: "今年出口增长支撑了经济，尽管投资放缓和房地产危机抑制了市场情绪。",
+                        grammar: [
+                            { type: "Subj", text: "Growth in exports" },
+                            { type: "Verb", text: "buoyed" },
+                            { type: "Obj", text: "the economy" },
+                            { type: "Conjunction", text: "though" },
+                            { type: "Subj 2", text: "slowing investment..." },
+                            { type: "Verb 2", text: "dampened" }
+                        ],
+                        vocab: [
+                            { w: "buoy", m: "v. 支撑，提振 (keep afloat)" },
+                            { w: "dampen", m: "v. 抑制，泼冷水" },
+                            { w: "sentiment", m: "n. 情绪，观点" }
+                        ]
+                    },
+                    {
+                        en: "Meanwhile China’s official manufacturing purchasing managers’ index showed that factory activity increased unexpectedly in December, ending eight consecutive months of contraction.",
+                        cn: "与此同时，中国官方制造业采购经理人指数显示，12月工厂活动意外增长，结束了连续八个月的萎缩。",
+                        grammar: [
+                            { type: "Subj", text: "China’s official... index (PMI)" },
+                            { type: "Verb", text: "showed" },
+                            { type: "Obj Clause", text: "that factory activity increased..." },
+                            { type: "Modifier", text: "ending eight consecutive months... (Result)" }
+                        ],
+                        vocab: [
+                            { w: "consecutive", m: "adj. 连续的" },
+                            { w: "contraction", m: "n. 收缩，萎缩" }
+                        ]
+                    }
+                ]
+            },
+            {
+                topic: "Warner Bros vs Paramount",
+                sentences: [
+                    {
+                        en: "Warner Bros Discovery plans to reject its rival Paramount’s bid of $108bn to purchase the Hollywood studio.",
+                        cn: "华纳兄弟探索公司计划拒绝其竞争对手派拉蒙以1080亿美元收购这家好莱坞制片厂的报价。",
+                        grammar: [
+                            { type: "Subj", text: "Warner Bros Discovery" },
+                            { type: "Verb", text: "plans to reject" },
+                            { type: "Obj", text: "Paramount’s bid" },
+                            { type: "Modifier", text: "to purchase... (Infinitive/Purpose)" }
+                        ],
+                        vocab: [
+                            { w: "bid", m: "n. 出价，投标" },
+                            { w: "rival", m: "n. 竞争对手" }
+                        ]
+                    },
+                    {
+                        en: "According to reports, Warner’s board still considers the $83bn offer from Netflix to be superior.",
+                        cn: "据报道，华纳董事会仍认为Netflix提出的830亿美元的报价更优。",
+                        grammar: [
+                            { type: "Adv", text: "According to reports" },
+                            { type: "Subj", text: "Warner’s board" },
+                            { type: "Verb", text: "considers" },
+                            { type: "Obj", text: "the $83bn offer" },
+                            { type: "Comp", text: "to be superior" }
+                        ],
+                        vocab: [
+                            { w: "superior", m: "adj. 更优越的，上级的" }
+                        ]
+                    }
+                ]
+            },
+            {
+                topic: "Politics: Democrats in 2026",
+                sentences: [
+                    {
+                        en: "Donald Trump’s return to the presidency left Democrats in disarray.",
+                        cn: "唐纳德·特朗普重返总统宝座让民主党人陷入混乱。",
+                        grammar: [
+                            { type: "Subj", text: "Donald Trump’s return..." },
+                            { type: "Verb", text: "left" },
+                            { type: "Obj", text: "Democrats" },
+                            { type: "Comp", text: "in disarray" }
+                        ],
+                        vocab: [
+                            { w: "presidency", m: "n. 总统职位/任期" },
+                            { w: "disarray", m: "n. 混乱，无序" }
+                        ]
+                    },
+                    {
+                        en: "They lacked leadership and direction.",
+                        cn: "他们缺乏领导力和方向。",
+                        grammar: [],
+                        vocab: []
+                    },
+                    {
+                        en: "Still, the party notched some impressive wins in state elections in November.",
+                        cn: "尽管如此，该党在11月的州选举中还是取得了一些令人印象深刻的胜利。",
+                        grammar: [
+                            { type: "Verb Phrase", text: "notch... wins (赢下，刻痕)" }
+                        ],
+                        vocab: [
+                            { w: "notch", m: "v. 赢取，获得 (notch a win)" }
+                        ]
+                    },
+                    {
+                        en: "And in 2026 its fight back could gain strength.",
+                        cn: "到了2026年，它的反击可能会增强。",
+                        grammar: [], vocab: []
+                    },
+                    {
+                        en: "That would grant the Democrats subpoena power and the ability to go on the offensive.",
+                        cn: "这将赋予民主党传票权以及发起进攻的能力。",
+                        grammar: [
+                            { type: "Verb", text: "grant (give)" },
+                            { type: "Ind Obj", text: "Democrats" },
+                            { type: "Dir Obj", text: "subpoena power and the ability..." }
+                        ],
+                        vocab: [
+                            { w: "subpoena", m: "n. 传票; v. 传唤" },
+                            { w: "offensive", m: "n. 攻势 (go on the offensive)" }
+                        ]
+                    }
+                ]
+            },
+            {
+                topic: "Iran Protests",
+                sentences: [
+                    {
+                        en: "Iran appointed a new central bank governor and announced a public holiday as anger over living standards prompted the largest anti-government demonstrations in years.",
+                        cn: "伊朗任命了一位新的央行行长并宣布公共假期，因为对生活水平的愤怒引发了多年来最大规模的反政府示威活动。",
+                        grammar: [
+                            { type: "Subj", text: "Iran" },
+                            { type: "Verb", text: "appointed... and announced" },
+                            { type: "Obj", text: "governor... holiday" },
+                            { type: "Adverbial", text: "as anger prompted..." }
+                        ],
+                        vocab: [
+                            { w: "appoint", m: "v. 任命" },
+                            { w: "prompt", m: "v. 促使，引发" },
+                            { w: "demonstration", m: "n. 示威游行" }
+                        ]
+                    },
+                    {
+                        en: "The protests, which began on Sunday, have been fuelled by the country’s ailing economy.",
+                        cn: "周日开始的抗议活动受到该国糟糕经济的推动。",
+                        grammar: [
+                            { type: "Subj", text: "The protests" },
+                            { type: "Clause", text: "which began on Sunday (Non-restrictive)" },
+                            { type: "Verb (Passive)", text: "have been fuelled by" },
+                            { type: "Agent", text: "the country’s ailing economy" }
+                        ],
+                        vocab: [
+                            { w: "fuel", m: "v. 加剧，刺激 (fuel the fire)" },
+                            { w: "ailing", m: "adj. 生病的，处境困难的" }
+                        ]
+                    },
+                    {
+                        en: "Iran’s currency, the rial, has plunged to record lows against the dollar and the annual inflation rate has risen above 40%.",
+                        cn: "伊朗货币里亚尔兑美元汇率跌至历史新低，年通胀率已升至40%以上。",
+                        grammar: [
+                            { type: "Subj", text: "Iran’s currency" },
+                            { type: "Appositive", text: "the rial" },
+                            { type: "Verb", text: "hel plunged" },
+                            { type: "Prep Phrase", text: "to record lows" }
+                        ],
+                        vocab: [
+                            { w: "plunge", m: "v. 暴跌，骤降" },
+                            { w: "inflation", m: "n. 通货膨胀" }
+                        ]
+                    }
+                ]
+            },
+            {
+                topic: "UN Budget Crisis",
+                sentences: [
+                    {
+                        en: "The United Nations slashed its budget for 2026 by 7%, to $3.45bn, and cut 2,900 jobs.",
+                        cn: "联合国将2026年的预算削减了7%，至34.5亿美元，并裁减了2900个工作岗位。",
+                        grammar: [
+                            { type: "Subj", text: "The United Nations" },
+                            { type: "Verb", text: "slashed... and cut" },
+                            { type: "Obj", text: "budget... jobs" }
+                        ],
+                        vocab: [
+                            { w: "slash", m: "v. 大幅削减" }
+                        ]
+                    },
+                    {
+                        en: "The organisation is grappling with a funding shortfall of nearly $1.6bn driven primarily by America, which owes more than $1.4bn in arrears.",
+                        cn: "该组织正努力应对近16亿美元的资金缺口，这主要是由拖欠超过14亿美元会费的美国造成的。",
+                        grammar: [
+                            { type: "Verb Phrase", text: "grapple with (act of fighting)" },
+                            { type: "Obj", text: "funding shortfall" },
+                            { type: "Modifier", text: "driven primarily by America..." },
+                            { type: "Clause", text: "which owes... (describing America)" }
+                        ],
+                        vocab: [
+                            { w: "grapple with", m: "v. 扭打，努力克服" },
+                            { w: "shortfall", m: "n. 亏空，不足" },
+                            { w: "arrears", m: "n. 拖欠款 (in arrears)" }
+                        ]
+                    }
+                ]
+            }
+        ];
+
+        // --- Render Logic ---
+
+        const container = document.getElementById('article-container');
+        const emptyState = document.getElementById('empty-state');
+        const analysisContent = document.getElementById('analysis-content');
+
+        const analysisCn = document.getElementById('analysis-cn');
+        const analysisGrammar = document.getElementById('analysis-grammar');
+        const analysisVocab = document.getElementById('analysis-vocab');
+
+        let allSentences = []; // Flattens array for easier mapping
+
+        function renderArticle() {
+            articleSections.forEach((section, sectionIdx) => {
+                // Section Header
+                if (section.topic) {
+                    const h2 = document.createElement('h2');
+                    h2.className = 'text-2xl font-sans font-bold text-gray-900 mt-8 mb-4 border-l-4 border-news-accent pl-3';
+                    h2.innerText = section.topic;
+                    container.appendChild(h2);
+                }
+
+                const p = document.createElement('p');
+                p.className = 'mb-6 text-lg text-gray-800 leading-loose';
+
+                section.sentences.forEach((sent, sIdx) => {
+                    const span = document.createElement('span');
+                    span.className = 'sentence-span';
+                    span.innerText = sent.en + ' '; // Add space
+
+                    // Store data reference
+                    const globalIdx = allSentences.length;
+                    allSentences.push(sent);
+
+                    span.onclick = () => activateSentence(span, sent);
+
+                    p.appendChild(span);
+                });
+                container.appendChild(p);
+            });
+        }
+
+        function activateSentence(element, data) {
+            // UI State
+            document.querySelectorAll('.sentence-span').forEach(el => el.classList.remove('active'));
+            element.classList.add('active');
+
+            emptyState.classList.add('hidden');
+            analysisContent.classList.remove('hidden');
+            analysisContent.classList.add('flex');
+
+            // Populate Content
+            analysisCn.innerText = data.cn;
+
+            // Grammar
+            analysisGrammar.innerHTML = '';
+            if (data.grammar && data.grammar.length > 0) {
+                data.grammar.forEach(g => {
+                    const div = document.createElement('div');
+                    div.className = 'bg-slate-50 p-3 rounded border border-slate-200';
+                    div.innerHTML = `<span class="grammar-tag bg-indigo-100 text-indigo-700 mr-2">${g.type}</span> <span class="text-slate-700">${g.text}</span>`;
+                    analysisGrammar.appendChild(div);
+                });
+            } else {
+                analysisGrammar.innerHTML = '<span class="text-gray-400 italic text-sm">Simple structure.</span>';
+            }
+
+            // Vocab
+            analysisVocab.innerHTML = '';
+            if (data.vocab && data.vocab.length > 0) {
+                data.vocab.forEach(v => {
+                    const div = document.createElement('div');
+                    div.className = 'flex items-start gap-3';
+                    div.innerHTML = `
+                        <div class="w-1.5 h-1.5 rounded-full bg-amber-500 mt-2 flex-shrink-0"></div>
+                        <div>
+                            <p class="font-bold text-slate-800 border-b border-amber-200 inline-block mb-1">${v.w}</p>
+                            <p class="text-sm text-slate-600">${v.m}</p>
+                        </div>
+                    `;
+                    analysisVocab.appendChild(div);
+                });
+            } else {
+                analysisVocab.innerHTML = '<span class="text-gray-400 italic text-sm">No advanced vocabulary.</span>';
+            }
+        }
+
+        // Init
+        renderArticle();
+
+    </script>
+</body>
+
+</html>
