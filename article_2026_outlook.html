@@ -411,10 +411,42 @@
                 gap: 8px !important;
             }
 
+            /* Mobile Reset for Stability */
+            *,
+            *:before,
+            *:after {
+                box-sizing: border-box !important;
+                min-width: 0;
+                /* Flexbox overflow fix */
+            }
+
             /* Full width article panel - add space at bottom for audio button */
             main>div:first-child {
                 border-radius: 20px !important;
                 padding-bottom: 100px !important;
+            }
+
+            /* Safe Card Containers */
+            .glass-panel {
+                max-width: 100% !important;
+                overflow-x: hidden;
+            }
+
+            /* Article Container Fixes */
+            article.prose {
+                padding: 16px 20px !important;
+                /* Reduced mobile padding */
+                width: 100% !important;
+                max-width: 100% !important;
+                overflow-wrap: break-word !important;
+                word-wrap: break-word !important;
+            }
+
+            /* Text content fixes */
+            .sentence-span {
+                white-space: normal !important;
+                /* Ensure text wraps */
+                display: inline !important;
             }
 
             /* HIDE the analysis panel sidebar completely on mobile */
