@@ -139,32 +139,20 @@
             }
         }
 
-        /* ===== TOEFL FEATURE 2: Sentence Crusher - Frosted Isolation ===== */
+        /* ===== TOEFL FEATURE 2: Sentence Crusher - Clean Selection ===== */
         .sentence-span {
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            padding: 4px 8px;
-            margin: 2px 0;
-            border-radius: 8px;
-            border: 1px solid transparent;
-            display: inline;
+            transition: all 0.2s ease;
+            border-bottom: 1px solid transparent;
         }
 
         .sentence-span:hover {
-            background: rgba(139, 92, 246, 0.15);
-            border-color: rgba(139, 92, 246, 0.3);
+            background: rgba(139, 92, 246, 0.1);
         }
 
         .sentence-span.active {
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.25), rgba(139, 92, 246, 0.1));
-            border: 2px solid var(--neon-purple);
-            box-shadow:
-                0 4px 20px rgba(139, 92, 246, 0.3),
-                0 0 40px rgba(139, 92, 246, 0.15),
-                inset 0 0 20px rgba(139, 92, 246, 0.1);
-            transform: scale(1.02);
-            z-index: 10;
-            position: relative;
+            background: rgba(139, 92, 246, 0.15);
+            border-bottom: 2px solid rgba(139, 92, 246, 0.5);
         }
 
         /* Grammar Highlighting in Sentence Crusher */
@@ -637,12 +625,6 @@
         </div>
     </div>
 
-    <!-- Mobile Floating Listen Button -->
-    <button id="mobile-listen-btn" onclick="showAudioBar()"
-        class="md:hidden fixed bottom-4 right-4 z-40 w-14 h-14 rounded-full bg-violet-600 text-white flex items-center justify-center shadow-xl shadow-violet-500/40 active:scale-95 transition">
-        <span class="material-symbols-rounded text-2xl">headphones</span>
-    </button>
-
     <!-- Mobile Analysis Modal (Shows on sentence click) -->
     <div id="mobile-modal" class="md:hidden fixed inset-0 z-[90] hidden">
         <!-- Backdrop -->
@@ -651,9 +633,16 @@
         <!-- Modal Content -->
         <div
             class="absolute bottom-0 left-0 right-0 bg-[#0B1120] rounded-t-3xl max-h-[70vh] overflow-y-auto animate-slideUp">
-            <!-- Header with close button -->
+            <!-- Header with audio and close button -->
             <div class="sticky top-0 bg-[#0B1120] border-b border-white/10 px-4 py-3 flex items-center justify-between">
-                <span class="text-violet-400 font-bold text-sm uppercase tracking-wider">📖 Sentence Analysis</span>
+                <div class="flex items-center gap-3">
+                    <button id="mobile-sentence-audio-btn" onclick="playMobileSentenceAudio()"
+                        class="w-10 h-10 rounded-full bg-violet-600 flex items-center justify-center active:scale-95 transition">
+                        <span class="material-symbols-rounded text-white text-xl"
+                            id="mobile-audio-icon">play_arrow</span>
+                    </button>
+                    <span class="text-violet-400 font-bold text-sm uppercase tracking-wider">Sentence Analysis</span>
+                </div>
                 <button onclick="closeMobileModal()"
                     class="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
                     <span class="material-symbols-rounded text-slate-400">close</span>
@@ -1844,7 +1833,8 @@
                 analysisContent.classList.remove('hidden');
                 analysisContent.classList.add('flex');
             } else {
-                // Mobile: show modal popup
+                // Mobile: show modal popup with audio ID
+                currentMobileAudioId = audioId;
                 showMobileModal(data);
             }
 
@@ -2400,6 +2390,39 @@
             const modal = document.getElementById('mobile-modal');
             modal.classList.add('hidden');
             document.body.style.overflow = '';
+            // Stop sentence audio when closing
+            if (mobileSentenceAudio) {
+                mobileSentenceAudio.pause();
+                mobileSentenceAudio = null;
+                document.getElementById('mobile-audio-icon').textContent = 'play_arrow';
+            }
+        }
+
+        // Mobile sentence audio
+        let mobileSentenceAudio = null;
+        let currentMobileAudioId = null;
+
+        function playMobileSentenceAudio() {
+            const icon = document.getElementById('mobile-audio-icon');
+
+            if (mobileSentenceAudio && !mobileSentenceAudio.paused) {
+                mobileSentenceAudio.pause();
+                icon.textContent = 'play_arrow';
+            } else if (currentMobileAudioId) {
+                const audioPath = `audio/news_2026/${currentMobileAudioId}.mp3`;
+                mobileSentenceAudio = new Audio(audioPath);
+                mobileSentenceAudio.play();
+                icon.textContent = 'pause';
+
+                mobileSentenceAudio.onended = () => {
+                    icon.textContent = 'play_arrow';
+                };
+
+                mobileSentenceAudio.onerror = () => {
+                    icon.textContent = 'play_arrow';
+                    console.log('Audio not found:', audioPath);
+                };
+            }
         }
 
     </script>
